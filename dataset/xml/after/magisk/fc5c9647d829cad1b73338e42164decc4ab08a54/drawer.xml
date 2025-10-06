@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/main_items"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/magisk"
+            android:icon="@drawable/magisk"
+            android:title="@string/magisk"/>
+
+        <item
+            android:id="@+id/root"
+            android:icon="@drawable/root"
+            android:title="@string/root"/>
+
+        <item
+            android:id="@+id/autoroot"
+            android:icon="@drawable/ic_autoroot"
+            android:title="@string/auto_root"/>
+
+        <item
+            android:id="@+id/modules"
+            android:icon="@drawable/ic_extension"
+            android:title="@string/modules"/>
+
+        <item
+            android:id="@+id/log"
+            android:icon="@drawable/ic_bug_report"
+            android:title="@string/log"/>
+
+    </group>
+
+    <group
+        android:id="@+id/option_items"
+        android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/app_about"
+            android:icon="@drawable/ic_info_outline"
+            android:title="@string/about"/>
+
+    </group>
+
+</menu>
