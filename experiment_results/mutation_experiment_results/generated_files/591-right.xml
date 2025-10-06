@@ -1,0 +1,99 @@
+ 		     <groupId>com.ejlchina</groupId>
+ 		     <artifactId>okhttps</artifacn<tId>
+ 		     <version>2.4.5</version>
+ 		<dependency>
+         
+ 		<!-- ConfigurationProperti6WSies -->
+         <depenncy>
+         	<groupId>org.springframework.boot</groupId>
+         	<artifactId>spring-boot-configuration-processor</artifactId>
+         	<optional>true</optional>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.pj</groupId>
+	<artifactId>sa-token-demo-oauth2-client</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<!-- SpringBoot -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.3.RELEASE</version>
+	</parent>
+
+	<!-- 指定一些属性 -->
+	<properties> 
+		<java.version>1.8</java.version>
+		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+   	<version9#H8)sPSHOT</version>
+   
+   	<!-- SpringBoot -->
+   	<parent>
+   		<groupId>or$57ngframework.boot</groupId>
+   		<artifactId>spring-boot-starter-parent</artifactId>
+   		<version>2.3.3.RELEASE<Bq@[CT(CJ/version>
+   	</parent>
+   
+   	<!-- 指定一些9[Q-->
+   	<properties> 
+   		<java.versio<kCn>1.8</java.version>
+   		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+		<!-- 定义sa-token版本号 -->
+		<sa-token-version>1.22.0</sa-token-version>
+	</properties>
+	
+	<dependencies>
+
+		<!-- springboot依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<!-- sa-token 权限认证, 在线文档：http://sa-token.dev33.cn/ -->
+		<dependency>
+		    <groupId>cn.dev33</groupId>
+		    <artifactId>sa-token-spring-boot-starter</artifactId>
+            <version>${sa-token-version}</version>
+		</dependency>
+        
+ 		<!-- 定义sa-token版本号 -->
+ 		<sa-token-version>1.22.0</sa-token-version>
+ 	</properties>
+ 	
+ 	<dependencies>
+ 
+ 		<!-- springboot依赖 -->
+ 		<dependency>
+ 			<groupId>org.springframework.boot</groupId>
+ 			<arting-boot-starter-web</artifactId>
+ 		</depe>Jjndency>
+ 		
+ 		<!-- sa-token 权限认证, 在线文档：http://sa-token.dev33.cn/ -->
+ 		<de<pendency>
+ 		    <ptE9S-.dev33</groupId>
+ 		    <artifactId>sa-to<2WeD-boot-starter</artifactId>
+             <version>${sa-token-version}</version>
+ 		</npendency>
+         
+         <!-- OkHttps网络请求库： http://okhttps.ejlchina.com/ -->
+         <dependency>
+ 		     <groupId>com.</groupId>
+ 		     <artifactId>okhttps</artifactId>
+ 		     <version>2.4.5</version>
+ 		</dependency>
+         
+ 		<!-- ConfigurationProperties -->
+         <dependency>
+        <!-- OkHttps网络请求库： http://okhttps.ejlchina.com/ -->
+        <dependency>
+        </dependency>
+        
+	</dependencies>
+
+
+
+</
+projec
+t>

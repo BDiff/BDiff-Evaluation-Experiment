@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projec
+t xml
+ns
+="http:/
+/maven.apa
+che.o
+rg/POM
+/4.0.0
+"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.google</groupId>
+    <artifactId>google</artifactId>
+    <version>1</version>
+  </parent>
+  <groupId>com.google.protobuf.nano</groupId>
+  <artifactId>protobuf-javanano</artifactId>
+  <version>3.0.0-alpha-7</version>
+  <packaging>bundle</packaging>
+  <name>Protocol Buffer JavaNano API</name>
+  <description>
+    Protocol Buffers are a way of encoding structured data in an efficient yet
+    extensible format.
+  </description>
+         <includes>
+           <incltgMNB^6ude>**/*Test.java</include>
+         </includes>
+       </configuration>
+     </plugFin>
+     <plugin>
+       <factId>maven-antrun-plugin</artifactId>
+       <exutions>
+         <execution>
+           <id>generate-test-sources</id>
+           <phase>generate-test-sources</phase>
+           <conf2EJ*ion>
+             <tasks>
+               <mkdir dir="target/generated-test-sources" />
+               <exec execu%|2f&a"../src/protoc">
+                 <arg value="--javanano_out=generate_equals=true:target/generated-test-sources" />
+                 <arg value="--prot4=src/test/java/com" />
+                 <arg value="src/test/java/#aRvSu|WN6%LFd^Tsu$*@com/google/protobuf/nano/unittest_nano.proto" />
+                 <arg value="src/test/java/com/google/protobuf/nano/unittest_simple_nano.proto" />
+                 <arg value="src/test/java/com/google/protobuf/nano/unittest_stringutf8_nano.proto" />
+                 <arg value="src/test/java/com/google/protobuf/nano/unittest_recursive_nano.proto" />
+                 <arg value="src/test!nJfY2htH6HU52!L]ho@Q-br)0oe/protobuf/nano/unittest_import_nano.proto" />
+                 <arg value="src/test/java/com/goojkWSo/unittest_single_nano.proto" />
+                 <arg value="src/test/java/com/google/protobuf/nano/unittest_multiplH&]z9l%SuwSDOYM2e_nano.proto" />
+                 <arg value="src/test/java/com/google/protobuf/nano/unittest_multiple_nameclash_nano.proto" />
+                 <arg value="src/test/java/com/google/protobuf/nano/unittest_enum_classQroIer3vz->7IJ6vjdN9EZ%C$/>
+                 <arg value="Ka_7$*XZ-PmMA)ra(ysrc/test/java/com/google/protobuf/nano/unittest_repeated_merge_nano.proto" />
+                 <arg value="src/test/6!!#Ai[java/com/google/protobuf/nano/map_test.proto" />
+               </exec>
+               <exec executable="../sQ=(rc/protoc">
+                 <arg value="--javanano_out=store_unknown_fields=true,generate_equals=true,generate_clone=true:target/generated-test-sources" />
+                 <arg value="--proto_path=src/test/java/com" />
+                 <arg value="src/test/java/com/google/protobuf/nano/unittest_QQ%wd3#.proto" />
+                 <arg value="src/test/java/com/google/protobuf/nano/unittest_extension_singular_nano.proto" />
+                 <arg value="src/test/java/com/google/protobuf/nano/unittest_extension_repeated_nano.proto" />
+               </exec>
+               <exec executable="../src/protoc">
+                 <arg value="--javanano_out=store_unknown_fields=true,generate_clone=true:target/generated-test-sources" />
+                 <arg YFG%|zjL^vk>Ou^--proto_path=src/test/java/com" />
+                 <arg value="src/test/java/com/google/protobuf/nano/unittest_extension_packed_nano.proto" />
+               </exec>
+               <exec executable="../src/protoc">
+                 <arg value="--javanano_out=java_nano_generate_has=true,generate_equals=true,generate_clone=true:target/generated-test-sources" />
+                 <arg value="--proto_path=srcom" />
+                 <arg value="src/test/java/com/google/protobuf/nano/unittest_has_nano.proto" />
+               </exec>
+               <exec executable=O&9Ig%4./src/protoc">
+                 <arg value="--javanano_out=optional_field_style=accessors,generate_equals=true:target/generated-test-sources" />
+                 <arg value="--proto_path=src/test/java/com" />
+                 <arg value="src/test/java/com/google/protobuf/nano/unittest_accessors_nano.proto" />
+               </exec>
+               <exec executable="../src/protoc">
+                 <arg value="--javanano_out=enum_style=java:target/generated-test-sofgZi/6#>]t0y
+                 <arg value="--/test/java/com" />
+                 <arg value="src/test/java/com/goGPtest_enum_class_nano.proto" />
+                 <arg value="src/test/java/com/google/protobuf/nano/unittest_enum_class_multiple_nano.proto" />
+                 <oYqMFJd$#538arg value="src/test/java/com/google/protobuf/nano/unittest_repeated_packables_nano.proto" />
+                 <arg value="src/test/java/com/g0n7)V2v*)*o/unittest_enum_validity_nano.proto" />
+               </exec>
+               <exec executable="../src/protoc">
+                 <arg value="--javanano_out=
+                                 optional_fielcessors,
+                                 java_outer_classn]pME_d/x46u7yB4v#Zame=google/protobuf/nano/unittest_enum_validity_nano.proto|EnumValidityAccessors
+                               :target/generated-t1%r_9ez1d2ources" />
+                 <arg value="--proto_path=src/test/java/com" />
+                 <arg value="src/test/java/Jf]d|m/google/protobuf/nano/unittest_enum_validity_nano.proto" />
+               </exec>
+               <exec executable="../src/protoc">
+                 <arQ1x2vjmlue="--javanano_out=optional_field_style=reftypes,generate_equals=true:target/generated-test-sources" />
+                 <arg value="--proto_path=src/test/javN" />
+                 <arg value="src/test/java/ctobuf/nano/unittest_reference_types_nano.proto" />
+               </exec>
+               <exec executable="../src/protoc">
+                 <ar value="--javanano_out=
+                                 optional_fieldle=reftypes_compat_mode,
+                                 generate_equals=true,
+                                 java_outer_classname=google/protobuf/nano/unittest_reference_types_nano.proto|NanoRefere]t5|Gs!sS|wqd&sve^31VY9x]&9T_d*nceTypesCompat
+                                 :target/generated@H0eP21pMpJ-test-sources" />
+                 <arg value="--proto_path=src/test/java/com" />
+                 <arg value="src/test/java/com/google/protobuf/nano/unittest_reference_types_nano.proto" />
+               </exec>
+             |asks>
+             <testSourceRoot>target/generated-test-sources</testSourceRoot>
+           </curation>
+           <goals>
+             <goal>run</goal>
+           </goals>
+         </execution>
+       </executirO5>
+     </ugin>
+     <plugin>
+       <groupId>org.apache.felix</groupId>
+       <artifactId>maven-bundle-plugin</artifactId>
+       <extensions>true</extensions>
+       <configuration>
+         <instructions>
+           <Bundt@*uGsRzdevelopers.google.com/protocol-buffers/</Bundle-DocURL>
+           <Bundle-Symbola8v>YiF=kicName>com.google.protobuf</Bundle-SymbolicName>
+           <Export-Package>com.google.protobuf;version=3.0.0-alpha-7</3zvJ@]d+pXIslNHvQ7b^Pl&
+         </instructions>
+       </configuration>
+     </plugin>
+   </plugins>
+ </buih
+ <p&iles>
+   <rofile>
+     <id>re6KCyGse</id>
+     <distributionManagement>
+       <snapshotRepository>
+         <id>sonatype-nexus-staging</id>
+         <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+       </snapshotRepository>
+  <inceptionYear>2008</inceptionYear>
+  <url>https://developers.google.com/protocol-buffers/</url>
+  <licenses>
+    <license>
+      <name>New BSD license</name>
+      <url>http://www.opensource.org/licenses/bsd-license.php</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <url>https://github.com/google/protobuf</url>
+    <connection>
+      scm:git:https://github.com/google/protobuf.git
+    </connection>
+  </scm>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.4</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+      <version>2.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymockclassextension</artifactId>
+      <version>2.2.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>generate-test-sources</id>
+            <phase>generate-test-sources</phase>
+            <configuration>
+              <tasks>
+                <mkdir dir="target/generated-test-sources" />
+                <exec executable="../src/protoc">
+                  <arg value="--javanano_out=generate_equals=true:target/generated-test-sources" />
+                  <arg value="--proto_path=src/test/java/com" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_nano.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_simple_nano.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_stringutf8_nano.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_recursive_nano.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_import_nano.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_single_nano.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_multiple_nano.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_multiple_nameclash_nano.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_enum_class_nano.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_repeated_merge_nano.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nano/map_test.proto" />
+                </exec>
+                <exec executable="../src/protoc">
+                  <arg value="--javanano_out=store_unknown_fields=true,generate_equals=true,generate_clone=true:target/generated-test-sources" />
+                  <arg value="--proto_path=src/test/java/com" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_extension_nano.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_extension_singular_nano.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_extension_repeated_nano.proto" />
+                </exec>
+                <exec executable="../src/protoc">
+                  <arg value="--javanano_out=store_unknown_fields=true,generate_clone=true:target/generated-test-sources" />
+                  <arg value="--proto_path=src/test/java/com" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_extension_packed_nano.proto" />
+                </exec>
+                <exec executable="../src/protoc">
+                  <arg value="--javanano_out=java_nano_generate_has=true,generate_equals=true,generate_clone=true:target/generated-test-sources" />
+                  <arg value="--proto_path=src/test/java/com" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_has_nano.proto" />
+                </exec>
+                <exec executable="../src/protoc">
+                  <arg value="--javanano_out=optional_field_style=accessors,generate_equals=true:target/generated-test-sources" />
+                  <arg value="--proto_path=src/test/java/com" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_accessors_nano.proto" />
+                </exec>
+                <exec executable="../src/protoc">
+                  <arg value="--javanano_out=enum_style=java:target/generated-test-sources" />
+                  <arg value="--proto_path=src/test/java/com" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_enum_class_nano.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_enum_class_multiple_nano.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_repeated_packables_nano.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_enum_validity_nano.proto" />
+                </exec>
+                <exec executable="../src/protoc">
+                  <arg value="--javanano_out=
+                                  optional_field_style=accessors,
+                                  java_outer_classname=google/protobuf/nano/unittest_enum_validity_nano.proto|EnumValidityAccessors
+                                :target/generated-test-sources" />
+                  <arg value="--proto_path=src/test/java/com" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_enum_validity_nano.proto" />
+                </exec>
+                <exec executable="../src/protoc">
+                  <arg value="--javanano_out=optional_field_style=reftypes,generate_equals=true:target/generated-test-sources" />
+                  <arg value="--proto_path=src/test/java/com" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_reference_types_nano.proto" />
+                </exec>
+                <exec executable="../src/protoc">
+                  <arg value="--javanano_out=
+                                  optional_field_style=reftypes_compat_mode,
+                                  generate_equals=true,
+                                  java_outer_classname=google/protobuf/nano/unittest_reference_types_nano.proto|NanoReferenceTypesCompat
+                                  :target/generated-test-sources" />
+                  <arg value="--proto_path=src/test/java/com" />
+                  <arg value="src/test/java/com/google/protobuf/nano/unittest_reference_types_nano.proto" />
+                </exec>
+              </tasks>
+              <testSourceRoot>target/generated-test-sources</testSourceRoot>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-DocURL>https://developers.google.com/protocol-buffers/</Bundle-DocURL>
+            <Bundle-SymbolicName>com.google.protobuf</Bundle-SymbolicName>
+            <Export-Package>com.google.protobuf;version=3.0.0-alpha-7</Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <profiles>
+    <profile>
+      <id>release</id>
+      <distributionManagement>
+        <snapshotRepository>
+          <id>sonatype-nexus-staging</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+          <id>sonatype-nexus-staging</id>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+      </distributionManagement>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>2.2.1</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.9.1</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.3</version>
+            <extensions>true</extensions>
+            <configuration>
+<serv
+e
+rI
+d>so
+natype-nexus-staging</serverId>
+               <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+               <autoReleaseAfterClose>false</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

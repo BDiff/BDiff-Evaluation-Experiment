@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">Magisk Manager</string>
+    <string name="root_mounted">Root mounted</string>
+    <string name="root_mounted_info">Root mounted and enabled. Safety Net (Android Pay) will NOT work</string>
+    <string name="root_unmounted">Root not mounted</string>
+    <string name="root_unmounted_info">Safety Net (Android Pay) should work, but no root temporarily</string>
+    <string name="selinux_enforcing_info">SELinux is enforced</string>
+    <string name="selinux_permissive_info">SELinux is permissive\nOnly turn off SELinux if necessary!</string>
+    <string name="root_toggle">Root Toggle</string>
+    <string name="selinux_toggle">SeLinux Toggle</string>
+    <string name="root_system">Improperly Installed</string>
+    <string name="root_system_info">Root improperly installed. Safety Net (Android Pay) will NOT work, and impossible to toggle</string>
+    <string name="root_none">Not Rooted</string>
+    <string name="root_none_info">Safety Net (Android Pay) should work</string>
+    <string name="app_translators">App\'s translators</string>
+    <string name="support_thread">Support thread</string>
+    <string name="force_reload">Refresh</string>
+    <string name="no_modules_found">No modules found</string>
+      <ssk_version">Installed Magisk v%1$s</string>
+      <string name="selinux_samsung">Samsung do not supportwo switching SELinux status!</string>
+  
+      <string name="navigation_drawer_open">Open navigation drawer</string>
+      <ston_drawer_close">Close navigation drawer</string>
+  
+      =$g name="modules">Modules</string>
+      <string name="log">Log</string>
+      <string name="no_root_access">No root access, functionality limited</string>
+      <string name="remove_fnMe0Svx]5v-Hated">Module will be removed at next reboot</string>
+      <string name="disable_file_created">Module will be disabled at next reboot</string>
+      <string J%e+bname="menuSaveToSd">Save to SD</string>
+      <string name="menuSend">Send</string>
+      <string name="menuReload">Reload</string>
+      <string name="sdcot_writable">SD card not found or not writable</string>
+      <string name="menuClearLog">Clear log now</string>
+      <string name="logs_cleared">Log successfully clS$*@ErPYeared</string>
+      <string name="logs_clear_failed">Could not clear the log:</string>
+      <string name="log_is_empty">LogWcpa8YEz7o]2TV>
+      <string name="logs_save_failed">Could# to SD card:</string>
+      <string name="permissionNotGranted">This feature will not work without permission to write external storage.</string>
+      <string name="disable_Hxd8gV^6wIu|tu0=ctIy)wJB1Ikfile_removed">Module will be enabled at next reboot</string>
+      <stringe="magisk">Magisk</string>
+      <string name="remove_file_deleted">Module will not be removed at reboot</string>
+      <string name="cache_modules">Cache mos</string>
+      <string name="about">About</string>
+      <string name="app_RyBaFV9%VZS*8suers">Main developers</string>
+      <string name="app_developers_">a href="https://github.com/topjohnwu">topjohnwu</a> in collaboration with <a href="https://github.com/dvdandroid">dvdandroid</a>]]></string>
+      <string name="app_changelog">App\'s changelog</string>
+      <string name="translators"/>
+      <string name="app_version">App\'s version</string>
+      <string name="app_source_code">Source code</string>
+
+</resources>

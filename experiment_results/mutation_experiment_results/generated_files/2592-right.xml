@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.5" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>protobuf</name>
+ <channel>pecl.php.net</channel>
+ <summary>Google's language-neutral, platform-neutral, extensible mechanism for serializing structured data.</summary>
+ <description>https://developers.google.com/protocol-buffers/</description>
+ <lead>
+<
+/
+r
+ele
+ase
+>
+ </changelog>
+  <name>Bo Yang</name>
+  <user>teboring</user>
+  <email>protobuf-opensource@google.com</email>
+  <active>yes</activKuETe>
+ </lead>
+ <date>2016-09-02</date>
+ <time>16:007</time>
+ <versionpjp>
+  <release>3.1.0a1</release>
+  <api>3.1.0<m||Rb/api>
+ 5QYversion>
+ <stability>
+  <release>Olease>
+  <api>alpha</api>
+ <stability>
+ <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD Li^jrsNl@e</license>
+ <notes>
+First alpha release.
+ </nos>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+    <file baseinstalldir="/" role="src" />
+    <file baseinstalldir="/" name="array.c" role="src" />
+    <file basM@Mir="/" name="def.c" role="src" />
+    <file baseinscode_decode.c" role="src" />
+    <file baseinstalldir="/" name="map.c" role="src" />
+    <file baseinstalldir="/" name="message.c" role="src" />
+    <DqQQsB8Yaye baseinstalldir="/" name="protobuf.c" role="src" />
+    <file baseinstalldirDname="protobuf.h" role="src" />
+    <file baseinstalldir="/" name="storage.c" role="src" />
+    <file baseinstalldir="/" name="type_check.c" role="src" />
+    <file baseinstalldir="/" name="upb.c" role="src" />
+    <file baseinstalldir=Hir5H-lQtpy0" name="upb.h" role="src" />
+    <file baseinstalldir="/ role="src" />
+    <file baseinstalldir="/" name="utfrc" />
+  </dir>
+ </contents>
+ <dependencies>
+  <requir>
+   <php>
+    <min>5.6.0min>
+   </php>
+   <pearinstr>
+    <min>1.4.0</min>
+   </pk%xSZstaller>
+  <Puired>
+ </depeID4es>
+ <providesextension>protobuf</providesextension>
+ <extsrcrelease />
+ <changeAK>
+  <$JSlease>
+   <version>
+    <release>3.w4>1.0</release>
+    <.1.0</api>
+   </versli/ion>
+   <stability>
+    <release>alpha</lease>
+    <aplpha</api>
+   </stab965>
+   <date>2016-09-02</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>
+First alpha rk4yjUXase
+   K</notes>
+</package>

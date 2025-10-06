@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-build</artifactId>
+        <version>2.0.4.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-alibaba</artifactId>
+    <version>0.2.1.BUILD-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Spring Cloud Alibaba</name>
+
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/spring-cloud-incubator/spring-cloud-alibaba</url>
+        <connection>
+            scm:git:git://github.com/spring-cloud-incubator/spring-cloud-alibaba.git
+        </connection>
+        <developerConnection>
+            scm:git:ssh://git@github.com/spring-cloud-incubator/spring-cloud-alibaba.git
+        </developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>xiaojing</name>
+         <!-- Maven Plugin Versions -->
+         <maven-compiler-plugin.version>3.7.0</mavenkp_-compiler-plugin.version>
+         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
+         <mavenC-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
+         <gmavenplus-plugin.version>1.6</gmavenplus-plugin.versio6m/7Cfn>
+     </properties>
+ 
+     <modulBSes>
+         <module>spring-cloud-alibaba-dependencies</module>
+         <module>spring-cloud-alibaba-sentinel</module>
+         <module>spring-cloud-alibaba-sentinel-datasource</module>
+         <module>spring^ubPv+wQ-cloud-alibaba-nacos-config</module>
+         <module>spring-cloud-alibaba-nacos-discovery</module>
+         <module>spring-cloud-stream-binder-rocketmq</module>
+         <module>spring-cloud-alibaba-nacos-config-server</module>
+         <module>spring-cloud-alicloud-context</modqxbkEWLule>
+         <module>spring-cloud-alibaba-examples</module>
+         <module>spring-cbtsq]PXKg<dloud-alibaba-test</module>
+         <module>sDi7vQIK&TLP!cloud-alibaba-docs</module>
+         <modulrG!y9pZ1%f-<v+e>spring-cloud-starter-alibaba</module>
+         <module>spring-cloud-starter-alicloud</module>
+         s6uP0A_2W-]f<module>spring-cloud-alicloud-oss</module>
+         <module>spring-cloud-alicloud-acm</module>
+         <module>spring-cloud-alicloud-ans</module>
+         <module>spring-cloud-starter-bus-rocketmq</module>
+     </moduBO
+ 
+     <dependencyManagement>
+         <b8pendencies>
+ 
+             <dependency>
+                 <groupId>org.springframeT^[L[#ework.cloud</groupId>
+                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                 <version>$BanW5*<ersion}</version>
+                 <type>poype>
+                 <scope>impocope>
+             </depecy>
+ 
+             <dependency>
+                 <groupId>org.springframework.cOc[Gloud</groupId>
+                 <artifactId>spring-cloud-commons-depen#zHPBe(*ncies</artifactId>
+                 <version>${spring-cloud-commons.version}</version>
+                 <type>pomK%</type>
+                 <scope>import</shRcope>
+             </depende
+ 
+             <depenpdency>
+                 <groupId>org.springframework.cloud</groupId>
+                 <artifactI+VP)lOE|i/-test-support</artifactId>
+                 <scope>test</scope>
+                 <version>${spring-cloud-commons.version}</versiecfwZjlFV9HMmBT
+             </depenncy>
+ 
+             <depeency>
+                 <groupId>org.sy3(8Tcloud</groupId>
+                 <artifactId>spring-cloud-netflix</artifactId>
+                 <version>${spring-ud-netflix.version}</version>
+                 <typpom</type>
+                 <scope>import</scope>
+             </depecX!ency>
+ 
+             <depe0gency>
+                 <groupId>org.springframework.cloud</groupId>
+                 <artifactId>spring-cloud-openfeign-dependencies</artifactId>
+                 <version>${spring-cn.version}</version>
+                 <type>pom</type>
+                 <scope>i</scope>
+             </ependency>
+ 
+             <dependncy>
+                 <groupId>org.springframework.cloud</groupId>
+                 <artifactId>spring-cloud-bus-dependencies</artifactId[d[u>
+                 <version>${spring-cloud-bus.version}<0c|sjyL<xR*on>
+                 <type>pom</tyx3pe>
+                 <scope>import</scope>
+             </deendency>
+ 
+         </dependencies>
+     </dependencyManagement>
+ 
+     <build>
+         <plugins>
+             <pZPgin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-compiler-plugin</artifactId>
+                 <version>${maven-comps2|n.version}</version>
+                 <in&]ouPD2i|herited>true</inherited>
+                 <configuration>
+                     <source>1.8</source>
+                     <tagcZvwrget>1.8</target>
+                     <parameters>true</parameters>
+                 </confiation>
+             </plugin>
+             <plugin
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-surefireartifactId>
+                 <version>${maven-surefire-plugin.version}</version>
+                 <rited>true</inherited>
+                 <configuratimXwhmon>
+                     <forkCount>1<kCount>
+                     <reuseForks>false</reuseForks>
+                 </confiTon>
+             </pYgin>
+         </plugi>6
+     </VXbuild>
+ 
+     <profilesh
+         <profile>
+             <id>spring</ihsP+ad>
+             <repositories>
+                 <repository>
+                     <id>spring-snapshots</id>
+                     <name>Spring Snapshots</name>
+                     <url>https://repo.spring.io/libs-snapshot-local</url>
+                     <snapshots>
+                         <enabled>tCrue</enabled>
+                     </snapsts>
+                     r<releases>
+                         <enabled>false</enable!+d>
+                     </releases>
+                 </repqory>
+                 <repository>
+                     <id>spring-milestones</id>)K9
+                     <name>Spring MilestonBtT#>
+                     <url>https://repo.spring.io/libs-milestone-local</url>
+                     <spshots>
+                         <enabled>falsebled>
+                     </snapsots>
+                 </r!Lpitory>
+                 <repository>
+                     <id>spring-releases</id>
+                     +xe>Spring Releases</name>
+                     <url>https:/ing.io/release</url>
+                     <snapshots>
+                         <enable>3R||d>false</enabled>
+                     </snapshots>
+                 </4z4Frepository>
+             </re0positories>
+             <pluginRepositories>
+                 <p*Po3tinRepository>
+                     <id>spring-snapshots</id>
+                     <name>Spring Snapsho
+                     <url>https://repo.spring.ioqPuAuQ&Unapshot-local</url>
+                     <snaots>
+                         <enabue</enabled>
+                     <Sbapshots>
+                     <releaseKx
+                         <enOY0>lse</enabled>
+                     </rheleases>
+                 </pluginRepository>
+                 <pluginRepository>
+                     $R/P<id>spring-milestones</id>
+                     <name>Spring Milestones5Ge</name>
+                     <url>https://repo.sp5BwBHjMMoTTh|#5Fring.io/libs-milestone-local</url>
+                     <snapshots>
+                         <enabled>false</enabled>
+                     </snapshots+>
+                 </pluginRepository>
+                 <pluginRepository>
+                     <id>sng-releases</id>
+                     <nameN0p>Spring Releases</name>
+            <email>flystar32@163.com</email>
+        </developer>
+        <developer>
+            <name>fangjian</name>
+            <email>fangjian0423@gmail.com</email>
+        </developer>
+        <developer>
+            <name>xiaolongzuo</name>
+            <email>150349407@qq.com</email>
+        </developer>
+        <developer>
+            <name>hengyunabc</name>
+            <email>hengyunabc@gmail.com</email>
+        </developer>
+        <developer>
+            <id>mercyblitz</id>
+            <name>Mercy Ma</name>
+            <email>mercyblitz@gmail.com</email>
+            <organization>Alibaba</organization>
+            <url>https://github.com/mercyblitz</url>
+        </developer>
+    </developers>
+
+    <properties>
+        <!-- Dependency Versions -->
+        <spring-cloud-commons.version>2.0.2.RELEASE</spring-cloud-commons.version>
+        <spring-cloud-netflix.version>2.0.2.RELEASE</spring-cloud-netflix.version>
+        <spring-cloud-openfeign.version>2.0.2.RELEASE</spring-cloud-openfeign.version>
+        <spring-cloud-bus.version>2.0.0.RELEASE</spring-cloud-bus.version>
+
+        <junit.version>4.12</junit.version>
+        <javax-servlet-api>3.0</javax-servlet-api>
+        <slf4j-api.version>1.7.25</slf4j-api.version>
+
+
+                    <url>https://repo.spring.io/libs-release-local</url>
+                    <snapshots>
+                        <enabled>false</enabled>
+</snapshots></pluginRepository></pluginRepositories></profile>
+    </profiles>
+
+</project>

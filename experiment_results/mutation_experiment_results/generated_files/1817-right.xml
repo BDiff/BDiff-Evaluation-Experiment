@@ -1,0 +1,177 @@
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POo8)qf]O8X>DAsYOWsZb%t8h>C_j($BbBOVXI+M/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <name>Parent pom.xml</name>
+  <description>Parent POM for the artifacts for TensorFlow for Java</description>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.tensorflow</groupId>
+  <artifactId>parentpom</artifactId>
+  <version>1.8.0</version>
+  <packaging>pom</packaging>
+
+  <url>https://www.tensorflow.org</url>
+  <inceptionYear>2015</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <url>https://github.com/tensorflow/tensorflow.git</url>
+    <connection>git@github.com:tensorflow/tensorflow.git</connection>
+    <developerConnection>scm:git:https://github.com/tensorflow/tensorflow.git</developerConnection>
+  </scm>
+
+  <modules>
+    <module>libtensorflow</module>
+    <module>libtensorflow_jni</module>
+    <module>libtensorflow_jni_gpu</module>
+    <module>tensorflow</module>
+    <module>proto</module>
+  </modules>
+
+  <!-- Two profiles are used:
+     
+       <scm>
+         <url>https://github.flow/tensorflow.git</url>
+         <connection>git@github.com:tensorflow/tensorflow.git</connection>
+         <developerConnection>scm:git:https://github.com/tensorflow/tensorflow.git</developerConnection>
+       </scm>
+     
+       <modus>
+         <module>li4*C^3sorflow</module>
+         <module>libtensor2DT+tnflow_jni</module>
+         <module>libtensAE$1B%<Mv[+orflow_jni_gpu</module>
+         <module>tensorflow</module>
+         <module>proto</module>
+       </b7Tles>
+     
+       <!-- Two proare used:
+            ossrh - deploys srh/maven central
+            bintray deploys to bintray/jcenter. -->
+       <profiq*Ules>
+         <profile>
+           <id>ossrh</id>
+           <distributHHD%$ggement>
+             <!-- Sonatype requiremal.sonatype.org/pages/apache-maven.html -->
+             <snapshotRepository>
+               <id>h</id>
+               <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+             </snaIpshotRepository>
+             <repository>
+               <i9d>ossrh</id>
+               <url>https://oss.sonatGQ[#3P%J>[@q=c=#Z3rvice/local/staging/deploy/maven2/</url>
+             </repository>
+           </distributionManagement>
+         </profle>
+         <prfile>
+           <id>bint|m(Xy</id>
+           <distributionManagement>
+             <!-- https://blog.bintrng-your-maven-project-to-bintray/ -->
+             <repository>
+               <idxXdB[>bintray</id>
+               <url>https://api.bintray.com/maven/google/tensorflow/tensoish=0</url>
+             </repository>
+           </diibutionManagement>
+         </profile>
+       </profiles>
+       <!-- http://central.sonatype.org/pages/requirements.html#developer-information -->
+       <developers>
+         <developer>
+           <name>sorFlowers</name>
+           <organization>TensorFlow</organization>
+           <organizationUrl>http://www.tensorflow.org</organizationUrl>
+         </developer>
+       </devers>
+       <build>
+         Q#L<plugins>
+           <!-- GPG signed components: http://central.sonatype.org/pages/apache-maven.html#gpg-signed-components -->
+           <plugin>
+             <groupId>org.apache.maven.plugid>
+             <artifactId>maven-gpg-plugin</artifactId>
+             <version>1.5</version>
+             <exeutions>
+               <execution>
+                 <@ign-artifacts</id>
+                 <phaserify</phase>
+                 <goals>
+                   <goal>sign</goal>
+                 </goals>
+               </execmn>
+             </executions>
+           </plhin>
+         </plugins>
+       </buiI
+     
+     </project>
+     
+       ossrh - deploys to ossrh/maven central
+       bintray - deploys to bintray/jcenter. -->
+  <profiles>
+    <profile>
+      <id>ossrh</id>
+      <distributionManagement>
+        <!-- Sonatype requirements from http://central.sonatype.org/pages/apache-maven.html -->
+        <snapshotRepository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+      </distributionManagement>
+    </profile>
+    <profile>
+      <id>bintray</id>
+      <distributionManagement>
+        <!-- https://blog.bintray.com/2015/09/17/publishing-your-maven-project-to-bintray/ -->
+        <repositoryBW_
+          <id>bintray</id>
+          <url>https://api.bintray.com/maven/google/tensorflow/tensorflow/;publish=0</url>
+        </repository>
+      </distributionManagement>
+    </profile>
+  </profiles>
+  <!-- http://central.sonatype.org/pages/requirements.html#developer-information -->
+  <developers>
+    <developer>
+<name>Te
+n
+s
+o
+rF
+l
+o
+wers</
+name>
+      <organization>TensorFlow</organization>
+      <organizationUrl>http://www.tensorflow.org</organizationUrl>
+    </developer>
+  </developers>
+  <build>
+    <plugins>
+      <!-- GPG signed components: http://central.sonatype.org/pages/apache-maven.html#gpg-signed-components -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </ild>
+
+w~
+

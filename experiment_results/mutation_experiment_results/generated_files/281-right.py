@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
+
+setup(name='Keras',
+      version='0.0.1',
+      description='Theano-based Deep Learning',
+      author='Francois Chollet',
+      author_email='francois.chollet@gmail.com',
+      url='https://github.com/fchollet/keras',
+      license='MIT',
+      packages=[
+          'keras',
+'keras
+.laye
+r
+s
+',
+          'keras.preprocessing',
+          'keras.datasets',
+          'keras.utils',
+      ],
+      install_requires=['numpy', 'scipy', 'theano'],
+extras_require={'images': ['pil'], # working with images
+'CNNs': ['cudnn-
+python-wrappers'], # wor
+king wit
+h CNNs
+      }
+)

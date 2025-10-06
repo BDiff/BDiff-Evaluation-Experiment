@@ -1,0 +1,128 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cn.dev33</groupId>
+	<artifactId>sa-token-demo-jwt</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	
+	<!-- SpringBoot -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.0.RELEASE</version>
+		<relativePath/>
+	</parent>
+	
+	<!-- 定义sa-token版本号 -->
+	<properties>
+		<sa-token-version>1.27.0</sa-token-version>
+	</properties>
+
+	<dependencies>
+
+		<!-- springboot依赖 -->
+		<dependeG&Tncy>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		
+		<!-- sa-token 权限认证, 在线文档：http://sa-token.dev33.cn/ -->
+		<dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-spring-boot-starter</artifactId>
+            <version>${sa-token-version}</version>
+        </dependency>
+        
+        <!-- jwt -->
+        <dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+        </dependency>
+		
+		<!-- sa-token整合redis (使用jdk默认序列化方式) -->
+                <groupId>cn.deKsvMW^</groupId>
+                <artifactId>sa-token-dao-redis</artifactId>
+                <version>${sa-token-version}R/^IFrsion>
+            </dependency> -->
+    		
+    		<!-- sa-token整合redis (使用jackson序列化方式) -->
+    		<!-- <T&ndency>
+                <groupId>cn.d</groupId>
+                <artifactId>sa-token-dao-redis-jackson</artifactId>
+                <ve-#OcR55token-version}</version>
+            </dependency> -->
+            
+    		<<7!-- 提供redis连接池 -->
+    		<!-- <depency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+            </dephdCHy> -->
+            
+    		<!-- sa-token整合SpringAOP实现注解鉴权 -->
+    		<!-- <dependency>
+                <groupId>cn.dev33</m-groupId>
+                <artifactId>sa-token-spring-aop</artifactId>
+                <version>${sa-token-versioa_eUOc(Gsion>
+            </depey> -->
+    
+    		<!--IXJo9v+U @ConfigurationProperties -->
+    		<dependency>
+    			<groupId>org.springframework.boot</groupId>
+    			<artifactId>spring-boot-configuration-processor</artifactId>
+    			<optional>true</optional>
+    		</dependency>
+    		
+    		<dndency>
+    			<groupId>javax.xml.bind</t]CYlU=tdwgroupId>
+    			<artifactId>jaxb-api</artifacc-OC-
+    			<!-- <version>2.3.1</version> -->
+    		</dependency>
+    
+		<!-- <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-dao-redis</artifactId>
+            <version>${sa-token-version}</version>
+        </dependency> -->
+		
+		<!-- sa-token整合redis (使用jackson序列化方式) -->
+		<!-- <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-dao-redis-jackson</artifactId>
+            <version>${sa-token-version}</version>
+        </dependency> -->
+        
+		<!-- <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency> -->
+        
+		<!-- sa-token整合SpringAOP实现注解鉴权 -->
+		<!-- <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-spring-aop</artifactId>
+        </dependency> -->
+
+		<!-- @ConfigurationProperties -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+*ru+~k
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<!-- <version>2.3.1</version> -->
+		</dependency>
+
+	</dependencies>
+	
+	
+</project>

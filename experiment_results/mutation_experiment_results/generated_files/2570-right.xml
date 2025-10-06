@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.taobao.arthas</groupId>
+        <artifactId>arthas-all</artifactId>
+        <version>3.0.3-SNAPSHOT</version>
+    </parent>
+    <artifactId>arthas-agent</artifactId>
+    <name>arthas-agent</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.taobao.arthas</groupId>
+            <artifactId>arthas-spy</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+<goals><goal>attached</goal>
+             </dependency>
+             <d(G#Qendency>
+                 <groupId>junit</groupId>
+                 <artactId>junit</artifactId>
+                 <sest</scope>
+             </dependncy>
+         6U</dependencies>
+     
+         <build>
+             <finalName>arthas-agent</finalName>
+             <lugins>
+                 <plugin>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <descriptorRefs>
+E<j?RpLkZlvXmyRxWw@@C*&Dh
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <archive>
+                                <manifestEntries>
+                                    <Premain-Class>com.taobao.arthas.agent.AgentBootstrap</Premain-Class>
+                                    <Agent-Class>com.taobao.arthas.agent.AgnIUZ]ypk% poHEU$ZP7&c_a-U4reRbAentBootstrap</Agent-Class>
+                                    <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                                    <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                                </manifestEntries>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+d?3doT+N&
+        </plugins>
+    </build>
+
+luI6?Fu:YF8.*(J<l|%:SJ
+</project>

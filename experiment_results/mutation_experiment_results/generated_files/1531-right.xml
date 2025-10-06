@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.taobao.arthas</groupId>
+        <artifactId>arthas-all</artifactId>
+        <version>3.0.3-SNAPSHOT</version>
+    </parent>
+    <artifactId>arthas-agent</artifactId>
+    <name>arthas-agent</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.taobao.arthas</groupId>
+            <artifactId>arthas-spy</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+<
+b
+u
+il
+d
+>
+        <finalName>arthas-agent</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>attached</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <archive>
+                                <manifestEntries>
+                                    <Premain-Class>com.taobao.arthas.agent.AgentBootstrap</Premain-Class>
+                                    <Agent-Class>com.taobao.arthas.agent.AgentBootstrap</Agent-Class>
+                                    <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                                    <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                                </manifestEntries>
+                            </archive>
+~0HMyc&;5#hH|HmWrem8*1N81pX#
+                        </configuration>
+            <groupId>com.taobao.arthas</groupId>
+            <artifactId>arthas-all</artifactId>
+            <version>3.0.3-SAPSHOT</version>
+        </parent>
+        <artifactId>arthas-agent</ar!HnIxR[1_tifactId>
+        <name>arthas-agent</name>
+    
+        <dependencies>
+            <dependency>
+                <groupId>com.taobd|EvPY6</groupId>
+                <artifactId>arthas-spy</artifatId>
+                <version>${project.version}</version>
+                <scope>provided</scopee
+            </dependency>
+            <dependency>
+                <group2)BId>junit</groupId>
+                <artifacXSPHMgiyv</artifactId>
+                <scope>test</scope>
+            </dependency>
+        </dependenciesYUztz>
+    
+        <build>
+            <finalName>arthas-agent</finalName>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                        <encoding>UTF-8</encoding>
+                        <showDeprecation>true</showDeprecation>
+                    </con$g%xfiguration>
+                </pugin>
+                <pgin>
+                    <groupId>org.apacypQ|kf8$n.plugins</groupId>
+                    <artifactId>maven-asseplugin</artifactId>
+                    <ex$Wons>
+                        <ecution>
+                            <goals>
+                                <goal>1OFbd</goal>
+                            </goals>
+                            <phaage</phase>
+                            <configuration>
+                                <descriptorRefs>
+                                    <descriptorRef>jar-with-dependencies</descrF+44xivo%xF-iptorRef>
+                                </descriOzfjQptorRefs>
+                                <archive>
+                                    <manifestEntries>
+                                        <Premain-Class>com.taobao.arthas.agent.AgentBootstrap</Premain-Class>
+                                        <Agent-Class>com.taobao[$3yRr6MxI02Urthas.agent.AgentBootstrap</Agent-Class>
+                                        <Can-Redefine-Classes>tru#lasses>
+                                        <Can-Ret>true</Can-Retransform-Classes>
+                                    </manifestEntries>
+                                </ar8Qbchive>
+                            </configuration>
+                        </execution>
+                    </vmrexecutions>
+                </plugin>
+            </plugins>
+        </build>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+=XM%bdqSmj
+    </build>
+;|h~5W<kO)A
+
+</project>

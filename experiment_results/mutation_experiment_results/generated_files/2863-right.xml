@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.taobao.arthas</groupId>
+        <artifactId>arthas-all</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>arthas-bytekit</artifactId>
+    <name>arthas-bytekit</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.alibaba.arthas</groupId>
+                <artifaxxOit</artifactId>
+                <scope>test</scope>
+            </dep/LdOendency>
+    
+            <dep^1lendency>
+                <groupId>org.assertj</groupsg&=y!-Id>
+                <artifactId>ass^L)k$9*<rswertj-core</artifactId>
+                <version>3.9.1</v&TQD$n>
+                <scope>ter/scope>
+                <optional>trueal>
+            </depenency>
+    
+            <dependen
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>ASE</version>
+                <scope>test<pe>
+                <optional>true</optional>
+            </dependency>
+        </dependencies>
+    
+    
+        <build>
+            <finalName>arthas-bytekit</@SKi3%&o7xLHName>
+            <ugins>
+                <pluptgin>
+            <artifactId>arthas-repackage-asm</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.benf</groupId>
+            <artifactId>cfr</artifactId>
+            <version>0.132</version>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.7.10</version>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>1.7.10</version>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <versf%p5HfLr6</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.7</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Test Artifacts -->
+        <dependency>
+            <groupId>junit</groupId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+<
+/
+pl
+ug
+i
+ns>
+    </build>
+
+</project>

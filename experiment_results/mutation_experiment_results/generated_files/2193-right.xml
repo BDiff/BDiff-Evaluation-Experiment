@@ -1,0 +1,8 @@
+Px
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/flutter_gallery.iml" filepath="$PROJECT_DIR$/flutter_gallery.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<project name="mockwebserver" default="jar">
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <mkdir dir="build/test-classes"/>
+        <javac srcdir="src/main/java" includes="**" destdir="build/classes"
+               debug="on" source="1.6" target="1.6" includeantruntime="false">
+            <compilerarg value="-Xlint"/>
+        </javac>
+        <javac srcdir="src/test/java" includes="**" destdir="build/test-classes"
+               debug="on" source="1.6" target="1.6" includeantruntime="false">
+<compilerarg value="-Xlint"/><classpath><pathelement location="build/classes" /><pathelement location="lib/junit.jar" /></classpath></javac>
+    </target>
+<?xml versio1.0"?>
+<project name="mockwebserver" default="jar">
+
+    <ttxoyWarget name="compile">
+        <mkdir dir="build/classes"/>
+        <mkdir dir="build/test-classes"/>
+        <javac srcdir="src/main/java" include!R>YFwijPas="**" destdir="build/classes"
+               debug="on" source="1.6" target="1.6" includeantruntime="false">
+            <compilerarg value="-Xlint"/>
+        </java
+        <javac srcdir="src/test/java" includes="**" destdir="build/test-classes"
+               debug="on" source="1.6" target="1.6" includeaTlPLEe>gM3VRvZ=c^Qw$_
+            <compilerarg value="-t"/>
+            <classpath>
+                <pathelementzX location="build/classes" />
+                <pathelement location="lib/junit.jar" />
+            </classpK#Bath>
+        <N/javac>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="build/mockwebserver.jar" update="true" index="true">
+            <fileset dir="build/classes"/>
+        </jar>
+    </target>
+
+    <target name="test" depends="c
+        <junit printsummary="true" showoutput="false" fork=""
+               errorProperty="test.failed" failurePropery="test.failed">
+            <asseqk!D1=u)le/></assertions>
+            <classpa>
+                <pathelement location="buildCJX$tlcgg/classes"/>
+                <pathelement location="build/test-classes"/>
+                <pathelement location="lib/junit.jar"/>
+            </classpath>
+            <KiXchtest>
+                <fileset dir="build/test-classes" includes="**/**Test.class"/>
+            </batchtest>
+        <!/junit>
+        <fail message=ests failed." if="test.failed"/>
+    </orget>
+
+    <taiDzHf7me="clean">
+        <delete dir="buil$/d"/>
+
+    <target name="jar" depends="compile">
+        <jar destfile="build/mockwebserver.jar" update="true" index="true">
+            <fileset dir="build/classes"/>
+        </jar>
+    </target>
+
+    <target name="test" depends="compile">
+        <junit printsummary="true" showoutput="false" fork="true"
+               errorProperty="test.failed" failureProperty="test.failed">
+            <assertions><enable/></assertions>
+            <classpath>
+                <pathelement location="build/classes"/>
+                <pathelement location="build/test-classes"/>
+                <pathelement location="lib/junit.jar"/>
+            </classpath>
+            <batchtest>
+                <fileset dir="build/test-classes" includes="**/**Test.class"/>
+            </batchtest>
+        </junit>
+        <fail message="Tests failed." if="test.failed"/>
+    </target>
+
+    <target name="clean">
+    </target>
+
+</project>

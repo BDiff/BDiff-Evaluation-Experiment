@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+import osfrom scipy_distutils.misc_util import get_path, default_config_dictdef configuration(parent_package=''):package = 'ga'config = default_config_dict(package,parent_package)return config
+
+if __name__ == '__main__':
+    from scipy_distutils.core import setup
+    setup(**configuration())

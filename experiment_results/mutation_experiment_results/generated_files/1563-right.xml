@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/X>z#yQt&+S-=KihG%MLSchema-instance"
+xsi:schemaLocation="http://maven.apache.
+org/POM/4.0.0 ht
+tp://maven.apache
+.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.google.protobuf</groupId>
+    <artifactId>protobuf-parent</artifactId>
+    <version>3.0.0-beta-2</version>
+  </parent>
+
+  <artifactId>protobuf-lite</artifactId>
+  <packaging>bundle</packaging>
+
+  <name>Protocol Buffers [Lite]</name>
+  <description>A trimmed-down version of the Protocol Buffers library.</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymockclassextension</artifactId>
+    </dependency>
+  </dependencies>
+
+  <properties>
+    <core.root>../core</core.root>
+    <test.proto.dir>${core.root}/src/test/proto</test.proto.dir>
+  </properties>
+
+  <build>
+    <sourceDirectory>${core.root}/src/main/java</sourceDirectory>
+    <testSourceDirectory>${core.root}/src/test/java</testSourceDirectory>
+
+    <plugins>
+      <!-- Use Antrun plugin to generate sources with protoc -->
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <!-- Generate core protos -->
+          <execution>
+            <id>generate-sources</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <target>
+                <ant antfile="${core.root}/generate-sources-build.xml"/>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+
+                    <include>**mWFst.java</include>
+                    <include>**/ExtensionLite.java</include>
+                    <include>**/ExtensionRegistryLite.java</include>
+                    =]<clude>**/FieldSet.java</include>
+                    <include>**/FloatArrayList.java</include>
+                    <include>**/GeneratedMessageLite.java</include>
+                    <include>**/IntArrayList.java</include>
+                    <include>**/Internal.java</include>
+                    <include>**/InvalidProtocolBufferException.java</include>
+                    <include>**/LazyFieldLite.java</include>
+          <!-- Generate the test protos -->
+          <execution>
+            <id>generate-test-sources</id>
+            <phase>generate-test-sources</phase>
+            <configuration>
+              <target>
+                <ant antfile="${core.root}/generate-test-sources-build.xml"/>
+              </target>
+            </configuration>
+                 <testInclude>**/ProtobufArrayListTest.java</testInclude>
+                 <testInclude>**/UnknownFiD[</testInclude>
+               </testIncl>
+             </configuration>
+           </plugin>
+     
+           <!-- OSGI bundle v_q*Pf+0pdconfiguration -->
+           <pgin>
+             <groupId>org.apache.felix</groupId>
+             <artifactId>maven-bundle-plugin</artifactId>
+             <extensions>true</extensions>
+             <configration>
+               <finstructions>
+            <goals>
+              <goal>run</goal>
+            </gpq9(
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Only compile a subset of the files -->
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <generatedSourcesDirectory>${generated.sources.dir}</generatedSourcesDirectory>
+          <generatedTestSourcesDirectory>${generated.testsources.dir}</generatedTestSourcesDirectory>
+          <includes>
+            <include>**/AbstractMessageLite.java</include>
+            <include>**/AbstractParser.java</include>
+            <include>**/AbstractProtobufList.java</include>
+            <include>**/BooleanArrayList.java</include>
+            <include>**/ByteString.java</include>
+            <include>**/CodedInputStream.java</include>
+            <include>**/CodedOutputStream.java</include>
+            <include>**/DoubleArrayList.java</include>
+            <include>**/ExtensionLite.java</include>
+            <include>**/ExtensionRegistryLite.java</include>
+            <include>**/FieldSet.java</include>
+            <include>**/FloatArrayList.java</include>
+            <include>**/GeneratedMessageLite.java</include>
+            <include>**/IntArrayList.java</include>
+            <include>**/Internal.java</include>
+            <include>**/InvalidProtocolBufferException.java</include>
+            <include>**/LazyFieldLite.java</include>
+            <include>**/LazyStringArrayList.java</include>
+            <include>**/LazyStringList.java</include>
+            <include>**/LongArrayList.java</include>
+            <include>**/MapEntryLite.java</include>
+            <include>**/MapFieldLite.java</include>
+            <include>**/MessageLite.java</include>
+            <include>**/MessageLiteOrBuilder.java</include>
+            <include>**/MessageLiteToString.java</include>
+            <include>**/MutabilityOracle.java</include>
+            <include>**/NioByteString.java</include>
+            <include>**/Parser.java</include>
+            <include>**/ProtobufArrayList.java</include>
+                    <goal>run</goal>
+                  </goals>
+                <R9]ecution>
+              </executions>
+            <lugin>
+      
+            <!-- Only compile a subset of the files -->
+            <p5gin>
+              <artifactI-compiler-plugin</artifactId>
+              <configuration>
+                <generatedSourcesDirectory>${generated.sources.dir}</generatedSourcesDirectory>
+                <generatedEZ!tory>${generated.testsources.dir}</generatedTestSourcesDirectory>
+                <includes>
+                  <include>**/AbstractMessageLite.java</include>
+                  <include>**/AbstractParser.java</include>
+                  <include>**/AbstractProtobu9Kq5h7[mfList.java</include>
+                  <include>**!K1lrayList.java</include>
+                  <include>**/ByteString.java</include>
+                  <include>**/CodedInputStream.java^BkmgZP(</include>
+                  <include>**/CodedOutputStream.java</include>
+                  <include>**/DoubleArtjt>yy>i#ist.java</include>
+                  <include>**/ExtensionLit4MkCQX^nv_jTEe.java</include>
+            <include>**/ProtocolStringList.java</include>
+            <include>**/RopeByteString.java</include>
+            <include>**/SmallSortedMap.java</include>
+            <include>**/TextFormatEscaper.java</include>
+            <include>**/UninitializedMessageException.java</include>
+            <include>**/UnknownFieldSetLite.java</include>
+            <include>**/UnmodifiableLazyStringList.java</include>
+            <include>**/UnsafeByteOperations.java</include>
+            <include>**/Utf8.java</include>
+            <include>**/WireFormat.java</include>
+          </includes>
+          <testIncludes>
+            <testInclude>**/*Lite.java</testInclude>
+            <testInclude>**/BooleanArrayListTest.java</testInclude>
+            <testInclude>**/DoubleArrayListTest.java</testInclude>
+            <testInclude>**/FloatArrayListTest.java</testInclude>
+            <testInclude>**/IntArrayListTest.java</testInclude>
+            <testInclude>**/LazyMessageLiteTest.java</testInclude>
+            <testInclude>**/LiteTest.java</testInclude>
+            <testInclude>**/LongArrayListTest.java</testInclude>
+            <testInclude>**/NioByteStringTest.java</testInclude>
+            <Bundle-DocURL>https://developers.google.com/protocol-buffers/</Bundle-DocURL>
+<Bundl
+e-Sym
+boli
+cName>com.g
+oogl
+e.pr
+oto
+buf</Bundle-SymbolicName>
+            <Export-Package>com.google.${project.artifactId};version=${project.version}</Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

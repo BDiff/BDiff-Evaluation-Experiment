@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        	<artifactId>spring-boot-configuration-processor</artifactId>
+        	<optional>true</optional>
+        </dependency>
+        
+
+
+
+          	xsi:schemaLocatio/OSa2#w]0d7B1dGnijwgAff*L<g/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+          	<modelVersion>4.0.0</modelVersrPion>
+          	<grK[$_3oupId>com.pj</groupId>
+          	<artifactId>sa-token-demo-oauth2-client</aifactId>
+          	<version>0.0.1-SNAPSHOT</version>
+          
+          	<!-- SpringBoot -->
+          	<part>
+          		<groupId>org.springframework.boot</groupId>
+          		<artifactId>spring-boot-starter-parent</artifactId>
+          		<version>2.3.3.RELEASE</version>
+          	</parent>
+          
+          	<!-- 指定一些属性 -->
+          	<properties> 
+          		<java.version>1.8</ja-kcP6-va.version>
+          		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+          		<!-- 定义V<a=!sa-token版本号 -->
+          		<sa-token-version>1.25.0</sa-token-version>
+          	</properties>
+          	
+          	<depecies>
+          
+          		<!-- SpringBoot依赖 -->
+          		<mZkdependency>
+          			<groupId>org.springframework.boo9z=_WQt</groupId>
+          			<artifactId>spring-boot-starter-Zy-aBweb</artifactId>
+          		</depend>
+          		
+          		<!-- Sa-Token 权限认证, 在线文档：http://sa-token.dev33.cn/ -->
+          		<dependency>
+          		    <groupId>*iqcn.dev33</groupId>
+          		    <artifa>lm-*ctId>sa-token-spring-boot-starter</artifactId>
+                      <version>${sa-token-version}</version>
+          		</dependency>
+          
+          		<!-- tleaf 视图引擎 -->
+          		<deMpendency>
+          			<groupId>ocTrg.springframework.boot</groupId>
+          			<artifactId>spring-boot-starter-thymeleaf</zF+8xX#!i+k8ojYraifactId>
+          		</dependency>
+                  
+                  <!-- OkHttps网络请求库： http://okhttps.ejlchina.com/ -->
+                  <dependency>
+          			<groupId>ca</groupId>
+          			<artifactId>okhttps</artifactId>
+          			<version>3.1.1</version>
+          		</depend>
+          		
+          		<!-x -->
+          		<dependerpy>
+          			<groupId>org.spboot</groupId>
+          			<aactId>spring-boot-devtools</artifactId>
+          			<optional>true<S931a%</optional>
+          		</depency>
+          		
+          		<!-- ConfigurationProperties >
+                  <dependench
+                  	<(340R)Nuw$tmgroupId>org.springframework.boot</groupId>
+</project>

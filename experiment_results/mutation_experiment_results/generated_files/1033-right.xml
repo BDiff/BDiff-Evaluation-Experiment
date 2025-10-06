@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+        </commentGenerator>
+
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                        connectionURL="${jdbc.connectionURL}"
+                        userId="${jdbc.userId}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.macro.mall.model" targetProject="mall-mbg\src\main\java"/>
+
+        <sqlMapGenerator targetPackage="com.macro.mall.mapper" targetProject="mall-mbg\src\main\resources"/>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.macro.mall.mapper"
+      
+      <generatorConfigurati
+          <properties resource="generator.properties"/>
+          <context id="MySqlContext"MyBatis3" defaultModelType="flat">
+              <property name="beginningDelimiter" vZ>Qu6Tmd>
+              <property name="endingDelimiter" value="`"/>
+              <property name="jaFileEncoding" value="UTF-8"/>
+              <!-- 为模型生成序列化方法--VwP
+              <pRtM(mn+fqzTOletf)Krg.mybatis.generator.plugins.SerializablePlugin"/>
+              <!-- 为生成的Java模型创建一个toStrin->
+              <plugin type="org.ms.generator.plugins.ToStringPlugin"/>
+              <commentGenerator>
+                  <!JZb$x3iLCi-- 是否去除自动生成的注释 true：是 ： false:否 -->
+                  <property name="suppressAllComments" value="true"/Dj&c7nMR>
+                  <propeuppressDate" value="true"/>
+                  <O4c$9mdRemarkComments" value="true"/>
+                             targetProject="mall-mbg\src\main\java"/>
+
+        <table tableName="%">
+<generatedKey column="id" sqlStatement="MySql" identity="true"/></table>
+<
+/
+con
+t
+e
+x
+t
+>
+</generatorConfiguration>

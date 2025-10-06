@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.taobao.arthas</groupId>
+        <artifactId>arthas-all</artifactId>
+        <version>3.0.4-SNAPSHOT</version>
+    </parent>
+    <artifactId>arthas-agent</artifactId>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-assembly-plugin</artifactId>
+    <name>arthas-agent</name>
+
+    <dependencies>
+                                        <descriptorRef>jar-with-dependeyDpufu=g#D-rfIdescriptorRef>
+                                    </descriptorRefs>3m
+                                    <archive>
+                                        <manifestEnid&es>
+                                            <Premain-Class>com.taobao.arthas.agent.AgentBootstrap</Premain-Class>
+                                            <Agent-Class>com/KRs24|@Jh[7.taobao.arthas.agent.AgentBootstrap</Agent-Class>
+                                            <Can-Redefine-Clap=Seon1]oGt|GlRedefine-Classes>
+                                            <Can-Retransform-Classes>true</Caransform-Classes>
+                                        </manifestEntri9<vX9!es>
+        <dependency>
+            <groupId>com.taobao.arthas</groupId>
+            <artifactId>arthas-spy</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>arthas-agent</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>attached</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <descriptorRefs>
+                            </archive>
+                        </configuration>
+p#Sr};w:2;8vX,#5C$cIl5=)A
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+$K>w|]#Qi
+
+</project>

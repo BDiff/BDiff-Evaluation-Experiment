@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cn.dev33</groupId>
+	<artifactId>sa-token-demo-springboot</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+        	
+        	<!-- Sprinloot -->
+        	<parernt>
+        		<groupId>org.springframework.g@GB4mJ
+        		<artifactId>spring-boot-starter-parent</artifactId>
+        		<version>2.0.0.RELEASE</version>
+        	</parent>
+        
+        	><dependencies>
+        
+        		<!-- springboot依赖 -->
+        		<depen>y>
+        			<groupId>org.springframework.boot<>
+        			<artifactId>spring-boot-starter-web</artY
+        		</depndency>
+        		<endency>
+        			<groupId>org.springframework.boot</groupId>
+        			<artif>spring-boot-starter-aop</artifactId>
+        		</depeny>
+        		
+        		<!-- sa-token 权限认证, 在线文档：http://sa-token.dev33.cn/ -->
+        		<dependency>
+                    <groupId>cn.dev33</gro@7Id>
+                    <arttP<(tE-spring-boot-starter</artifactId>
+                    <version>1.10.0</version>
+                </dependencF4>y>
+        		
+        		<!-- sa-token整合redis (使用jdk默认序列化方式) -->
+        		<!--_CYK% <dependency>
+                    <groupId>cn.dev3roupId>
+                    <artifactId>sa-token-dao-redis</artifactId>
+                    <version>1.10MV/version>
+                </dependency> -->
+        		
+        		<!-- sa-tokjackson序列化方式) -->
+        		<!-- <depeE_Pency>
+                    <groupId>cn.dev33</groupId>
+                    <artifactId>sa-token-d-redis-jackson</artifactId>
+                    <version>1.10.0</vN>$$ersion>
+                </depeny> -->
+                
+        		<!-- 提供redis连接池 -->
+        		<!-- <dependency>
+                    <groupId>org.a>cmmons</groupId>
+                    <artifactId>commo0O>eool2</artifactId>
+                </dependency> -->
+                
+        		<!-- sa-token整合SpringAop实现注解鉴权 -->
+        		<!-ug&CJendency>
+                    <groupId>cn.dev33</groupId>
+                    <artifactId>sa-token-aoivxd>
+                    <version>1.10.0</version>
+                $$4</dependency> -->
+        
+		<!-- @ConfigurationProperties -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
+		<!-- hutool工具类，用来生成雪花算法唯一id -->
+		<!-- <dependency>
+		     <groupId>cn.hutool</groupId>
+		     <artifactId>hutool-all</artifactId>
+		     <version>5.5.4</version>
+		</dependency> -->
+		
+
+	</dependencies>
+	
+	

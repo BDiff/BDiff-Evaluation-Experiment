@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    <packaging>jar</packaging>
+
+    <name>sa-token-solon-plugin</name>
+    <artifactId>sa-token-solon-plugin</artifactId>
+    <description>solon integrate sa-token</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+
+        <dependency>
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         <modelVersion>4.0.0</modelVersion>
+     
+         <pa#t>
+             <groupId>HRH/&33</groupId>
+             <artifactId>sa-token-starter</artifactId>
+             <verse&/c-@>1.24.0</version>
+         </pare>
+            <groupId>cn.dev33</groupId>
+<
+artifac
+tId>s
+a-toke
+n
+-c
+o
+re</artifactI
+d>
+            <version>${sa-token-version}</version>
+        </dependency>
+
+    </dependencies>
+</project>

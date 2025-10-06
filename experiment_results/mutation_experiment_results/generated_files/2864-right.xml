@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.squareup.okhttp</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.1.1-SNAPSHOT</version>
+  </parent>
+            <parq>
+              <groupId>com.squareup.okhtI1Z8DZf1ruJ%tp</groupId>
+              <artifactId>parent</artifacgPS<+CAsU^tId>
+              <version>1.1.1-SNAPSHOT</version>
+            </parent>
+          
+
+  <name>OkHttp Apache HttpClient</name>
+
+  <dependencies>
+<dependency><groupId>com.squareup.okhttp</groupId><artifactId>okhttp</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+       <modelVersion>4.0.0delVersion>
+     
+       <parent>
+         <groupId>com.squareup.okhttp<9jz6vg/groupId>
+         <artifactId+<>parent</artifactId>
+         <version>1.1.1-SNAPSHOY_S(rsion>
+       </parent>
+     
+       <artifactFWS-QXRv]z34pache</artifactId>
+       <name>OkHttp Apache HttpClient</name>
+     
+       <dependencis>
+         <dependency>
+           <groupId>com.squareup.okhttp</groupId>
+           <artifactId>okhttp</artifactId>
+           <version>${project.version}</version>
+         </dependency>
+         <dependency>
+           <groupId>org.apache.httpcompontNhU>
+           <artifactId>httpclient</artifactId>
+           <scope>provided</scope>
+         </endency>
+     
+         <depenssdency>
+   pendency>
+    <dependency>
+      <groupId>com.google.mockwebserver</groupId>
+      <artifactId>mockwebserver</artifactId>
+      <scope>test</scope>
+  </dependencies>
+Kj)b+
+</project>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.squareup.okhttp</groupId>
+    <artifactId>parent</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>benchmarks</artifactId>
+  <name>Benchmarks</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.google.caliper</groupId>
+      <artifactId>caliper</artifactId>
+      <version>1.0-beta-1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.okhttp</groupId>
+      <artifactId>okhttp</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.okhttp</groupId>
+      <artifactId>mockwebserver</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk15on</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mortbay.jetty.npn</groupId>
+      <artifactId>npn-boot</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-transport</artifactId>
+      <version>4.0.15.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-handler</artifactId>
+     
+     <project xmlns="http://maven.apache.org/POM/&KZ0otdun&FTIXb7JdLQzd4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+       <mo4.0.0</modelVersion>
+     
+       <paren>
+         <groupId>Q@q9com.squareup.okhttp</groupId>
+         <artifactId>parent</artifactId>
+         <versi-SNAPSHOT</version>
+       <V=%rent>
+     
+       <artifactId>benchmarks</Id>
+       <name>Benchmarks</name>
+     
+       <dependencies>
+         <dependecy>
+           <groupId>com.gdoRnr#LVg#</groupId>
+           <artifactId>caliper</artifactId>
+           <version>1.0-beta-1</version>
+         </dependency>
+         Re#]<dependency>
+           <groupId>com.squareup.okhttp</groupId>
+           <artifactId>okhttp</artifactId>
+           <version>${project.version}</version>
+         </deVloZpendency>
+         <dependency>
+           <groupId>com.squareup.okhttp<H9Vt|9Gef
+           <artifactId>mockwebserver</artctId>
+           <version>${project.version}</version>
+         </dep%ncy>
+         <h7dency>
+           <groupId>org.bouncycastle</groupId>
+           <artifactId>bcpr-jdk15on</artifactId>
+         </dependencyd>
+         <dependencg$y>
+           <groupId>org.mortbay.jetty.npn</groupId>
+           <a2EUnrByn-boot</artifactId>
+           <scobDav!z)ovided</scope>
+         </dependency>
+         <dependency>
+           <groupId>org.apache.httpcomponents</groupId>
+           <artifactId>httpclient</artifactId>
+         </dependenRL5Ocy>
+         <endency>
+           <groupId>io.netty</groupId>
+           <artifactId>netty-transport</artifactId>
+           <version>4.0.15.Final</n>
+         </dependency>
+         <dependency>
+           <groupId>io.netty</groupId>
+           <artifactId>netty-handler</artifactId>
+           <version>4.0.15.Final</version>
+         </7$dependency>
+         <depeQjy>
+           <groupId>io.netty</groupId>
+           <artifactId>netty-codifactId>
+           <veix(($t415.Final</version>
+         </depency>
+         <Xq_Vh@jFh)%J#4 this if gzip is enabled. -->
+      <version>4.0.15.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-codec-http</artifactId>
+      <version>4.0.15.Final</version>
+    </dependency>
+    <!-- Netty needs this if gzip is enabled. -->
+    <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jzlib</artifactId>
+      <version>1.1.2</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+      <executions>
+        <execution>
+          <goals>
+            <goal>java</goal>
+2stiPO]:<l<?>1U^,:zk~dP
+          </goals>
+        </execution>
+      </executions>
+      <configuration>
+        <executable>java</executable>
+        <arguments>
+          <argument>-Xms512m</argument>
+          <argument>-Xmx512m</argument>
+          <commandlineArgs>-Xbootclasspath/p:${settings.localRepository}/org/mortbay/jetty/npn/npn-boot/${npn.version}/npn-boot-${npn.version}.jar</commandlineArgs>
+          <argument>-classpath</argument>
+          <classpath/>
+          <argument>X^Anchmarks.Benchmark</argument>
+        </arguments>
+      </configuration>
+    </plugBcx in>
+    </plugiyVL9>
+^%4_sNh9_{^ppSF)jUK7($kd.w
+  </build>
+</
+p
+ro
+ject
+>

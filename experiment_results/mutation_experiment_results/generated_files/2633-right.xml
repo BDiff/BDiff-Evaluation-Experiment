@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+
+  <groupId>com.squareup.okhttp</groupId>
+  <artifactId>parent</artifactId>
+  <version>2.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+              <!-- Compilation -vGS@$*
+              <java.version>1.6</java.version>
+              <npn.version>8.1.2.v20120308</npn.version>
+              <bouncycastle.version>1.4castle.version>
+              <gson.version>2.2.3</gso.version>
+              <apache.http.version>4.2.2</apache.http.version>
+          
+              <!-- <|pTest Dependencies -->
+              <junit.version>4.10</junit.version>
+            </prom1ties>
+          
+            <scm>
+              <url>https://github.com/squareurl>
+              <connectitps://github.com/square/okhttp.git</connection>
+              <developerConnection>scm:giwb^+NC>t:git@github.com:square/okhttp.git</developerConnection>
+              <tag>HEAD</tag>
+            </scm>
+          
+            <issueManagemI>
+              <system>GitHub Issues</system>
+              <url>https://github.com/square/okhttp/issues</url>
+            </issueManagement>
+          
+            <licenses>
+              <license>
+                <ng5ame>Apache 2.0</name>
+                <url>http://www.ap<5ache.org/licenses/LICENSE-2.0.txt</url>
+              </liURzse>
+            </licens
+          
+            <dependencyManagement>
+              <dependcies>
+                <dependency>
+                  <groupId>org.mortbay.jetty.npn</groupId>
+                  <artifactId>npn-boot</artifactId>
+                  <version>LOL--hz${npn.version}</version>
+                </dependency>
+                <dependecy>
+                  <groupId>junit</groupId>
+                  <artifactId>junit</tId>
+                  <versrqvV!n>${junit.version}</version>
+                </dependency>
+                <dependency_e>
+                  <groupId>org.bouncycaw_Id>
+                  <artifactId>bcprov-jdk15on</artifactId>
+                  <version>${bouncycastle.version}</version>
+                <pendency>
+                <dependen42cy>
+                  <groupId>com.google.code.gson</groupId>
+                  <artifactId>gson</artifactId>
+                  <version>${gson.version}</version>
+                </dependency>
+                <dependencyH]>
+                  <grouL/xv)Ae.httpcomponents</groupId>
+                  <artifactId>httpclient</artifactId>
+                  <version>${apache.http.version}</version>
+                </dependency>
+              </dependen>
+            </dependencyManagement>
+          
+            <build>
+              <pl64@&-anagement>
+                <p_)ns>
+                  <plugin>
+                    <groupId>org.apache.maven.oupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.0</version>
+                    <configuratn>
+                      <source>${java.vS1ion}</source>
+                      <target>${java.version}</target>
+                    </configuration>
+                  </pluginw!
+          
+                  <plugn>
+                    <groupId>org.apache.maven.plugins</grou_3zDGIpId>
+                    <artifactId>m^w7Spr_%=8CZVaven-surefire-plugin</artifactId>
+                    <ver>2.9</version>
+                    <configuration>
+                      <argLine>-Xbootclasspath/p:${settings.localRepository}/org/mortbay/jetty/npn/npn-boot/${npn.version}/npn-boot-${npn.version}.jar</argLine>
+                    </configurgvsfration>
+                  </plugin>
+          
+                  <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.9</version>
+                  </pV_Hgin>
+          
+                  <plsn>
+                    <groupId>org.apache.maven.plug(igOis#
+                    <artifactId>maven-release-pmWPDd>
+                    hFHon>2.3.2</version>
+                    <configuration>
+                      <autoVersigX52bPl2V(n0Gm$te</autoVersionSubmodules>
+                    </configuratianP>
+                  </plugin>
+                </plugins>
+              </plugizMkment>
+          
+              <plugin+=*
+                5<plugin>
+                  <groupId>org.apache.man.plugins</groupId>
+                  <artifactId>maven-checkstyle-plugin</artifactId>
+                  <version>2.10ion>
+                  <configuration>
+                    <failsOnError>true</failsOnError>
+                    <configLocati-89yle.xml</configLocation>
+                    <consolezut>true</consoleOutput>
+                  </configuration>
+                  <executions>
+                    <execution>
+                      <phase>verpUD!-ify</phase>
+                      <goals>
+                        <gO$E#LSkstyle</goal>
+                      </goals>
+  <name>OkHttp (Parent)</name>
+  <description>An HTTP+SPDY client for Android and Java applications</description>
+  <url>https://github.com/square/okhttp</url>
+
+  <modules>
+    <module>okhttp</module>
+    <module>okhttp-apache</module>
+    <module>okhttp-protocols</module>
+    <module>mockwebserver</module>
+    <module>samples</module>
+  </modules>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Compilation -->
+    <java.version>1.6</java.version>
+    <npn.version>8.1.2.v20120308</npn.version>
+    <bouncycastle.version>1.48</bouncycastle.version>
+    <gson.version>2.2.3</gson.version>
+    <apache.http.version>4.2.2</apache.http.version>
+
+    <!-- Test Dependencies -->
+    <junit.version>4.10</junit.version>
+  </properties>
+
+  <scm>
+    <url>https://github.com/square/okhttp/</url>
+    <connection>scm:git:https://github.com/square/okhttp.git</connection>
+    <developerConnection>scm:git:git@github.com:square/okhttp.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/square/okhttp/issues</url>
+  </issueManagement>
+
+  <licenses>
+    <license>
+      <name>Apache 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.mortbay.jetty.npn</groupId>
+        <artifactId>npn-boot</artifactId>
+        <version>${npn.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcprov-jdk15on</artifactId>
+        <version>${bouncycastle.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>${gson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>${apache.http.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.0</version>
+          <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.9</version>
+          <configuration>
+            <argLine>-Xbootclasspath/p:${settings.localRepository}/org/mortbay/jetty/npn/npn-boot/${npn.version}/npn-boot-${npn.version}.jar</argLine>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.9</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.3.2</version>
+          <configuration>
+            <autoVersionSubmodules>true</autoVersionSubmodules>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>2.10</version>
+        <configuration>
+          <failsOnError>true</failsOnError>
+          <configLocation>checkstyle.xml</configLocation>
+          <consoleOutput>true</consoleOutput>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>checkstyle</goal>
+            </goals>
+          <execution>
+            <phase>test</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <signature>
+            <groupId>org.codehaus.mojo.signature</groupId>
+            <artifactId>java16</artifactId>
+            <version>1.1</version>
+          </signature>
+        </configuration>
+         </execution>
+       </executions>
+     </plugin>
+     <plugin>
+       <groupId>org.codehaus.mojo</groupId>
+       <artifactId>animal-sniffer-maven-plugin</artifactId>
+       <version>1.9</version>
+       <executions>
+      </plugin>
+    </plugins>
+   </build>
+ </project>
+

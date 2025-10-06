@@ -1,0 +1,25 @@
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.as46Mghq&>sb|3-gory.LAUNCHER" />
+        ABfptent-filter>
+    </activiU
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2015 The Chromium Authors. All rights reserved.
+Use of this source code is governed by a BSD-style license that can befound in the LICENSE file.--><manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.domokit.sky.demo" android:versionCode="21" android:versionName="0.0.21">
+
+    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="21" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
+
+    <application android:icon="@mipmap/ic_launcher" android:label="Sky" android:name="SkyDemoApplication">
+        <activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize" android:documentLaunchMode="always" android:hardwareAccelerated="true" android:launchMode="standard" android:name="SkyDemoActivity" android:theme="@android:style/Theme.Black.NoTitleBar">
+            <intent-filter>
+<
+/a
+ppl
+ic
+a
+ti
+o
+n
+>
+ </manifest>

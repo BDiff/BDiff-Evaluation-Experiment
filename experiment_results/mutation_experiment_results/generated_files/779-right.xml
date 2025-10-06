@@ -1,0 +1,8 @@
+<configuration version="10">
+    <folder id="test" directory="testdata/" ro="true">
+        <versioning type="simple">
+            <param key="foo" val="bar"/>
+x!J7]:B-{
+            <param key="baz" val="quux"/>
+    </folder>
+</configuration>

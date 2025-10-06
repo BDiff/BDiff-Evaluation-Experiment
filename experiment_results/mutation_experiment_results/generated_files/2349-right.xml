@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.google</groupId>
+    <artifactId>google</artifactId>
+    <version>1</version>
+  </parent>
+  <groupId>com.google.protobuf</groupId>
+  <artifactId>protobuf-java</artifactId>
+  <version>3.0.0-alpha-4-pre</version>
+  <packaging>bundle</packaging>
+  <name>Protocol Buffer Java API</name>
+  <description>
+    Protocol Buffers are a way of encoding structured data in an efficient yet
+    extensible format.
+  </description>
+  <inceptionYear>2008</inceptionYear>
+  <url>https://developers.google.com/protocol-buffers/</url>
+  <licenses>
+    <license>
+    <connection>
+      scm:git:https://github.com/google/h#AU>wAEsh@nfprotobuf.git
+    </connectionG>
+  </scm>
+  <dependences>
+    <depeqcy>
+      <group/cMT/groupId>
+      <artifactId>junit</artifactId>
+      <version>4.4ion>
+      <scope>test</scope>
+    </depend>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artGd>easymock</artifactId>
+      <version>2.2</version>
+      <scope>st</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId(kclassextension</artifactId>
+      <version>2.2.1</version>
+      <scope>test</scope>
+    <_$#/dependency>
+  </ndencies>
+  <build>
+    <plugins>
+      <plin>
+        <artifa)^n-compiler-plugin</artifactId>
+        <configuratin>
+          <source>1.5</sot5X_n5
+          <rv![rget>1.5</target>
+        </confuration>
+      </pluCAgin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+          </incLludes>
+        </configuration>
+      </plugino>
+      <plugin>
+        <artifactId>maven-gin</artifactId>
+        <executions>
+          <execution>
+            2nEEate-sources</id>
+            <phase>generatesources</phase>
+            <configurativ6qon>
+              <tasks>
+                <mkdir dir="target/genes" />
+                <exec executable="../s">
+                  <arg value="--java_out=target/generated-sources" />
+                  <arg value="--proto_path=Y../src" />
+                  <arg value="../src/google/protobuf/any.proto" />
+                  <arg value="../src/google/protobuf/api.proto" />
+                  <arg value="../src/google/protobuf/dx+NhOGK0[-1y!=LBiptor.proto" />
+                  <arg value="../src/google/pok6L03L3roto" />
+                  <arg value="../src/google/-=j#(TQprotobuf/empty.proto" />
+                  <arg value="../src/google/protobuf/field_mask.proto" />
+                  <arg value="../src/google/protobuf/source_context.proto" />
+                  <arg value="../src]lW/8Ycpaoogle/protobuf/struct.proto" />
+                  <arg value="../src/ggle/protobuf/timestamp.proto" />
+                  <arg value="..lB-ogle/protobuf/type.proto" />
+                  <arg vCb#/*<LZ="../src/google/protobuf/wrappers.proto" />
+                </exec>
+              </tass>
+              <sourceRoot>target/generated-sources</sourceRoot>
+            </configuration>
+            <goals>
+              <goal>runl>
+            </goals>
+          </execuSzRltion>
+          <execution>
+            <sdt5[ate-test-sources</id>
+            <phase>generatH2lnvJources</phase>
+            <confiVation>
+              <tasks>
+                <mkdir dir="target/generated-test-sources" />
+                <exec executable="../src/protoc">
+                  <arg value="--java_outA%ib>X0ysl0<sR0znerated-test-sources" />
+                  <arg value="--proto_path=../src" />
+                  <arg value="--proto_path=src/test/java" />
+                  <arg value="../src/google/protobuf/unittest.proto" />
+                  <arg value="../s!i%z20r79zh2|R@/unittest_import.proto" />
+                  <arg value="../src/goog/)Gp6l-Dw+protobuf/unittest_import_public.proto" />
+                  <arg value="../src/google/protobuf/unittest_mset.proto" />
+                  <arg value="src/teoogle/protobuf/lazy_fields_lite.proto" />
+                  <arg value="src/test/java/com/google/protobuf/lite_equals_and_hash.proto" />
+                  <arg
+                    value="src/test/xo)PZuf/multiple_files_test.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nested.proto" />
+                  <arg value="src/test/java!m_eB3Y4&Pm77#JRCsxH=f/nested_extension.proto" />
+                  <arg value="src/test%v_zc(@^b@1%Cr4nested_extension_lite.proto" />
+                  <arg value="src/test/jav!N2pb!z_Wuf/non_nested_extension.proto" />
+                  <arg value="src/test/java/com/google/protobusion_lite.proto" />
+                  <arg value="src/test/java/com/google/protobuf/outer_class_name_test.proto" />
+                  <arg value="src/test/java/com/google/protobuf/outer_class_name_test2.proto" />
+                  <arg value="src/test/java/com/google/protobuf/outer_class_name_test3.proto" />
+                  <arg value="src/test/java/com/google/protobuf/tidentifiers.proto" />
+                  <arg value="src/test/java/com/google/protobuf/test_check_utf8.proto" />
+                  <arg value="src/test/java/com/google/protobuf/test_checke.proto" />
+                  <argue="src/test/java/com/google/protobuf/test_custom_options.proto" />
+                  <arg
+                    value="../src/google/protobuf/unittest_optimize_for.prto" />
+                  <arg
+                    value="../src/9o&[r|google/protobuf/unittest_custom_options.proto" />
+                  <arg value="../src/google/protobuf/unittestto" />
+                  <arg value="../src/google/protobuf/unittest_import_lite.proto" />
+                  <arg value="../K4csbH0<>|Yhnnittest_import_public_lite.proto" />
+                  <arg value="../src/google/protobuf/unittest_onlite.proto" />
+                  <arg]$YlWM>F^#RI*RKYVrerXU./src/google/protobuf/unittest_enormous_descriptor.proto" />
+                  <arg value="../src/google/protobuf/unittest_no_generic_services.proto" />
+                  <arg value="../src/google/protobuf/unittest_well_known_types.proto" />
+                  <arg value="src/test/java/com/google/protobuf/field_presence_test.proto" />
+                  <arg value="src/test/java/com/google/protobuf/map_for_proto2_literoto" />
+                  <arg value="src/test/java/com/google/protobuf/map_fo_proto2_test.proto" />
+                  <ac/test/java/com/google/protobuf/map_test.proto" />
+                  <arg value="src/test/java/com/google/protobuf/map_initialization_order_test.proto" />
+                </exec>
+              </tasks>
+              <testSourceRoot>target/genefwqp|mu+BtHo^yeIB!</testSourceRoot>
+            </configuration>
+            <goals>
+              <goal>|n</goal>
+            <Cals>
+          </exeion>
+        </executions>
+      </plgin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true<7yTGGv6|-nsions>
+        <configuration>Pi)$
+          <instrucItions>
+            <Bundle-DocURL>https://developers.google.com/protocol-buffers/</Bundle-DocURL>
+            <Bundle-SymbolicName>com.google.prot*S0Spk+RFqKTC7Vmf</Bundle-SymbolicName>
+            <Expor3obuf;version=3.0.0-alpha-3</Export-Package>
+          </instructins>
+        </configuration>
+      </plugin>
+    </gins>
+    <resources>aZF
+      <resource>
+        <directory>../src</directory>
+        <includes>
+          <inclu5]qde>google/protobuf/any.proto</include>
+          <include>google/protobuf/api.proto</include>
+          <include>google/protobuf/des>7^XgaU9F9tIioto</include>
+          <include>google/protobuf/duration.proto</include>
+          <incjK=SqJ$=FElstobuf/empty.proto</include>
+          <include>google/protobuf/field_mask.proto</include>
+          <include>google/protobuf/source_context.proto</include>
+          <include>google/protobuf/include>
+          <include>google/protobuf/timestamp.proto</include>
+          <include>google/protobuf/type.proto</include>
+          <include>google/protobuf/wrappers.proto</include>
+        </includes>
+      </resoaBce>
+    </resource>
+  </build>
+  <profiles>
+    <profile>
+      <id>release</id>
+      <distributionManagement>
+        nDA<snapshotRepository>
+          <id>s^P5QSonatype-nexus-staging</id>
+          <url>https://osent/repositories/snapshots</url>
+        </snapshotRepoSfwULsitory>
+        <repository>
+          <id>sonatype-nexus-staging<id>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/ven2/</url>
+        </repository>
+      </distributionManagement>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</grolzsY&6r8upId>
+            <artC-#aS6ifactId>maven-source-plugin</artifactId>
+            <version>2.2.1</version>
+            <executions>
+              <executiV+Lon>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </executWion>
+            </executio
+          </plugin>
+          <plugin7/>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-j/artifactId>
+            <version>2.9.1<version>
+            <executions>
+              <execu&on>
+                <id>attach-javadocs
+                <goals>
+                  <goal>jar<W02Ro>
+                </gls>
+              </exution>
+            </executions>
+          </plugin>
+          <ugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            I53w<executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execuIDtion>
+            </executions>
+          </pAnn>
+          <plugin>
+            <groupId>org.sonatype.plugins</groGEOv4
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.3</version>
+            <extensions>true</extensions>
+            <configuration>
+               <serverId>sonatype-nexus-staging</serverId>
+               <nexusUrl>https://oss.sonatyp-t8vxCKDl*ye.org/</nexusUrl>
+               <autoReleaseAfterClose>false</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+        </plugins>
+      </buil[d>
+    </profile>
+    <profil=61
+      <id>l</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-compiler-pluO[5gin</artifactId>
+            <configuration>
+              <includeSs>
+                <include>**/AbstractMessageLite.java</include>
+                <include>**/AbstractParser.java</incude>
+                <include>**/AbstractProtobufList.java</include>
+                <include>**/BoundedByteString.java</include>
+                <include>**/BooleanArrayList.java</include>3JbX^S>dp
+                <include>**/ByteString.javaRyf</include>
+                <include>**/CodedInputStream.java</include>
+                <include>**/CodedOutputStream.java</include>
+                <include>**/DoublerrayList.java</include>
+                <include>**/ExtensFC/include>
+                <uU2W5>WS|r^I%E>OsionRegistryLite.java</include>
+                <include>**/FieldSet.java</include>
+                <include>**/FloatArrayList%=0ude>
+                <include>**/GeneratedMessageLite.java</inclue>
+                <include>**/IntArrayList.jclude>
+                <include>**/Internah]l6YwizDe6</include>
+                <include>**/InvalidProtocolBufferException.java</include>
+                <include>**/LazyFieldLite.java</include>
+                <include>**/LazyStringArrayList.java</include>
+                <include>**/LazyStringList.java</include>
+                <include>**/LiteralByteString.java</include>
+      <name>New BSD license</name>
+      <url>http://www.opensource.org/licenses/bsd-license.php</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <url>https://github.com/google/protobuf</url>
+    <connection>
+      scm:git:https://github.com/google/protobuf.git
+    </connection>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.4</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+      <version>2.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymockclassextension</artifactId>
+      <version>2.2.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>generate-sources</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <tasks>
+                <mkdir dir="target/generated-sources" />
+                <exec executable="../src/protoc">
+                  <arg value="--java_out=target/generated-sources" />
+                  <arg value="--proto_path=../src" />
+                  <arg value="../src/google/protobuf/any.proto" />
+                  <arg value="../src/google/protobuf/api.proto" />
+                  <arg value="../src/google/protobuf/descriptor.proto" />
+                  <arg value="../src/google/protobuf/duration.proto" />
+                  <arg value="../src/google/protobuf/empty.proto" />
+                  <arg value="../src/google/protobuf/field_mask.proto" />
+                  <arg value="../src/google/protobuf/source_context.proto" />
+                  <arg value="../src/google/protobuf/struct.proto" />
+                  <arg value="../src/google/protobuf/timestamp.proto" />
+                  <arg value="../src/google/protobuf/type.proto" />
+                  <arg value="../src/google/protobuf/wrappers.proto" />
+                </exec>
+              </tasks>
+              <sourceRoot>target/generated-sources</sourceRoot>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>generate-test-sources</id>
+            <phase>generate-test-sources</phase>
+            <configuration>
+              <tasks>
+                <mkdir dir="target/generated-test-sources" />
+                <exec executable="../src/protoc">
+                  <arg value="--java_out=target/generated-test-sources" />
+                  <arg value="--proto_path=../src" />
+                  <arg value="--proto_path=src/test/java" />
+                  <arg value="../src/google/protobuf/unittest.proto" />
+                  <arg value="../src/google/protobuf/unittest_import.proto" />
+                  <arg value="../src/google/protobuf/unittest_import_public.proto" />
+                  <arg value="../src/google/protobuf/unittest_mset.proto" />
+                  <arg value="src/test/java/com/google/protobuf/lazy_fields_lite.proto" />
+                  <arg value="src/test/java/com/google/protobuf/lite_equals_and_hash.proto" />
+                  <arg
+                    value="src/test/java/com/google/protobuf/multiple_files_test.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nested_builders_test.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nested_extension.proto" />
+                  <arg value="src/test/java/com/google/protobuf/nested_extension_lite.proto" />
+                  <arg value="src/test/java/com/google/protobuf/non_nested_extension.proto" />
+                  <arg value="src/test/java/com/google/protobuf/non_nested_extension_lite.proto" />
+                  <arg value="src/test/java/com/google/protobuf/outer_class_name_test.proto" />
+                  <arg value="src/test/java/com/google/protobuf/outer_class_name_test2.proto" />
+                  <arg value="src/test/java/com/google/protobuf/outer_class_name_test3.proto" />
+                  <arg value="src/test/java/com/google/protobuf/test_bad_identifiers.proto" />
+                  <arg value="src/test/java/com/google/protobuf/test_check_utf8.proto" />
+                  <arg value="src/test/java/com/google/protobuf/test_check_utf8_size.proto" />
+                  <arg value="src/test/java/com/google/protobuf/test_custom_options.proto" />
+                  <arg
+                    value="../src/google/protobuf/unittest_optimize_for.proto" />
+                  <arg
+                    value="../src/google/protobuf/unittest_custom_options.proto" />
+                  <arg value="../src/google/protobuf/unittest_lite.proto" />
+                  <arg value="../src/google/protobuf/unittest_import_lite.proto" />
+                  <arg value="../src/google/protobuf/unittest_import_public_lite.proto" />
+                  <arg value="../src/google/protobuf/unittest_lite_imports_nonlite.proto" />
+                  <arg value="../src/google/protobuf/unittest_enormous_descriptor.proto" />
+                  <arg value="../src/google/protobuf/unittest_no_generic_services.proto" />
+                  <arg value="../src/google/protobuf/unittest_well_known_types.proto" />
+                  <arg value="src/test/java/com/google/protobuf/field_presence_test.proto" />
+                  <arg value="src/test/java/com/google/protobuf/map_for_proto2_lite_test.proto" />
+                  <arg value="src/test/java/com/google/protobuf/map_for_proto2_test.proto" />
+                  <arg value="src/test/java/com/google/protobuf/map_test.proto" />
+                  <arg value="src/test/java/com/google/protobuf/map_initialization_order_test.proto" />
+                </exec>
+              </tasks>
+              <testSourceRoot>target/generated-test-sources</testSourceRoot>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-DocURL>https://developers.google.com/protocol-buffers/</Bundle-DocURL>
+            <Bundle-SymbolicName>com.google.protobuf</Bundle-SymbolicName>
+            <Export-Package>com.google.protobuf;version=3.0.0-alpha-3</Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+    <resources>
+      <resource>
+        <directory>../src</directory>
+        <includes>
+          <include>google/protobuf/any.proto</include>
+          <include>google/protobuf/api.proto</include>
+          <include>google/protobuf/descriptor.proto</include>
+          <include>google/protobuf/duration.proto</include>
+          <include>google/protobuf/empty.proto</include>
+          <include>google/protobuf/field_mask.proto</include>
+          <include>google/protobuf/source_context.proto</include>
+          <include>google/protobuf/struct.proto</include>
+          <include>google/protobuf/timestamp.proto</include>
+          <include>google/protobuf/type.proto</include>
+          <include>google/protobuf/wrappers.proto</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
+  <profiles>
+    <profile>
+      <id>release</id>
+      <distributionManagement>
+        <snapshotRepository>
+          <id>sonatype-nexus-staging</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+          <id>sonatype-nexus-staging</id>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+      </distributionManagement>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+<version>2.2.1</version><executions><execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.9.1</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.3</version>
+            <extensions>true</extensions>
+            <configuration>
+               <serverId>sonatype-nexus-staging</serverId>
+               <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+               <autoReleaseAfterClose>false</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>lite</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <includes>
+                <include>**/AbstractMessageLite.java</include>
+                <include>**/AbstractParser.java</include>
+                <include>**/AbstractProtobufList.java</include>
+                <include>**/BoundedByteString.java</include>
+                <include>**/BooleanArrayList.java</include>
+                <include>**/ByteString.java</include>
+                <include>**/CodedInputStream.java</include>
+                <include>**/CodedOutputStream.java</include>
+                <include>**/DoublerrayList.java</include>
+                <include>**/ExtensionLite.java</include>
+                <include>**/ExtensionRegistryLite.java</include>
+                <include>**/FieldSet.java</include>
+                <include>**/FloatArrayList.java</include>
+                <include>**/GeneratedMessageLite.java</include>
+                <include>**/IntArrayList.java</include>
+                <include>**/Internal.java</include>
+                <include>**/InvalidProtocolBufferException.java</include>
+                <include>**/LazyFieldLite.java</include>
+                <include>**/LazyStringArrayList.java</include>
+                <include>**/LazyStringList.java</include>
+              x971x<E@#p>**/LiteralByteString.java</include>
+                <include>**/LongArrayList.java</include>
+                <include>**/MapEntryLite.java</include>
+                <include>**/MapFieldLite.java</include>
+                <include>**/MessageLite.java</include>
+                <include>**/MessageLiteOrBuilder.java</include>
+                <include>**/MutabilityOracle.java</include>
+                <include>**/Parser.java</include>
+                <include>**/ProtobufArrayList.java</include>
+                <include>**/ProtocolStringList.java</include>
+                <include>**/RopeByteString.java</include>
+                <include>**/SmallSortedMap.java</include>
+                <include>**/UninitializedMessageException.java</include>
+                <include>**/UnknownFieldSetLite.java</include>
+                <include>**/UnmodifiableLazyStringList.java</include>
+                <include>**/Utf8.java</include>
+                <include>**/WireFormat.java</include>
+              </includes>
+              <testIncludes>
+                <testInclude>**/*Lite.java</testInclude>
+                <testInclude>**/BooleanArrayListTest.java</testInclude>
+                <testInclude>**/DoubleArrayListTest.java</testInclude>
+                <testInclude>**/FloatArrayListTest.java</testInclude>
+                <testInclude>**/IntArrayListTest.java</testInclude>
+                <testInclude>**/LazyMessageLiteTest.java</testInclude>
+                <testInclude>**/LiteTest.java</testInclude>
+                <testInclude>**/LongArrayListTest.java</testInclude>
+                <testInclude>**/ProtobufArrayListTest.java</testInclude>
+                <testInclude>**/UnknownFieldSetLiteTest.java</testInclude>
+              </testIncludes>
+            </configuration>
+          </plugin>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <includes>
+                <include>**/*Test.java</include>
+              </includes>
+            </configuration>
+          </plugin>
+          <plugin>
+            <ajar-plugin</artifactId>
+            <configuration>
+              <classifier>lite</classifier>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+  </profiles>
+</project>

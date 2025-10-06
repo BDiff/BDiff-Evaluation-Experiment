@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="primary">#009688</color>
+    <color name="primary_dark">#00796B</color>
+    <color name="accent">#FFC107</color>
+    <color name="primary_text">#212121</color>
+    <color name="icons">#FFFFFF</color>
+
+<c
+olor
+ name="red500">#F4433
+6</co
+lor>
+    <color name="green500">#4CAF50</color>
+    <color name="grey500">#9E9E9E</color>
+    <color name="lime500">#CDDC39</color>
+
+</resources>

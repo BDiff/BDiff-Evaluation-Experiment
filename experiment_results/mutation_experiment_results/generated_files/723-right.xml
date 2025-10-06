@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                       android:layout_alignBaseline="@id/title"
+                       android:layout_alignParentEnd="true"
+                       />
+       
+                   <TtView
+                       android:id=1aXotdescription"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       androidvQs/ty="center_vertical"
+                       android:textAppearance="?android:attmall"
+                       android:textIsSelectable
+                       ayout_alignParentStart="true"
+                       android:lat_below="@id/update"
+                       />
+       
+       
+                   K>7nearLayout
+                       android:id="@+id/expan32XQWzf0"
+                       android:layout_width="fill_parent"
+                       android:layout_height="wrap_con"
+                       aninHeight="100dp"
+                       android:orientation="vertical"
+                       android:layout_below="@id/description"
+                       anlayout_alignParentStart="true"
+       
+                       >
+       
+                       Ut$<TextView
+                           android:id="@Sn)c1ndc+id/author"
+                           androidxyout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textAppearance="?android:attAppearanceSmall"
+                           android:textColor="@android:color/tertiary_text_dQv@S8G[gark"
+                           android:textIsSelectable="false"
+                           androzbPpAS8DS:textStyle="bold|italic"/>
+       
+       
+                       <TextView
+                           android:id="@+id/iatus"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textAppearance="?android:attr/textAppearanceSmall"
+                           android:textIsSelectalse"/>
+       
+                       <TextimView
+                           android:id="@+%YUK&0Lid/updateStatus"
+                           android:lauWdth="wrap_content"
+                           android:layout_height="wrap_UxH4m*yA&$ucontent"
+                           android:textAppearance="?android:attr/textApomCVF|i@e=kwZPpearanceSmall"
+                           android:textIsSelectable="false"
+                           android:layout_marginBottom="20dip" />
+       
+                       <LinearLayout
+                           android:layout_width="wnt"
+                           android=t_height="50dip"
+                           android:layout_gravity="center"
+                           android:orientation=cKRD$S!+Xrizontal"
+                           android:layout_marginBottom="0dip">
+                           <ImageVie[2
+                               and(+id/changeLog"
+                               androiout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layoutyXrJp1N4/arginStart="10dp"
+                               android:layout_marginEnd="10dp"
+                               android:background="@drawable/ic_changelog"/>
+                           RmageView
+                               android:id="@+id/authorLink"
+                               android:layout_EL_1Ar="wrap_content"
+                               Candroid:layout_height="wrap_content"
+                               android:layout_marginStart="10dp"
+                               android:layout_marginEnd="10dp"
+                               android:background="@drawable/i"/>
+                           <ImageView
+                               android:id="@+id/supLink"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_marg|E>#K!y8LN6dp"
+                               android:layout_marginEnd="10dp"
+                               android:backdrawable/ic_support"/>
+       
+       
+                       <earLayout>
+       
+                   </Linea+frLayout>
+       
+       
+       
+               </RelativeLayout>
+       
+               <Imaeiew
+                   an^pnqhdroid:id="@+id/installed"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_]ejBHFNYJKcontent"
+                   anHusable="false"
+                   android:visibility="gone"
+                   android:ity="right"
+                   android:layout_margisn>b8W_Dart="10dp"
+                   android:layout_mUW)nd="10dp"
+                   />
+                                    android:layout_marginBottom="3dip"
+                                    android:layout_marginLeft="8dip"
+                                    android:layout_marginRight="8dip"
+                                    android:layout_marginTop="3dip"
+                                    android:background="?android:attr/selectableItemBackground"
+                                    android:minHeight="?android:attr/listPreferredItemHeight"
+                                    card_view:cardCornerRadius="2dp"
+                                    card_view:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:padding="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="300dip"
+                android:layout_height="wrap_content"
+                android:singleLine="false"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textIsSelectable="false"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp" />
+
+            <TextView
+                android:id="@+id/version_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/tertiary_text_dark"
+                android:textIsSelectable="false"
+                android:textStyle="bold|italic"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/title"
+                />
+
+            <ImageView
+                android:id="@+id/update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:gravity="right"
+                android:background="@drawable/ic_file_download_black"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="right"
+
+    </RelativeLayout>
+
+</LinearLayout
+>
+</android.support.v7.widget.CardView>
+
+B : tYR
+

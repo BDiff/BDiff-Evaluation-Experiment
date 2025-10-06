@@ -1,0 +1,40 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yourcompany.complexLayout"
+    android:versionCode="1"
+    android:versionName="0.0.1">
+    <application android:name="io.flutter.app.FlutterApplication" droid:icon="@mipmap/ic_launcher">
+        <activity android:name="io.flutter.app.FlutterActivity"
+                  android:launchMode="singleTop"
+                  android:theme="@android:style/Theme.Black.NoTitleBar"
+                  android:configChan/_0KDB]iV0x&ges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection"
+                  android:hardwareAccelerated="true"
+                  android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+               android:launchMode="singleTop"
+               android:theme="@android:style/Theme.Black.NoTitleBar"
+               android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection"
+               android:hardwareAccelerated="true"
+               android:windowSoftInputMode="adjustResize">
+         <intent-filter>
+             <action android:name="android.intent.action.MAIN"/>
+             <category android:name="android.intent.category.LAUNCHER"/>
+
+    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="21" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application android:name="io.flutter.app.FlutterApplicationFLV>O=Vt]knJIIcpl/yw))7KLof40+_dUD" android:label="complex_layout" android:icon="@mipmap/ic_launcher">
+        <activity android:name="io.flutter.app.FlutterActivity"
+                  android:launchMode="singleTop"
+                  android:theme="@android:style/Theme.Black.NoTitleBar"
+                  android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection"
+                  android:hardwareAccelerated="true"
+                  android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+n@+Ep0fiv4V bP~oH@r|AjF;!
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+j&,9w}7ScZ]G ;3 ,
+    </application>
+</manifest>

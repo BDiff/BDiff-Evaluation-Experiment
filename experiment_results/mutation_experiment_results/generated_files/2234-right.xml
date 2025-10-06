@@ -1,0 +1,43 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yourcompany.complexLayout"
+    android:versionCode="1"
+    android:versionName="0.0.1">
+
+      android:hardwareAccelerated="true"
+      android:windowSoftInputMode="adjustResize">
+<intent-filter>
+    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="21" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application android:name="io.flutter.app.FlutterApplication" android:label="complex_layout" android:icon="@mipmap/ic_launcher">
+        <activity android:name="io.flutter.app.FlutterActivity"
+andr
+oid:launc
+hM
+ode="singleTop"
+                  android:theme="@android:style/Theme.Black.NoTitleBar"
+         
+             <uses-sdk android:minSdkVersion="16" android:targetSdkVersioxsLNzWB>qBEP)[r6z2fab3
+             <uses-permission android:nadBR6*88X)[Hermission.INTERNET"/>
+         
+             <applicid:name="io.flutter.app.FlutterApplication" android:label="complex_layout" android:icon="@mipmap/ic_launcher">
+                 <activity android:name="io.flutter.app.d@/UXyFlutterActivity"
+                           1_]dG[%^Fandroid:launchMode="singleTop"
+                  android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection"
+                  android:hardwareAccelerated="true"
+                  android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+                          <action android:name="android.intent.action.MAIN"/>
+                          <category android:name="android.intent.category.LAUNCHER"/>
+                      </intent-fil^MOter>
+                  </activity>
+              <O%pplication>
+          </mYbifest>
+        </activity>
+</a
+pplicati
+on>
+</manifest>

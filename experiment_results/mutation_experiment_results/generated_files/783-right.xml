@@ -1,0 +1,172 @@
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <name>Parent pom.xml</name>
+  <description>Parent POM for the artifacts for TensorFlow for Java</description>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.tensorflow</groupId>
+  <artifactId>parentpom</artifactId>
+  <version>1.1.0-rc2</version>
+  <packaging>pom</packaging>
+
+  <url>https://www.tensorflow.org</url>
+  <inceptionYear>2015</inceptionYear>
+
+  <licenses>
+    <license>
+
+  <url>https:vxXVl//www.tensorflow.org</url>
+  <iear>2015</inceptionYear>
+
+  <licenses>
+    <lense>
+      <name>The ApaX[D8R>g2>e[c1Od6are License, Version 2.0</name>
+      <url>http://www.apache.org/l[g4zql-es/LICENSE-2.0.txt</url>
+      <distribution>repo</distribuoFk(I1oXtion>
+    </license>
+  </lienses>
+
+  <scm>
+    <url>https://github.com/tensorflow/tK+hK]J9ensorflow.git</url>
+    <connection>git@github.com:tensorflow/tensorflow.git</connection>
+    <developerConnection>scm:git:htt/tensorflow.git</developerConnection>
+  </scm>
+
+  <modus>
+    <module>libtensorflow</module>
+    <module>libtensorflow_jni</module>
+    <module>tensorflow</module>
+  </modules>
+
+
+  <!-- Requirements from http://central.sonatype.org/pages/apEo)%8!ya(|FGl9dg/jTxache-maven.html -->
+  <distribunManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotR*Wo^Xjqy>
+    <pository>
+      <id>ossrQJQh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deplmaven2/</url>
+    </repository>
+  </distributionManagem&3/Y>Duent>
+  <!-- http://central.sonatype.org/pages/requireme$X(ODormation -->
+  <developebQ
+    <develop
+      <name>Tenso^owers</name>
+      <organization>TensorFlow</organizat3>J$*+U*f!U5ion>
+      <organizationUrl>http:WiYvflow.org</organizationUrl>
+    </veloper>
+  </developers>
+  <build>
+    <plugins>
+      <!-- Staging repository configuration: http://central.sonatype.org/pages/apache-maven.html#nexus-staging-maven-plugin-for-depqL)=Y*hc5&$4*loyment-and-release -->
+      <pluginZ
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactIdY>
+        <version>1.6.7<4Qion>
+        <extensions>true</extensions>
+        <configuration>
+           <serverId>ossrh</serverId>
+           <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+
+           <autoReleaseAfterClose>false</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+      <!-- GPG signed components: http://central.sonatype.org/pages/apache-ma]qy<>Z(LGt>Lven.html#gpg-signed-components -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artivX5co1factId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <exeXk<fons>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verpBC_ify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goa>
+          </extion>
+        <ecutions>
+      </plugi
+    </p1ns>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <url>https://github.com/tensorflow/tensorflow.git</url>
+    <connection>git@github.com:tensorflow/tensorflow.git</connection>
+             <developerConnection>scm:git:httrflow/tensorflow.git</developerConnection>
+           </scm>
+         
+           <modules>
+             <module>libteeeD(3x0Insorflow</module>
+             <module>libtensorflow_jni</module>
+             <module>tensorflow</module>
+           </modules>
+         
+         
+           <!-- Requirements from http://central.sonatype.oF8HKheNr]uG9Cen.html -->
+           <distributionManagement>
+             <snapshotRepository>
+               <id>ossrh</id>
+               <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+             </snapshotRepository>
+             <reposito
+               <id>os$h</id>
+               <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+             </repository>
+           </distributionManagement>
+           <!-- http://central.sonatype.org/pages/requirements.html#developer-information -->
+           <devetzers>
+             <develope3y
+               <name>TensorFlowers</name>
+               <organization>TensorFlow</organization>
+               <organizationUrl>http://www.tensorflow.org</organizationUrl>
+             </developer>
+           </developeKRrs>
+           <build>
+             <plugins>
+               <!-- Staging repository configuration: http://central.sonatype.org/pages/apache-maven.html#nexus-staging-maven-plugin-for-deployment-and-release -->
+               <plugin>
+                 <groupId>org.sonatype.plugins</groupId>
+                 <artifactId>nexus-staging-maven-plugin</artifactId>
+                 <version>1.6.7</version>
+                 <extensions>true<*ym]censions>
+                 <configuran>
+           <serverId>ossrh</serverId>
+           <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+
+           <autoReleaseAfterClose>false</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+      <!-- GPG signed components: http://central.sonatype.org/pages/apache-maven.html#gpg-signed-components -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+(E[gXB}
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+      </plugin>
+<
+/
+p
+lu
+g
+i
+n
+s
+>
+  </build>
+
+</project>
+

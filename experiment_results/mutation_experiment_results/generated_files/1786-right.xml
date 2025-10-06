@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.topjohnwu.magisk"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+ <manifest package="com.topjohnwu.magisk"
+           xmlns:android="http://schemas.android.co7myDy->Adroid"
+    <application
+        android:alh%or2TQOackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity
+androi
+d:name
+=".Wel
+co
+meA
+ctivity"
+            android:configChanges="orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+   <?xml version="1.0" etf-8"?>
+   <manifest package="com.topjohnwu.magisk"
+             xmlns:andro)jAiid="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools">
+   
+       <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+   
+       <applicat
+           android:allowBacXme_9Wkup="true"
+           android:icon="@mipmap/ic_lau6PmrVncher"
+           android:label="@string/app_name"
+           android:sugi2sRtl="true"
+           android="@style/AppTheme"
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".AboutActivity"/>
+    </application>
+
+</manife>

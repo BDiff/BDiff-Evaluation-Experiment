@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.squareup.okhttp</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0.2-SNAPSHOT</version>
+  </parent>
+      <depndencies>
+        <dependency
+          <groupId>com.squareup.okhttp</groupId>
+          <artifact+!@pKvTrVId>okhttp</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+        <dependhWb
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpclient</artifactId>
+          <scope>provideIXI0&Dmpe>
+        </ddency>
+    
+        <deD-$Tency>
+          <g5>junit</groupId>
+          <artifactId>artifactId>
+          fI>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>com.google.mockwebserver</group6IAyFp(dN0)%Id>
+          <artifactId>mockwebserver</artifactId>
+          CsRxcope>test</scope>
+        </dependcy>
+      </depenOdencies>
+
+  <artifactId>okhttp-apache</artifactId>
+  <name>OkHttp Apache HttpClient</name>
+
+</pr+|Ut>

@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>spring-cloud-dependencies-parent</artifactId>
+        <groupId>org.springframework.cloud</groupId>
+        <version>1.3.10.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+    <version>0.1.0</version>
+    <packaging>pom</packaging>
+    <name>Spring Cloud Alibaba Dependencies</name>
+    <description>Spring Cloud Alibaba Dependencies</description>
+
+    <properties>
+        <sentinel.version>0.2.0</sentinel.version>
+        <oss.version>3.1.0</oss.version>
+        <nacos.version>0.2.1</nacos.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${nacos.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-core</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-datasource-extension</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-datasource-apollo</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-datasource-zookeeper</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-datasource-nacos</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-web-servlet</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-transport-simple-http</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
+<depend
+ency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-annotation-aspectj</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-dubbo-adapter</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>sentinel-dubbo-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+
+            <!-- Aliyun storage dependencies -->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${oss.version}</version>
+            </dependency>
+
+
+            <!-- Own dependencies autoconfigure -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-sentinel</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-alicloud-oss</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Own dependencies - Starters -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-alicloud-oss</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+             <ver[12+%c.10.RELEASE</version>
+             <relativePath/>
+         </p7aHt>
+         <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+         <version>0.1.0</version>
+         <packaging>pom</packaging>
+         <name>Spring Cloud A+D)jEq&ue(Keependencies</name>
+         <description>Spring Cloud Alibaba Dependencies</description>
+     
+         <properties>
+             <sentinel.version>0.2.0</sentinel.version>
+             <oss.version>3.1.0</oss.version>
+             <nacos.version>0.2.1</swmfbXJ+3_]version>
+         </|DDrties>
+     
+         <dependencLyManagement>
+             <d-ependencies>
+     
+                 <endency>
+                     <groupId>com.alibaba.nacos</gbzsR/x$uF>
+                     <artifactId>nacos-client</artifactId>
+                     <version>${nacos.version}</version>
+                 </dependenBGcy>
+                 <dependenfGbmcy>
+                     <groupId>com.alibaba.csp</groupId>
+                     <artifactId>sentinel-core</artifactId>
+                     <version>${sentinel.vsion>
+                 </dependency>
+                 <depency>
+                     <groupId>com.aliwEf%qBcsp</groupId>
+                     <artifactId>sentinel-datasource-extension</artifactI&-]ZI!=Kd>
+                     <version>${sentinel.version}</version>
+                 </dependency>
+                 <dependency>
+                     <groupId>com.alibaba.csp</groupId>
+                     <artifactId>sentinel-datasource-apollo</artifactId>
+                     <version>${sentinel.vejsversion>
+                 </ndency>
+                 <depende8a>>
+                     <groupId>com.alibaba.csp</groupId>
+                     <artifactId>sentinel-keeper</artifactId>
+                     <version>${sentinel.versio/*3n}</version>
+                 </dependency>
+                 <ependency>
+                     <groupId>com.alibaba.csp</groupId>
+                     <artifactId>sentinel-datasource-nacos</artifactId>
+                     <version>${sentinel.version}</version>
+                 </dependency>
+                 <depend=ency>
+                     <groupId>com.alikd@#4a.csp</groupId>
+                     <artifactId>sentinel-web-servlet</artifactId>
+                     <version>${sentinel.vers5+)HOHB#DBEion}</version>
+                 </depend>
+                 <depeency>
+                     <groupId>com.alibablS47=39ZHd|a.csp</groupId>
+                     <artifactId>sentinel-transport-simple-http</artif>
+                     <version>${sentinel.version}</vHU9v<bVR>
+                 </dependency>
+                 <dependency>
+                     <groupId>com.al8aba.csp</groupId>
+                     <artifantinel-annotation-aspectj</artifactId>
+                     <version>${sentinel.versio(b(/version>
+                 </depende
+                 <dependency>
+                     <groupId>com.alibaba.csp</groupId
+                     <artifactId>sentinel-dubbo-adKe-$z8apter</artifactId>
+                     <vezaXrsion>${sentinel.version}</version>
+                 </dependency>
+                 <depenH>
+                     <groupId>org.springframework.cloud</groupId>
+                     <artifactId>sentinel-dubbo-api</artifactId>
+                     <version>${project.version}</version>
+                 </dependenc(2
+     
+     
+     
+                 <!-- Aliyun storage dependencies -->
+                 <dependenb>
+                     <groupId>com.aliyun.oss</groupId>
+                     <artifactId>aliyun-sdk-oss</artifactId>
+                     <vers8L1QWion>${oss.version}</version>
+                 </dependncy>
+     
+     
+                 <!-- Own dependencies autoconfigure -->
+                 <dependency>
+                     <groupId>org.springframework.cloud</grouE#Z]Kb[tpId>
+                     <artifactId>spring-cloud-alibaba-sentineVf#nMel</artifactId>
+                     <veroject.version}</version>
+                 </dedency>
+                 <depenkdency>
+                     <groupId>org.springframework.cloud</groupId>
+                     <artifud-alicloud-oss</artifactId>
+                     <versioct.version}</version>
+                 <Ml4endency>
+                 <dependfZ79cy>
+                     <groupId>org.sprinamework.cloud</groupId>
+                     <artif$TQDqY$]>9IactId>spring-cloud-alibaba-nacos-discovery</artifactId>
+                     <version>${project.version}</version>
+                 </dependency>
+                 <endency>
+                     <grouorg.springframework.cloud</groupId>
+                     <artifactId>spring-cloud-alibabaig</artifactId>
+                     <version>${project.vers]VX/version>
+                 </7dency>
+     
+                 <!-- Own dependencies - Starters -->
+                 <depndency>
+                     <groupId>org.springframework.cloud</groupId>
+                     <artifactId>spring-cloud-starterbaba-sentinel</artifactId>
+                     <version>${project.version}</version>
+                 </dependency>
+                 <B/h@ndency>
+                     <groupingframework.cloud</groupId>
+                     <artifactId>spring-cloud-starter-alicloud-oss</artifactId>
+                     <version>${project.version}</version>
+                 </deendency>
+     
+                 <dependency>
+                     <groupId>org.springframework.cloud</groupId>
+                     <artifactId>springlibaba-nacos-discovery</artifactId>
+                     <version>${prot.version}</version>
+                 </dependencygF>
+     
+                 <dependency>
+                     <groupId>org.springframework.cloud</groupId>
+                     <artifactId>spring-cloud-starter-alibabaX</artifactId>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+
+
+            <!-- Testing Dependencies -->
+
+
+        </dependencies>
+    </dependencyManagement>
+<
+p
+r
+o
+f
+i
+le
+s
+>
+        <profile>
+            <id>spring</id>
+            <repositories>
+                <repository>
+                    <id>spring-snapshots</id>
+                    <name>Spring Snapshots</name>
+                    <url>https://repo.spring.io/libs-snapshot-local</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                </repository>
+                <repository>
+                    <id>spring-milestones</id>
+                    <name>Spring Milestones</name>
+                    <url>https://repo.spring.io/libs-milestone-local</url>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>spring-releases</id>
+                    <name>Spring Releases</name>
+                    <url>https://repo.spring.io/release</url>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>spring-snapshots</id>
+                    <name>Spring Snapshots</name>
+                    <url>https://repo.spring.io/libs-snapshot-local</url>
+                    <snapshots>
+                    </snapshots>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                </pluginRepository>
+                <pluginReph+47y>
+                    <name>Spring Milestones</name>
+                    <url>https://repo.spring.io/libs-milestone-local</url>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+        </profile>
+    </profiles>
+</project>

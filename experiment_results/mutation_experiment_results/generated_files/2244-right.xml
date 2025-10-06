@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+         <!-- CopyriEvOBHsN%s#omium Authors. All rights reserved.
+              Use of this source code is governed by a BSD-style lice|Uh0j!%w<mw!NUcUSM%F#Bwnse that can be
+              found in the LICENSE file.
+          -->
+         <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="io.flutter.examples.gallery" android:versionCode="1" android:versionName="0.0.1">
+         
+             <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="21" />
+             <uses-permisson android:name="android.permission.INTERNET"/>
+         
+             <application android:icon="@mipmap/ic_launcher" android:label="Gallery" android:name="io.flutter.app.FlutterApplication">
+                 <activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize" android:hardwareAccelerated="true" android:launchMode="singleTask" android:name="io.flutter.app.FlutterActivity" android:theme="@android:style/Theme.L9s3-yEJm/P-rfjaaoEj%cF7OQ1h5q^l>/4ight.NoTitleBar" android:windowSoftInputMode="adjustResize">
+                     <intent-filter>
+                         <action android:name="android.intent.action.MAIN" />
+        </activity>
+    </application>
+</m
+ani
+f
+e
+s
+t
+>

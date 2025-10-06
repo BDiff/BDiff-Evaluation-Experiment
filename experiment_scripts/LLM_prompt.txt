@@ -1,0 +1,1004 @@
+##########  SYSTEM PROMPT ########## 
+You are an expert in code differencing.
+
+You will be given two pieces of code:
+
+* `code A` - the original code.
+* `code B` - the edited version of `code A`.
+
+Your task is to analyze the differences and output a list of edit actions (EAs) as dictionaries that transform `code A` into `code B`.
+
+**Important**
+- Do not write a function or any Python code other than the list of EA dictionaries.
+- The only output must be the list of dictionaries (a JSON-like Python list).
+- Follow the EA formats and global rules exactly as specified below.
+
+--------------------------------
+## Global Resolution Rules (MUST follow)
+
+1. **Mutual exclusivity per change.** Every change is represented **either** by one line-level EA **or** one block-level EA — not both.
+2. **Block Copy exception.** For a Block Copy (BC), each copied instance may include at most one extra line-level EA that directly corresponds to the copy. A single source block may be copied multiple times, and each copy instance may carry its own one permitted line-level EA.
+3. **Prefer split/merge.** When both interpretations are possible (e.g., a moved block that was also collapsed into one line), prioritize LS/LM. Only use BM/BC if the change cannot be expressed as LS/LM.
+4. **No overlap.** Lines in a block-level EA must not appear in standalone line EAs (except the BC exception above).
+5. **Minimize total EAs.** Prefer fewer EAs overall; group changes into blocks where valid.
+6. **Block-level EA block length bounds.** A block-level EA (BM/BC) must cover at least 2 consecutive lines. Single-line block moves/copies are disallowed.
+7. **Line-level EA block length bounds.** LS and LM must produce between 2 and 8 lines. For longer regions, partition into the fewest valid splits/merges. Avoid 1-line fragments; only allow them if unavoidable.
+8. **Indexing.** Line numbers are 1-based; `str_diff` offsets are 0-based and end-inclusive; `indent_offset` is an integer (spaces).
+
+--------------------------------
+## Line-level Edit Actions (EAs)
+
+These EAs operate at the level of individual lines.
+
+1. Line Deleting (LD) - Deleting an entire line.
+```python
+{
+    'mode': 'delete',
+    'src_line': <line number in code A being deleted>,
+}
+````
+
+2. Line Adding (LA) - Adding a new line.
+
+```python
+{
+    'mode': 'insert',
+    'dest_line': <line number in code B where the new line is inserted>,
+}
+```
+
+3. Line Updating (LU) - Modifying part of a line (deletion, addition, or replacement within the same line).
+
+```python
+{
+    'mode': 'update', 
+    'src_line': <line number in code A>, 
+    'dest_line': <line number in code B>,
+    'indent_offset': <indentation offset>, 
+    'str_diff': [
+        [[<start offset in code A>, <end offset in code A>]],
+        [[<start offset in code B>, <end offset in code B>]]
+    ]
+}
+```
+
+# NOTE: All offsets in str_diff are 0-based.
+
+4. Line Splitting (LS) - Splitting one line into multiple lines.
+
+```python
+{
+    'mode': 'split', 
+    'src_line': <first line number before splitting in code A>,
+    'dest_line': <first line number after splitting in code B>,
+    'block_length': <number of lines after split>,
+}
+```
+
+5. Lines Merging (LM) - Merging multiple consecutive lines into a single line.
+
+```python
+{
+    'mode': 'merge',
+    'src_line': <first line number before merging in code A>,
+    'dest_line': <first line number after merging in code B>,
+    'block_length': <number of lines to be merged>
+}
+```
+
+---
+
+## Block-level Edit Actions (EAs)
+
+These EAs operate on a group of consecutive lines while preserving their relative indentation.
+
+**Constraints:**
+
+* Apply Global Rules 1–8.
+* Modifications **inside** a moved/copied block must be represented via the block EA’s `updates` and corresponding `m_update`/`c_update` entries; do not emit separate line EAs for those lines (except the single allowed extra line EA for **BC**).
+
+1. Block Moving (BM) - Moving a code block or changing indentation.
+
+```python
+{
+    'mode': 'move', 
+    'move_type': '<u/d/h>',  # 'u' upward, 'd' downward, 'h' horizontal (indent only)
+    'src_line': <starting line number of the block in code A>,
+    'dest_line': <starting line number of the block in code B>,
+    'block_length': <number of lines in the moved block>,  # MUST be 2..8
+    'indent_offset': <positive = indented right, negative = left, 0 = unchanged>,
+    'updates': [
+        [<original line number in code A>, <corresponding updated line number in code B>],
+        ...
+    ]
+}
+```
+
+1.1 Update to a moved line in BM(m_update)
+
+```python
+{
+    'mode': 'm_update',
+    'src_line': <line number in code A before the move>,
+    'dest_line': <line number in code B after the move>,
+    'str_diff': [
+        [[<start offset in code A>, <end offset in code A>]],
+        [[<start offset in code B>, <end offset in code B>]]
+    ]
+}
+```
+
+# NOTE: All offsets in str_diff are 0-based.
+
+2. Block Copying (BC) - Copying a code block to another location/indentation.
+
+```python
+{
+    'mode': 'copy', 
+    'src_line': <starting line number of the block in code A>,
+    'dest_line': <starting line number of the block in code B>,
+    'block_length': <number of lines in the copied block>,  # MUST be 2..8
+    'indent_offset': <positive = indented right, negative = left, 0 = unchanged>,
+    'updates': [
+        [<original line number in code A>, <corresponding updated line number in code B>],
+        ...
+    ]
+    # IMPORTANT (exception to mutual exclusivity):
+    # You may include EXACTLY ONE additional line-level EA for this BC if needed
+    # to represent a single line change that corresponds to the same copy change.
+}
+```
+
+2.1 Update to a copied line in BC (c_update)
+
+```python
+{
+    'mode': 'c_update',
+    'src_line': <line number in code A before the copy>,
+    'dest_line': <line number in code B after the copy>,
+    'str_diff': [
+        [[<start offset in code A>, <end offset in code A>]],
+        [[<start offset in code B>, <end offset in code B>]]
+    ]
+}
+```
+## Output Requirements
+
+1. Return **only** a single Python list literal of EA dictionaries, e.g.:
+
+```python
+[
+  {'mode': 'delete', 'src_line': 10, 'dest_line': 9},
+  {'mode': 'move', 'src_line': 50, 'dest_line': 30, 'block_length': 3, 'indent_offset': 0, 'move_type': 'u', 'updates': []},
+  {'mode': 'm_update', 'src_line': 52, 'dest_line': 32, 'str_diff': [[[5, 8]], [[5, 10]]]}
+]
+```
+
+2. Do **not** include explanations, comments, or function wrappers.
+3. The list must contain **all and only** the EAs needed to transform `code A` into `code B`.
+
+########## USER PROMPT (providing examples) ##########
+Code A:
+# -*- coding: utf-8 -*-
+
+\"\"\"
+    requests.core
+    ~~~~~~~~~~~~~
+
+    This module implements the main Requests system.
+
+    :copyright: (c) 2011 by Kenneth Reitz.
+    :license: ISC, see LICENSE for more details.
+\"\"\"
+
+import urllib
+import urllib2
+
+
+__title__ = 'requests'
+__version__ = '0.2.0'
+__build__ = 0x000200
+__author__ = 'Kenneth Reitz'
+__license__ = 'ISC'
+__copyright__ = 'Copyright 2011 Kenneth Reitz'
+
+
+AUTOAUTHS = []
+
+
+class _Request(urllib2.Request):
+	\"\"\"Hidden wrapper around the urllib2.Request object. Allows for manual
+	setting of HTTP methods.
+	\"\"\"
+	
+	def __init__(self, url,
+					data=None, headers={}, origin_req_host=None,
+					unverifiable=False, method=None):
+		urllib2.Request.__init__( self, url, data, headers, origin_req_host,
+								  unverifiable)
+	   	self.method = method
+
+	def get_method(self):
+		if self.method:
+			return self.method
+
+		return urllib2.Request.get_method(self)
+
+
+class Request(object):
+	\"\"\"The :class:`Request` object. It carries out all functionality of
+	Requests. Recommended interface is with the Requests functions.
+	
+	\"\"\"
+	
+	_METHODS = ('GET', 'HEAD', 'PUT', 'POST', 'DELETE')
+	
+	def __init__(self):
+		self.url = None
+		self.headers = dict()
+		self.method = None
+		self.params = {}
+		self.data = {}
+		self.response = Response()
+		self.auth = None
+		self.sent = False
+		
+	def __repr__(self):
+		try:
+			repr = '<Request [%s]>' % (self.method)
+		except:
+			repr = '<Request object>'
+		return repr
+	
+	def __setattr__(self, name, value):
+		if (name == 'method') and (value):
+			if not value in self._METHODS:
+				raise InvalidMethod()
+		
+		object.__setattr__(self, name, value)
+	
+	
+	def _checks(self):
+		\"\"\"Deterministic checks for consistiency.\"\"\"
+
+		if not self.url:
+			raise URLRequired
+
+		
+	def _get_opener(self):
+		\"\"\" Creates appropriate opener object for urllib2.
+		\"\"\"
+		
+		if self.auth:
+
+			# create a password manager
+			authr = urllib2.HTTPPasswordMgrWithDefaultRealm()
+
+			authr.add_password(None, self.url, self.auth.username, self.auth.password)
+			handler = urllib2.HTTPBasicAuthHandler(authr)
+			opener = urllib2.build_opener(handler)
+
+			# use the opener to fetch a URL
+			return opener.open
+		else:
+			return urllib2.urlopen
+
+	
+	def send(self, anyway=False):
+		\"\"\"Sends the request. Returns True of successfull, false if not.
+		    If there was an HTTPError during transmission,
+		    self.response.status_code will contain the HTTPError code.
+
+		    Once a request is successfully sent, `sent` will equal True.
+		
+		    :param anyway: If True, request will be sent, even if it has
+		    already been sent.
+		\"\"\"
+		self._checks()
+
+		success = False
+		
+		if self.method in ('GET', 'HEAD', 'DELETE'):
+			if (not self.sent) or anyway:
+
+				# url encode GET params if it's a dict
+				if isinstance(self.params, dict):
+					params = urllib.urlencode(self.params)
+				else:
+
+					params = self.params
+
+				req = _Request(("%s?%s" % (self.url, params)), method=self.method)
+
+				if self.headers:
+					req.headers = self.headers
+
+				opener = self._get_opener()
+
+				try:
+					resp = opener(req)
+					self.response.status_code = resp.code
+					self.response.headers = resp.info().dict
+					if self.method.lower() == 'get':
+						self.response.content = resp.read()
+
+					success = True
+				except urllib2.HTTPError, why:
+					self.response.status_code = why.code
+
+
+		elif self.method == 'PUT':
+			if (not self.sent) or anyway:
+
+				req = _Request(self.url, method='PUT')
+
+				if self.headers:
+					req.headers = self.headers
+
+				req.data = self.data
+
+				try:
+					opener = self._get_opener()
+					resp =  opener(req)
+
+					self.response.status_code = resp.code
+					self.response.headers = resp.info().dict
+					self.response.content = resp.read()
+
+					success = True
+
+				except urllib2.HTTPError, why:
+					self.response.status_code = why.code
+
+
+
+
+		elif self.method == 'POST':
+			if (not self.sent) or anyway:
+
+				req = _Request(self.url, method='POST')
+
+				if self.headers:
+					req.headers = self.headers
+
+				# url encode form data if it's a dict
+				if isinstance(self.data, dict):
+					req.data = urllib.urlencode(self.data)
+				else:
+					req.data = self.data
+
+				try:
+
+					opener = self._get_opener()
+					resp =  opener(req)
+
+					self.response.status_code = resp.code
+					self.response.headers = resp.info().dict
+					self.response.content = resp.read()
+
+					success = True
+
+				except urllib2.HTTPError, why:
+					self.response.status_code = why.code
+
+		
+		self.sent = True if success else False
+		
+		return success
+		
+
+class Response(object):
+	\"\"\"The :class:`Request` object. All :class:`Request` objects contain a
+	:class:`Request.response <response>` attribute, which is an instance of
+	this class.
+	\"\"\"
+
+	def __init__(self):
+		self.content = None
+		self.status_code = None
+		self.headers = dict()
+		
+	def __repr__(self):
+		try:
+			repr = '<Response [%s]>' % (self.status_code)
+		except:
+			repr = '<Response object>'
+		return repr
+
+	
+class AuthObject(object):
+	\"\"\"The :class:`AuthObject` is a simple HTTP Authentication token. When
+	given to a Requests function, it enables Basic HTTP Authentication for that
+	Request. You can also enable Authorization for domain realms with AutoAuth.
+	See AutoAuth for more details.s
+	
+	:param username: Username to authenticate with.
+    :param password: Password for given username.
+	\"\"\"
+	
+	def __init__(self, username, password):
+		self.username = username
+		self.password = password
+
+
+
+def get(url, params={}, headers={}, auth=None):
+	\"\"\"Sends a GET request. Returns :class:`Response` object.
+
+	:param url: URL for the new :class:`Request` object.
+	:param params: (optional) Dictionary of GET Parameters to send with the :class:`Request`.
+	:param headers: (optional) Dictionary of HTTP Headers to sent with the :class:`Request`.
+	:param auth: (optional) AuthObject to enable Basic HTTP Auth.
+	\"\"\"
+	
+	r = Request()
+	
+	r.method = 'GET'
+	r.url = url
+	r.params = params
+	r.headers = headers
+	r.auth = _detect_auth(url, auth)
+	
+	r.send()
+	
+	return r.response
+
+
+def head(url, params={}, headers={}, auth=None):
+	\"\"\"Sends a HEAD request. Returns :class:`Response` object.
+
+	:param url: URL for the new :class:`Request` object.
+	:param params: (optional) Dictionary of GET Parameters to send with the :class:`Request`.
+	:param headers: (optional) Dictionary of HTTP Headers to sent with the :class:`Request`.
+	:param auth: (optional) AuthObject to enable Basic HTTP Auth.
+	\"\"\"
+	
+	r = Request()
+	
+	r.method = 'HEAD'
+	r.url = url
+	# return response object
+	r.params = params
+	r.headers = headers
+	r.auth = _detect_auth(url, auth)
+	
+	r.send()
+	
+	return r.response
+
+
+def post(url, data={}, headers={}, auth=None):
+	\"\"\"Sends a POST request. Returns :class:`Response` object.
+
+	:param url: URL for the new :class:`Request` object.
+	:param data: (optional) Dictionary of POST Data to send with the :class:`Request`.
+	:param headers: (optional) Dictionary of HTTP Headers to sent with the :class:`Request`.
+	:param auth: (optional) AuthObject to enable Basic HTTP Auth.
+	\"\"\"
+	
+	r = Request()
+
+	r.url = url
+	r.method = 'POST'
+	r.data = data
+	
+	r.headers = headers
+	r.auth = _detect_auth(url, auth)
+	
+	r.send()
+	
+	return r.response
+	
+	
+def put(url, data='', headers={}, auth=None):
+	\"\"\"Sends a PUT request. Returns :class:`Response` object.
+
+	:param url: URL for the new :class:`Request` object.
+	:param data: (optional) Bytes of PUT Data to send with the :class:`Request`.
+	:param headers: (optional) Dictionary of HTTP Headers to sent with the :class:`Request`.
+	:param auth: (optional) AuthObject to enable Basic HTTP Auth.
+	\"\"\"
+	
+	r = Request()
+
+	r.url = url
+	r.method = 'PUT'
+	r.data = data
+	
+	r.headers = headers
+	r.auth = _detect_auth(url, auth)
+	
+	r.send()
+	
+	return r.response
+
+	
+def delete(url, params={}, headers={}, auth=None):
+	\"\"\"Sends a DELETE request. Returns :class:`Response` object.
+
+	:param url: URL for the new :class:`Request` object.
+	:param params: (optional) Dictionary of GET Parameters to send with the :class:`Request`.
+	:param headers: (optional) Dictionary of HTTP Headers to sent with the :class:`Request`.
+	:param auth: (optional) AuthObject to enable Basic HTTP Auth.
+	\"\"\"
+	
+	r = Request()
+
+	r.url = url
+	r.method = 'DELETE'
+	# return response object
+	
+	r.headers = headers
+	r.auth = _detect_auth(url, auth)
+	
+	r.send()
+	
+	return r.response
+
+
+def add_autoauth(url, authobject):
+	\"\"\"Registers given AuthObject to given URL domain. for auto-activation.
+	Once a URL is registered with an AuthObject, the configured HTTP
+	Authentication will be used for all requests with URLS containing the given
+	URL string.
+
+	Example: ::
+	    >>> c_auth = requests.AuthObject('kennethreitz', 'xxxxxxx')
+	    >>> requests.add_autoauth('https://convore.com/api/', c_auth)
+	    >>> r = requests.get('https://convore.com/api/account/verify.json')
+	    # Automatically HTTP Authenticated! Wh00t!
+
+	:param url: Base URL for given AuthObject to auto-activate for.
+	:param authobject: AuthObject to auto-activate.
+	\"\"\"
+	global AUTOAUTHS
+	
+	AUTOAUTHS.append((url, authobject))
+
+
+def _detect_auth(url, auth):
+	\"\"\"Returns registered AuthObject for given url if available, defaulting to
+	given AuthObject.\"\"\"
+
+	return _get_autoauth(url) if not auth else auth
+
+	
+def _get_autoauth(url):
+	\"\"\"Returns registered AuthObject for given url if available.
+	\"\"\"
+	
+	for (autoauth_url, auth) in AUTOAUTHS:
+		if autoauth_url in url: 
+			return auth
+			
+	return None
+
+class RequestException(Exception):
+	\"\"\"There was an ambiguous exception that occured while handling your request.\"\"\"
+
+class AuthenticationError(RequestException):
+	\"\"\"The authentication credentials provided were invalid.\"\"\"
+	
+class URLRequired(RequestException):
+	\"\"\"A valid URL is required to make a request.\"\"\"
+	
+class InvalidMethod(RequestException):
+	\"\"\"An inappropriate method was attempted.\"\"\"
+
+
+
+Code B:
+# -*- coding: utf-8 -*-
+
+\"\"\"
+    requests.core
+    ~~~~~~~~~~~~~
+
+    This module implements the main Requests system.
+
+    :copyright: (c) 2011 by Kenneth Reitz.
+    :license: ISC, see LICENSE for more details.
+\"\"\"
+
+import urllib
+import urllib2
+
+
+__title__ = 'requests'
+__version__ = '0.2.0'
+__build__ = 0x000200
+__author__ = 'Kenneth Reitz'
+__license__ = 'ISC'
+__copyright__ = 'Copyright 2011 Kenneth Reitz'
+
+
+AUTOAUTHS = []
+
+
+class _Request(urllib2.Request):
+    \"\"\"Hidden wrapper around the urllib2.Request object. Allows for manual
+    setting of HTTP methods.
+    \"\"\"
+	
+	def __init__(self, url, data=None, headers={}, origin_req_host=None, unverifiable=False, method=None):
+		urllib2.Request.__init__( self, url, data, headers, origin_req_host, unverifiable)
+		self.method = method
+
+	def get_method(self):
+		if self.method:
+			return self.method
+
+		return urllib2.Request.get_method(self)
+
+
+class Request(object):
+    \"\"\"The :class:`Request` object. It carries out all functionality of
+    Requests. Recommended interface is with the Requests functions.
+    \"\"\"
+	
+	_METHODS = ('GET', 'HEAD', 'PUT', 'POST', 'DELETE')
+	
+	def __init__(self):
+		self.url = None
+		self.headers = dict()
+		self.method = None
+		self.params = {}
+		self.data = {}
+		self.response = Response()
+		self.auth = None
+		self.sent = False
+		
+		
+	def __repr__(self):
+		try:
+			repr = '<Request [%s]>' % (self.method)
+		except:
+			repr = '<Request object>'
+		return repr
+	
+	
+	def __setattr__(self, name, value):
+		if (name == 'method') and (value):
+			if not value in self._METHODS:
+				raise InvalidMethod()
+		
+		object.__setattr__(self, name, value)
+	
+	
+	def _checks(self):
+	    \"\"\"Deterministic checks for consistiency.\"\"\"
+
+		if not self.url:
+			raise URLRequired
+
+		
+	def _get_opener(self):
+	    \"\"\"Creates appropriate opener object for urllib2.\"\"\"
+		
+		if self.auth:
+
+			# create a password manager
+			authr = urllib2.HTTPPasswordMgrWithDefaultRealm()
+
+			authr.add_password(None, self.url, self.auth.username, self.auth.password)
+			handler = urllib2.HTTPBasicAuthHandler(authr)
+			opener = urllib2.build_opener(handler)
+
+			# use the opener to fetch a URL
+			return opener.open
+		else:
+			return urllib2.urlopen
+
+	
+	def send(self, anyway=False):
+	    \"\"\"Sends the request. Returns True of successfull, false if not.
+        If there was an HTTPError during transmission,
+        self.response.status_code will contain the HTTPError code.
+
+        Once a request is successfully sent, `sent` will equal True.
+
+        :param anyway: If True, request will be sent, even if it has
+        already been sent.
+        \"\"\"
+
+		self._checks()
+
+		success = False
+
+
+		if self.method in ('GET', 'HEAD', 'DELETE'):
+			if (not self.sent) or anyway:
+
+				# url encode GET params if it's a dict
+				if isinstance(self.params, dict):
+					params = urllib.urlencode(self.params)
+				else:
+
+					params = self.params
+
+				req = _Request(("%s?%s" % (self.url, params)), method=self.method)
+
+				if self.headers:
+					req.headers = self.headers
+
+				opener = self._get_opener()
+
+				try:
+					resp = opener(req)
+					self.response.status_code = resp.code
+					self.response.headers = resp.info().dict
+					if self.method.lower() == 'get':
+						self.response.content = resp.read()
+
+					success = True
+				except urllib2.HTTPError, why:
+					self.response.status_code = why.code
+
+
+		elif self.method == 'PUT':
+			if (not self.sent) or anyway:
+
+				req = _Request(self.url, method='PUT')
+
+				if self.headers:
+					req.headers = self.headers
+
+				req.data = self.data
+
+				try:
+					opener = self._get_opener()
+					resp =  opener(req)
+
+					self.response.status_code = resp.code
+					self.response.headers = resp.info().dict
+					self.response.content = resp.read()
+
+					success = True
+
+				except urllib2.HTTPError, why:
+					self.response.status_code = why.code
+
+
+		elif self.method == 'POST':
+			if (not self.sent) or anyway:
+
+				req = _Request(self.url, method='POST')
+
+				if self.headers:
+					req.headers = self.headers
+
+				# url encode form data if it's a dict
+				if isinstance(self.data, dict):
+					req.data = urllib.urlencode(self.data)
+				else:
+					req.data = self.data
+
+				try:
+
+					opener = self._get_opener()
+					resp =  opener(req)
+
+					self.response.status_code = resp.code
+					self.response.headers = resp.info().dict
+					self.response.content = resp.read()
+
+					success = True
+
+				except urllib2.HTTPError, why:
+					self.response.status_code = why.code
+
+		
+		self.sent = True if success else False
+		
+		return success
+		
+
+class Response(object):
+    \"\"\"The :class:`Request` object. All :class:`Request` objects contain a
+    :class:`Request.response <response>` attribute, which is an instance of
+    this class.
+    \"\"\"
+
+	def __init__(self):
+		self.content = None
+		self.status_code = None
+		self.headers = dict()
+		
+	def __repr__(self):
+		try:
+			repr = '<Response [%s]>' % (self.status_code)
+		except:
+			repr = '<Response object>'
+		return repr
+
+	
+class AuthObject(object):
+    \"\"\"The :class:`AuthObject` is a simple HTTP Authentication token. When
+    given to a Requests function, it enables Basic HTTP Authentication for that
+    Request. You can also enable Authorization for domain realms with AutoAuth.
+    See AutoAuth for more details.
+    
+    :param username: Username to authenticate with.
+    :param password: Password for given username.
+    \"\"\"
+	
+	def __init__(self, username, password):
+		self.username = username
+		self.password = password
+
+
+
+def get(url, params={}, headers={}, auth=None):
+    \"\"\"Sends a GET request. Returns :class:`Response` object.
+
+    :param url: URL for the new :class:`Request` object.
+    :param params: (optional) Dictionary of GET Parameters to send with the :class:`Request`.
+    :param headers: (optional) Dictionary of HTTP Headers to sent with the :class:`Request`.
+    :param auth: (optional) AuthObject to enable Basic HTTP Auth.
+    \"\"\"
+	
+	r = Request()
+	
+	r.method = 'GET'
+	r.url = url
+	r.params = params
+	r.headers = headers
+	r.auth = _detect_auth(url, auth)
+	
+	r.send()
+	
+	return r.response
+
+
+def head(url, params={}, headers={}, auth=None):
+    \"\"\"Sends a HEAD request. Returns :class:`Response` object.
+
+    :param url: URL for the new :class:`Request` object.
+    :param params: (optional) Dictionary of GET Parameters to send with the :class:`Request`.
+    :param headers: (optional) Dictionary of HTTP Headers to sent with the :class:`Request`.
+    :param auth: (optional) AuthObject to enable Basic HTTP Auth.
+    \"\"\"
+	
+	r = Request()
+	
+	r.method = 'HEAD'
+	r.url = url
+	# return response object
+	r.params = params
+	r.headers = headers
+	r.auth = _detect_auth(url, auth)
+	
+	r.send()
+	
+	return r.response
+
+
+def post(url, data={}, headers={}, auth=None):
+    \"\"\"Sends a POST request. Returns :class:`Response` object.
+
+    :param url: URL for the new :class:`Request` object.
+    :param data: (optional) Dictionary of POST Data to send with the :class:`Request`.
+    :param headers: (optional) Dictionary of HTTP Headers to sent with the :class:`Request`.
+    :param auth: (optional) AuthObject to enable Basic HTTP Auth.
+    \"\"\"
+	
+	r = Request()
+
+	r.url = url
+	r.method = 'POST'
+	r.data = data
+	
+	r.headers = headers
+	r.auth = _detect_auth(url, auth)
+	
+	r.send()
+	
+	return r.response
+	
+	
+def put(url, data='', headers={}, auth=None):
+    \"\"\"Sends a PUT request. Returns :class:`Response` object.
+
+    :param url: URL for the new :class:`Request` object.
+    :param data: (optional) Bytes of PUT Data to send with the :class:`Request`.
+    :param headers: (optional) Dictionary of HTTP Headers to sent with the :class:`Request`.
+    :param auth: (optional) AuthObject to enable Basic HTTP Auth.
+    \"\"\"
+	
+	r = Request()
+
+	r.url = url
+	r.method = 'PUT'
+	r.data = data
+	
+	r.headers = headers
+	r.auth = _detect_auth(url, auth)
+	
+	r.send()
+	
+	return r.response
+
+	
+def delete(url, params={}, headers={}, auth=None):
+    \"\"\"Sends a DELETE request. Returns :class:`Response` object.
+
+    :param url: URL for the new :class:`Request` object.
+    :param params: (optional) Dictionary of GET Parameters to send with the :class:`Request`.
+    :param headers: (optional) Dictionary of HTTP Headers to sent with the :class:`Request`.
+    :param auth: (optional) AuthObject to enable Basic HTTP Auth.
+    \"\"\"
+	
+	r = Request()
+
+	r.url = url
+	r.method = 'DELETE'
+	# return response object
+	
+	r.headers = headers
+	r.auth = _detect_auth(url, auth)
+	
+	r.send()
+	
+	return r.response
+
+
+def add_autoauth(url, authobject):
+    \"\"\"Registers given AuthObject to given URL domain. for auto-activation.
+    Once a URL is registered with an AuthObject, the configured HTTP
+    Authentication will be used for all requests with URLS containing the given
+    URL string.
+
+    Example: ::
+        >>> c_auth = requests.AuthObject('kennethreitz', 'xxxxxxx')
+        >>> requests.add_autoauth('https://convore.com/api/', c_auth)
+        >>> r = requests.get('https://convore.com/api/account/verify.json')
+        # Automatically HTTP Authenticated! Wh00t!
+
+    :param url: Base URL for given AuthObject to auto-activate for.
+    :param authobject: AuthObject to auto-activate.
+    \"\"\"
+
+	global AUTOAUTHS
+	
+	AUTOAUTHS.append((url, authobject))
+
+
+def _detect_auth(url, auth):
+    \"\"\"Returns registered AuthObject for given url if available, defaulting to
+    given AuthObject.
+    \"\"\"
+
+	return _get_autoauth(url) if not auth else auth
+
+	
+def _get_autoauth(url):
+    \"\"\"Returns registered AuthObject for given url if available.\"\"\"
+	
+	for (autoauth_url, auth) in AUTOAUTHS:
+		if autoauth_url in url: 
+			return auth
+			
+	return None
+
+class RequestException(Exception):
+    \"\"\"There was an ambiguous exception that occured while handling your request.\"\"\"
+
+class AuthenticationError(RequestException):
+    \"\"\"The authentication credentials provided were invalid.\"\"\"
+	
+class URLRequired(RequestException):
+    \"\"\"A valid URL is required to make a request.\"\"\"
+	
+class InvalidMethod(RequestException):
+    \"\"\"An inappropriate method was attempted.\"\"\"
+
+########## SYSTEM PROMPT2 ##########
+```python
+[{'src_line': 29, 'dest_line': 29, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 30, 'dest_line': 30, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 31, 'dest_line': 31, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 33, 'block_length': 3, 'dest_line': 33, 'mode': 'merge'}, {'src_line': 36, 'block_length': 2, 'dest_line': 34, 'mode': 'merge'}, {'src_line': 38, 'dest_line': 35, 'mode': 'update', 'str_diff': [[[0, 4]], [[0, 1]]], 'indent_offset': -3}, {'src_line': 48, 'dest_line': 45, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 49, 'dest_line': 46, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'mode': 'delete', 'dest_line': 47, 'src_line': 50}, {'src_line': 51, 'dest_line': 47, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'mode': 'insert', 'dest_line': 61, 'src_line': 65}, {'mode': 'insert', 'dest_line': 69, 'src_line': 72}, {'src_line': 81, 'dest_line': 79, 'mode': 'update', 'str_diff': [[[0, 1]], [[0, 4]]], 'indent_offset': 0}, {'src_line': 88, 'dest_line': 86, 'mode': 'update', 'str_diff': [[[5, 51]], [[8, 56]]], 'indent_offset': 0}, {'mode': 'delete', 'dest_line': 87, 'src_line': 89}, {'src_line': 107, 'dest_line': 104, 'mode': 'update', 'str_diff': [[[0, 1]], [[0, 4]]], 'indent_offset': 0}, {'src_line': 108, 'block_length': 7, 'dest_line': 105, 'mode': 'copy', 'indent_offset': -4, 'updates': []}, {'mode': 'delete', 'dest_line': 112, 'src_line': 108}, {'mode': 'delete', 'dest_line': 112, 'src_line': 109}, {'mode': 'insert', 'dest_line': 112, 'src_line': 110}, {'mode': 'delete', 'dest_line': 114, 'src_line': 111}, {'mode': 'delete', 'dest_line': 114, 'src_line': 112}, {'mode': 'delete', 'dest_line': 114, 'src_line': 113}, {'mode': 'delete', 'dest_line': 114, 'src_line': 114}, {'mode': 'delete', 'dest_line': 114, 'src_line': 115}, {'mode': 'insert', 'dest_line': 117, 'src_line': 119}, {'src_line': 119, 'dest_line': 118, 'mode': 'update', 'str_diff': [[[0, 1]], [[0, -1]]], 'indent_offset': -8}, {'mode': 'delete', 'dest_line': 172, 'src_line': 173}, {'mode': 'delete', 'dest_line': 172, 'src_line': 174}, {'src_line': 210, 'dest_line': 207, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 211, 'dest_line': 208, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 212, 'dest_line': 209, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 213, 'dest_line': 210, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 229, 'dest_line': 226, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 230, 'dest_line': 227, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 231, 'dest_line': 228, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 232, 'dest_line': 229, 'mode': 'update', 'str_diff': [[[31, 31]], [[]]], 'indent_offset': 0}, {'src_line': 233, 'dest_line': 230, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 234, 'dest_line': 231, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 236, 'dest_line': 233, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 245, 'dest_line': 242, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 247, 'block_length': 5, 'dest_line': 266, 'mode': 'move', 'indent_offset': 0, 'move_type': 'd', 'updates': []}, {'src_line': 267, 'dest_line': 264, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 269, 'block_length': 5, 'dest_line': 244, 'mode': 'move', 'indent_offset': 0, 'move_type': 'u', 'updates': []}, {'src_line': 290, 'dest_line': 287, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 292, 'block_length': 5, 'dest_line': 312, 'mode': 'move', 'indent_offset': 0, 'move_type': 'd', 'updates': [[293, 313]]}, {'src_line': 293, 'dest_line': 313, 'mode': 'm_update', 'str_diff': [[[25, 41]], [[28, 38]]]}, {'src_line': 313, 'dest_line': 310, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 315, 'block_length': 5, 'dest_line': 289, 'mode': 'move', 'indent_offset': 0, 'move_type': 'u', 'updates': [[316, 290]]}, {'src_line': 316, 'dest_line': 290, 'mode': 'm_update', 'str_diff': [[[25, 35]], [[28, 44]]]}, {'src_line': 336, 'dest_line': 333, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 338, 'dest_line': 335, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 339, 'dest_line': 336, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 340, 'dest_line': 337, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 341, 'dest_line': 338, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 342, 'dest_line': 339, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 359, 'dest_line': 356, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 360, 'dest_line': 357, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 361, 'dest_line': 358, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 362, 'dest_line': 359, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 364, 'block_length': 9, 'dest_line': 361, 'mode': 'copy', 'indent_offset': 0, 'updates': []}, {'mode': 'delete', 'dest_line': 370, 'src_line': 364}, {'mode': 'delete', 'dest_line': 370, 'src_line': 365}, {'mode': 'delete', 'dest_line': 370, 'src_line': 366}, {'mode': 'delete', 'dest_line': 370, 'src_line': 367}, {'mode': 'delete', 'dest_line': 370, 'src_line': 368}, {'mode': 'delete', 'dest_line': 371, 'src_line': 370}, {'mode': 'delete', 'dest_line': 371, 'src_line': 371}, {'mode': 'delete', 'dest_line': 371, 'src_line': 372}, {'src_line': 379, 'dest_line': 377, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 380, 'block_length': 2, 'dest_line': 378, 'mode': 'split'}, {'src_line': 386, 'block_length': 2, 'dest_line': 385, 'mode': 'merge'}, {'src_line': 396, 'dest_line': 394, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 399, 'dest_line': 397, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 402, 'dest_line': 400, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}, {'src_line': 405, 'dest_line': 403, 'mode': 'update', 'str_diff': [[[0, 0]], [[0, 3]]], 'indent_offset': 0}]
+```
+
+########## USER PROMPT2 ##########
+Code A:
+<Code_A>
+Code B:
+<Code_B>

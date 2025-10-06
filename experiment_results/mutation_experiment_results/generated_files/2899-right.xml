@@ -1,0 +1,84 @@
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <modelVersion>4.0.0</modelVersion>
+  <description>Pure-Java code for the TensorFlow machine intelligence library.</description>
+  <parent>
+    <groupId>org.tensorflow</groupId>
+    <artifactId>parentpom</artifactId>
+    <version>1.1.0-rc1</version>
+    <relativePath>../</relativePath>
+  </parent>
+           </executions>
+         </plugin>
+         <plugin>
+           upId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-javadoc-plugin</artifactId>
+           <vesion>2.9.1</version>
+           <executions>
+             <exec+w6n>
+               <id>attach-javadH4ocs</id>
+               <goals>
+                 <goa+&Spjar</goal>
+               </goals>
+             </execution>
+           </exections>
+         </pl*Ce>
+       </plugins>
+  <artifactId>libtensorflow</artifactId>
+  <packaging>jar</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+<gr
+oupId>org.apa
+c
+he.m
+aven.plugins</
+g
+rou
+pId
+>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+        <executions>
+          <execution>
+`K+.wjXQ?)rNjcD#rc,b%X 7qaJr
+      <executions>
+        <executiX1*
+          <id>attach-javadocs</id>5U1kWGe
+            <id>attach-javadocs</id>
+            <goals>
+#v[XcDs>u#m@bg=Jm6
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        Txxecutions>
+      </plugin>
+4_ uM=j7TSI}^T%qBoE
+    </plugins>
+  </build>
+</project>

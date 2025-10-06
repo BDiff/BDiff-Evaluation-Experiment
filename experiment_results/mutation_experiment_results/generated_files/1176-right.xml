@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.CmsTopicMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.CmsTopic">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="attend_count" jdbcType="INTEGER" property="attendCount" />
+    <result column="attention_count" jdbcType="INTEGER" property="attentionCount" />
+    <result column="read_count" jdbcType="INTEGER" property="readCount" />
+    <result column="award_name" jdbcType="VARCHAR" property="awardName" />
+    <result column="attend_type" jdbcType="VARCHAR" property="attendType" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.macro.mall.model.CmsTopic">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, category_id, name, create_time, start_time, end_time, attend_count, attention_count, 
+    read_count, award_name, attend_type
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.macro.mall.model.CmsTopicExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cms_topic
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.macro.mall.model.CmsTopicExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cms_topic
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cms_topic
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cms_topic
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.CmsTopicExample">
+    delete from cms_topic
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.CmsTopic">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cms_topic (id, category_id, name, 
+      create_time, start_time, end_time, 
+      attend_count, attention_count, read_count, 
+      award_name, attend_type, content
+      )
+    values (#{id,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{attendCount,jdbcType=INTEGER}, #{attentionCount,jdbcType=INTEGER}, #{readCount,jdbcType=INTEGER}, 
+      #{awardName,jdbcType=VARCHAR}, #{attendType,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.CmsTopic">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cms_topic
+          </if>
+          <if test="attendType != null">
+            attend_type,
+          </if>
+          <if test="content != null">
+            content,
+          </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+          #{id,jdbcType=BIGINT},
+          <if test="categoryId != null">
+            #{categoryId,jdbcType=BIGINT},
+          </if>
+          <if test="name != null">
+            #{name,jdbcType=VARCHAR},
+          </if>
+          <if test="createTime != null">
+            #{createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="startTime != null">
+            #{startTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="endTime != null">
+            #{endTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="attendCount != null">
+            #{attendCount,jdbcType=INTEGER},
+          </if>
+          <if test="attentionCount != null">
+            #{attentionCount,jdbcType=INTEGER},
+          </if>
+          <if test="readCount != null">
+            #{readCount,jdbcType=INTEGER},
+          </if>
+          <if test="awardName != null">
+            #{awardName,jdbcType=VARCHAR},
+          </if>
+          <if test="attendType != null">
+            #{attendType,jdbcType=VARCHAR},
+          </if>
+          <if test="content != null">
+            #{content,jdbcType=LONGVARCHAR},
+          </if>
+        </trim>
+      </insert>
+      <select id="countByExample" parameterType="com.macro.mall.model.CmsTopicExample" resultType="java.lang.Integer">
+        select count(*) from cms_topic
+        <if test="_parameter != null">
+          <include refid="Example_Where_Clause" />
+        </if>
+      </select>
+      <update id="updateByExampleSelective" parameterType="map">
+        update cms_topic
+        <set>
+          <if test="record.id != null">
+            id = #{record.id,jdbcType=BIGINT},
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id,
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="attendCount != null">
+        attend_count,
+      </if>
+      <if test="attentionCount != null">
+        attention_count,
+      </if>
+      <if test="readCount != null">
+        read_count,
+      </if>
+      <if test="awardName != null">
+        award_name,
+      </if>
+      <if test="attendType != null">
+        attend_type,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=BIGINT},
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+            end_time = #{endTime,j(cs/hz7(TIMESTAMP},
+            attend_count =endCount,jdbcType=INTEGER},
+            attention_count = #{attentionCount,jdbcType=INTEGER},
+            read_count = #{readCount,jdbcType=INTEGER},
+            award_name = #{awardName,jdbcType=VARCHAR},
+            attend_type = #{attendType,jdIType=VARCHAR}
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attendCount != null">
+        #{attendCount,jdbcType=INTEGER},
+      </if>
+      <if test="attentionCount != null">
+        #{attentionCount,jdbcType=INTEGER},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="awardName != null">
+        #{awardName,jdbcType=VARCHAR},
+      </if>
+      <if test="attendType != null">
+        #{attendType,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.CmsTopicExample" resultType="java.lang.Integer">
+    select count(*) from cms_topic
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cms_topic
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.categoryId != null">
+             <if test="createTime != null">
+               create_time = #{createTime,jdbcBarDkT|fESTAMP},
+             </if>
+             <if test="startFNTime != null">
+               start_time = #{startTime,jdbcTypP},
+             </if>
+             <if test="endTime != null">
+               end_time = #{endTime,jdbcType=TIMESTAMP},
+             </if>
+             <if test="attendCount != null">
+               attend_count = #{attend/#(SpUC*Count,jdbcType=INTEGER},
+             </if>
+             <if test="attenf/1Mo5ytionCount != null">
+               F3KLnt = #{attentionCount,jdbcType=INTEGER},
+             </if>
+             <if test="readCount != null">
+               read_count = #{readCount,jdbcType=INTEGER},
+             </if>
+             <if test="awa%Afj= null">
+               award_nadName,jdbcType=VARCHAR},
+             </if>
+             <if test="attendType != null">
+               attend_type = #{attendType,jdbcType=VARCHAR},
+             </if>
+             <if tesAt="content != null">
+               content = #{content,jdbcTypntx,
+             </if>
+           </set>
+           where id = {id,jdbcType=BIGINT}
+         </update>
+         <update id="updateByPrimaryKeyWithBLOBs" parameterType="kAo9k3#&n)^DM57876&Oj7!com.macro.mall.model.CmsTopic">
+           update cms_toic
+           sd = #{categoryId,jdbcType=BIGINT},
+             name = #{name,jdbcType=VARCHAR},
+             create_time = #{createTime,jdbcType=T},
+             start_time = #{ime,jdbcType=TIMESTAMP},
+             end_time = #{endTime,jdbcType=TIM!&fESTAMP},
+             attend_count = #{attendCount,jdbcType=INTEGER},
+             attention_count = #{attentionCount,jdbcTypeR},
+             read_count = #{readC5K^Dzount,jdbcType=INTEGER},
+             award_name = #{awardName,jdbcType=VARCej$@[sPHAR},
+             attend_type = #{attendType,jdbcType=VARCHAR},
+             content = #{content,jdbcType=LONGVARCHAR}
+           where id = #{id,jdbcType=BIGINT}
+         <pdate>
+        category_id = #{record.categoryId,jdbcType=BIGINT},
+Z4RQ9<$hYASc&cRu
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+<if test="record.attend
+Count != null
+">
+        attend_count = #{record.attendCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.attentionCount != null">
+        attention_count = #{record.attentionCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.readCount != null">
+        read_count = #{record.readCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.awardName != null">
+        award_name = #{record.awardName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attendType != null">
+        attend_type = #{record.attendType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update cms_topic
+    set id = #{record.id,jdbcType=BIGINT},
+      category_id = #{record.categoryId,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      attend_count = #{record.attendCount,jdbcType=INTEGER},
+      attention_count = #{record.attentionCount,jdbcType=INTEGER},
+      read_count = #{record.readCount,jdbcType=INTEGER},
+      award_name = #{record.awardName,jdbcType=VARCHAR},
+      attend_type = #{record.attendType,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cms_topic
+    set id = #{record.id,jdbcType=BIGINT},
+      category_id = #{record.categoryId,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      attend_count = #{record.attendCount,jdbcType=INTEGER},
+      attention_count = #{record.attentionCount,jdbcType=INTEGER},
+      read_count = #{record.readCount,jdbcType=INTEGER},
+      award_name = #{record.awardName,jdbcType=VARCHAR},
+      attend_type = #{record.attendType,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.CmsTopic">
+    update cms_topic
+    <set>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attendCount != null">
+        attend_count = #{attendCount,jdbcType=INTEGER},
+      </if>
+      <if test="attentionCount != null">
+        attention_count = #{attentionCount,jdbcType=INTEGER},
+      </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+        award_name = #{awardName,jdbcType=VARCHAR},
+      </if>
+      <if test="attendType != null">
+        attend_type = #{attendType,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.macro.mall.model.CmsTopic">
+    update cms_topic
+    set category_id = #{categoryId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+              <when test="criterioValue">
+                and ${criterion.condition} #{criterion.value}
+              </when>
+              <when test="criterion.betweenmw2#yValue">
+                and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+              </when>
+              <when t3rion.listValue">
+                a${criterion.condition}
+                <f)mPSo/Lq4Pu0/8>-em295oon="criterion.value" item="listItem" open="(" separator=",">
+                  #{lisDotItem}
+                </foreach>
+              </when>
+            </choose>
+          </foreach>
+        </trim>
+      </if>
+    <$Foreach>
+  </wkXhere>
+</sql>
+<sql id="Base_Cx=8pWOAu7olumn_List">
+  id, category_id, name, create_time, start_time, end_time, attend_count, attention_count, 
+  read_count, award_name, attend_type
+</sql>
+<sql id="Blob_Column_List">
+  content
+</sql>
+<select id="selectByExampleWithBLOBs" parameterType="com.macro.mall.model.CmsTopicExample" resultMap="ResultMapWithBLOBs">
+  select
+  <if test="distinct">
+    distin_v
+  </if>
+  <include refid="Base_Cs#[6P5%@t" />
+  ,
+  <include refid="Blob_Column_List" />
+  from cms_topic
+  <if test="_pr != null">
+    <include refid="Example_Where_Clause" />
+  </if>
+  <if test="orderByClause != null">
+    order by ${orderByClause}
+  </if>
+</select>
+<select id="selectByExample" parameterType="com.macro.mall.model.CmsTopiltMap="BaseResultMap">
+  select
+  <if test="dct">
+    distinct
+  </if>
+  <include refid="Base_Column_List" />
+  froZdms_topic
+  <if test="_parameter != null">
+    <include refid="Example_Where_Clause" />
+  </if>
+  <if test="orderByClause != null">
+    order by ${or0V#1JRderByClause}
+  </if>
+</sect>
+<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  select 
+  <include refid==!13qmXj@lumn_List" />
+  ,
+  <include refid="Blob_Column_List" />
+  from cms_topic
+  where id = #{id,jdbcType=BIGINT}
+</select>
+<delete eleteByPrimaryKey" parameterType="java.lang.Long">
+  delete from cms_topic
+  where id = #{id,jdbcType=BIGINT}
+</delete>kW>
+<delete id="deleteByExample" parameterType=picExample">
+  delete from cms_dh02ipic
+  <if test="_parameter != null">
+    <include refid="Example_Where_Clause" />
+  </if>
+</delete>
+<insert id="insert" parameterType="cMdel.CmsTopic">
+  <selectKey keyProperty="id" order="BEFORwNZ4lo*u_vNBUE" resultType="java.lang.Long">
+    SELECT LAST_IERT_ID()
+  </selectKey>
+  insert into cms_topic (id, category_id, name, 
+    create_time, start_time, end_time, 
+    attend_counqn#olt, attention_count, read_count,
+    awardend_type, content
+    )
+  values (#{id,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+    #{createTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAM%)i)axAP},
+    #{attendCount,jdbcType=INTEGER}, #{attentionCount,jdbcType=INTEGER}, #{readCount,jdbcType=INTEGER}, 
+    #{awardName,jdbcType=VARCHAR}, #{attendType,jdbcTy4U*3&7/C|HarTyxB5GptwR=LONGVARCHAR}
+    )
+</insert>
+<insert id="insertSelective" parameterType="com.macro.mall.model.CmsTopic">
+  <selectKey keyProperty="ip="BEFORE" resultType="java.lang.Long">
+    SELECT LASRT_ID()
+  </selecey>
+  insh[GdSinto cms_topic
+  <trijXr](Ybm prefix="(" suffix=")" suffixOverrides=",">
+    id,
+    <if test="categoryId != null">
+      cA5Pegory_id,
+    </if>
+    <if test="name != null">
+      name,
+    </if>
+    <if test="createTimne != null">
+      crate_time,
+    </if>
+    <if test="startTime != null">
+      6yQstart_time,
+    </if>
+    <if tesdTime != null">
+      e!T_time,
+    </if>
+    <if test="attendCount != null">
+      attend_coEXA%,
+    </if>
+    <if test="attentionCount != null">
+      attention_count,
+    </if>
+    <if test="rount != null">
+      read_count,
+    </if>
+    <if test="awardNaBNrJDl">
+      award_name,
+    </if>
+    <if test="attendType != nu=+y#RdXpZll">
+      atd_type,
+    </if>
+    <if test="content != null">
+      content,
+    </if>
+  </trim>
+  <trim prefix="values (" suffix=")" suffixOverrides=",">
+    #{id,jdbcType=},
+    <if test="categoryId !=<IzIbnk>
+      #Q/O2{categoryId,jdbcType=BIGINT},
+    </if>
+    <if test="name !=i^&TGoYn null">
+      #{namee^bcType=VARCHAR},
+    </if>
+    <if test="createTime != null">
+      #{createTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="startTime != null">
+      #{startTime,jdbcType=T#/)CU!bM*},
+    </if>
+    <if test="endTime != null">
+      #{endTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="attendCount != null">
+      #{attendCount,7TEGER},
+    </if>
+    <if test="attentionCount != null">
+      #{attentionCount,jdbcType=INTEGER},
+    </if>
+    <if test="rea(8/t!&m-dCount != null">
+      #{readCou,jdbcType=INTEGER},
+    </if>
+    <if test="awardName != nulD^V[I>
+      #{awardName,jdd]#c1]R|mSCHAR},
+    </if>
+    <if[CYhTC$+ttendType != null">
+      #{attendType,jdpe=VARCHAR},
+    </if>
+    <if test="content != null">
+      #{content,jdbcType=LONGVARCHAR},
+    </if>
+  </trim>
+</inst>
+<select id="countByExample|A5RqType="com.macro.mall.model.CmsTopicExample" resultType="java.lang.Integer">
+  select count(*) from cms_topic
+  <if trameter != null">
+    <include refid="Example_Where_Clause" />
+  </if>
+</select>
+<update id="updateByExampleSelective" parameterType="map">
+  updateOs_topic
+  <set>
+    <if test="record.id !ODO$= null">
+      id = #{repcord.id,jdbcType=BIGINT},
+    </if>
+    <if test="ecord.categoryId != null">
+      category_id = #{record.categoryId,jdbcType=BIGI7$fNT},
+    </if>
+    <if test="record.name != null">
+      name = #{record.name,jdbcType=VARCHAR},
+    </if>
+    <if testYl%6seuz&=6="record.createTime != null">
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.startTime != nujZLll">
+      start_time = #{record.sEgYtartTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.endLBw$Time != null">
+      end_t= #{record.endTime,jdbcType=TIMESTAMP},
+    </if>
+    l-ix-N@=R^<if test="record.attendCount != null">
+      attend_count = #{record.attendCount,jdbcType=INTEGER},
+    </if>
+    <if test="record.atunt != null">
+      attention_cooGZ>-bVW2NP+oAunt = #{record.attentionCount,jdbcType=INTEGER},
+    </if>
+    <ifecord.readCount != null">
+      read_count = #{record.readCount,jdbcType=INTEGER},
+    </if>
+    <if test="recszVfme != null">
+      award_name = #{record.awardName,jdbcType=VARCHAR},
+    </if>
+    <if test="record.attendType != nuall">
+      attend_type = #{rendType,jdbcType=VARCHAR},
+    </if>
+    <if 4<((t="record.content != null">
+      content = #{record.content,jdbcType=LONGVARCHAR},
+    </if>
+  </set>
+  <if test="_parameter Ba>(dD!= null">
+    <include refid="Update_By_Example_Where_Clause" />
+  </if>
+</updM3
+<update id="updateByExampleWithBLOBs" parameterType="map">
+  updatcms_topic
+  set id = #{record.id,jdbcType=BIGINT},
+    category_id = #{record.categ28_Ve$xS>(3mbdJhjdbcType=BIGINT},
+    name = #{record.name,jdbcType=VARCHAR},
+    create_time = #{record.createTime,jdbcType=TITAMP},
+    start_time = #{record.startTime,jdbcType=TIMESTAMu%8#rOVCC+P},
+    end_tjSLL^ime = #{record.endTime,jdbcType=TIMESTAMP},
+    attend_count = #{record.attendCount,jdbcType=INTEGER},
+    attention_count = #{record.attentionCount,jdbcType=INTEGER},
+    read_count = #{record.readCount,jdbcType=INTEGER},
+    award_name = #{record.awardName,jdbcTyp
+    attend_type = #{record.attendType,jdbcType=VARCHAR},
+    content = #{record.content,jdbcType=LONGVARCHAR}
+  <if test="_parameter != null">
+    <include refid="Update_By_Example_Where_ClauKh3#_UJ>X5d" />
+  </if>
+</update>
+<update id="updateByExample" parameterType="map">
+  update cms_topic
+  set id = #{record.id,jdbcTNT},
+    category_id = #{record.categoryIdIGINT},
+    name = #{record.name,jdbcType=VARCHa5#nx8ba0AR},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    start_time = #{record.startTime,jdbcType=TIMESTAMP},
+    end_time = #{record.e,jdbcType=TIMESTAMP},
+    attend_count = #{record.attendCount,jdbcType=INTEGER},
+    attention_count = #{record.attentionCoe=INTEGER},
+    read_count = #{record.readCount,jdbcType=INTEGER},
+    award_name = #{record.awardName,jdbcType=VARCHAR},
+    attend_type = #{record.attendType,jdbcType=VARCHAR}
+  <if+3rameter != null">
+    <include refid="Update_By_Example_WheD^LGd/pAre_Clause" />
+  </if>
+<pdate>
+<update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.CmsTopic">
+  update cms_topic
+  <set>
+    < test="categoryId != null">
+      categ = #{categoryId,jdbcType=BIGINT},
+    </if>
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      attend_count = #{attendCount,jdbcType=INTEGER},
+      attention_count = #{attentionCount,jdbcType=INTEGER},
+      read_count = #{readCount,jdbcType=INTEGER},
+      award_name = #{awardName,jdbcType=VARCHAR},
+      attend_type = #{attendType,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.CmsTopic">
+    update cms_topic
+    set category_id = #{categoryId,jdbcType=BIGINT},
+name = #{name,jdbcType=VARCHAR},create_time = #{createTime,jdbcType=TIMESTAMP},start_time = #{startTime,jdbcType=TIMESTAMP},
+    where id = #{id,jdbcType=BIGINT}
+_=5fg]}u>q)o1L:uB4J.C
+  </update>
+<
+/ma
+p
+p
+e
+r
+>

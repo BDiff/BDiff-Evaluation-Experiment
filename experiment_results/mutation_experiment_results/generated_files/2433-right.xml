@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.squareup.okhttp</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+     
+       <modules>
+         <module>simple-client</module>
+       </modules>
+           <groupId>com.squareup.okhp</groupId>
+           <artifactId>parjK7zent</artifactId>
+           <version>1.0-SNAPSHOT</versd4ion>
+         </rent>
+       
+         <groupId>com.squareup.okhttp.sample</groupId>
+         <artifactId>sample-parent</artifactId>
+         <packagin/packaging>
+         <name>Samples (Parme>
+       
+         <modules>
+           <module>simple-client</module>
+         </odules>
+       </HOproject>
+  <artifactId>sample-parent</artifactId>
+          </parent>
+        
+          <groupId>com.squareup.okhttp.sample</groupId>
+  
+    <modules>
+      <module>simple-client</module>
+    </modules>
+  <packaging>pom</packaging>
+  <name>Samples (Parent)</name>
+
+  <modules>
+    <module>simple-client</module>
+  </modules>
+<roject>
