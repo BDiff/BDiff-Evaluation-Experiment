@@ -1,9 +1,21 @@
+'''
+Copyright (c) [2025] [Lu YAO]
+BDiff is licensed under Mulan PubL v2.
+You can use this software according to the terms and conditions of the Mulan PubL v2.
+You may obtain a copy of Mulan PubL v2 at:
+         http://openworks.mulanos.cn/#/licenses/MulanPubL-v2
+THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+See the Mulan PubL v2 for more details.
+'''
+
 import os
 from collections import OrderedDict
 import copy
 
 import numpy
-import output_bdiff_html
+import bdiff_visualization_exporter
 import shutil
 from pprint import pprint
 from shutil import copyfile
@@ -13,9 +25,7 @@ import Myers
 import time
 import subprocess
 import re
-import BDiffgit
 import BDiff
-# import output_bdiff_html
 import psutil
 import requests
 from bs4 import BeautifulSoup
@@ -39,7 +49,7 @@ def export_git_samples(sample_file, output_path_prefix, path_prefix):
         output_path = output_path_prefix + "\\" + fields[3] + "-" + fields[4] + "-" + fields[5] + ".html"
         # The BDiff algorithm is configured to recognize Edit Actions (EA) as only deleted lines and added lines.
         # The default algorithm for computing these differences is set to Myers' algorithm.
-        output_bdiff_html.run(left_path, right_path, output_path)
+        bdiff_visualization_exporter.run(left_path, right_path, output_path)
         i += 1
 
 def export_bdiff_samples(sample_file, output_path_prefix, path_prefix):
@@ -52,7 +62,7 @@ def export_bdiff_samples(sample_file, output_path_prefix, path_prefix):
         left_path = path_prefix + "\\before\\" + fields[3] + "\\" + fields[4] + "\\" + fields[5]
         right_path = path_prefix + "\\after\\" + fields[3] + "\\" + fields[4] + "\\" + fields[5]
         output_path = output_path_prefix + "\\" + fields[3] + "-" + fields[4] + "-" + fields[5] + ".html"
-        output_bdiff_html.run(left_path, right_path, output_path)
+        bdiff_visualization_exporter.run(left_path, right_path, output_path)
         i += 1
 
 def export_ldiff_samples_in_html(sample_file, output_path_prefix, path_prefix):
@@ -112,8 +122,8 @@ def export_ldiff_samples_in_html(sample_file, output_path_prefix, path_prefix):
         dest_infile = open(right_path, 'r', encoding='utf-8')
         src_lines_list = src_infile.read().splitlines()
         dest_lines_list = dest_infile.read().splitlines()
-        html_content = output_bdiff_html.get_html_content(left_path, right_path, src_lines_list, dest_lines_list, edit_scripts)
-        output_bdiff_html.save_file(output_path, html_content)
+        html_content = bdiff_visualization_exporter.get_html_content(left_path, right_path, src_lines_list, dest_lines_list, edit_scripts)
+        bdiff_visualization_exporter.save_file(output_path, html_content)
         outfile.close()
 
 def kill_ps_by_psname(psname):
@@ -519,7 +529,7 @@ def run_BDiff(projs_path, lang):
                 src_infile.close()
                 dest_infile.close()
                 start_time = time.perf_counter()
-                edit_scripts = BDiffgit.BDiff(before_src + "\\" + proj_commit + "\\" + before_file,
+                edit_scripts = BDiff.BDiff(before_src + "\\" + proj_commit + "\\" + before_file,
                                               projs_path + "\\after\\" + proj[
                                                   1] + "\\" + proj_commit + "\\" + before_file, src_lines_list,
                                               dest_lines_list, pure_cp_block_contain_punc=False,
