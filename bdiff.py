@@ -8,62 +8,30 @@
 # MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
 # See the Mulan PubL v2 for more details.
 
-"""Core codes of BDiff."""
+"""Core code of BDiff."""
 
 from __future__ import annotations as _
 
 import copy
 import os
-import pprint
 import re
 import subprocess
 from collections import OrderedDict
 
 import numpy as np
 from scipy import optimize
+from rapidfuzz import fuzz
 
 
-def levenshtein_ratio(s1: str, s2: str) -> float:
-    """Calculate normalized Levenshtein similarity ratio between two strings.
 
-    Args:
-        s1: First input string
-        s2: Second input string
-
-    Returns:
-        Similarity ratio in [0,1], where 1 means identical strings.
-        Computed as (total_length - edit_distance)/total_length.
-    """
-    if len(s1) == 0 and len(s2) == 0:
-        return 1.0
-
-    dp = np.zeros((len(s1) + 1, len(s2) + 1), dtype=float)
-    for i in range(len(s1) + 1):
-        dp[i, 0] = i * 1.0
-    for j in range(len(s2) + 1):
-        dp[0, j] = j * 1.0
-
-    for i in range(1, len(s1) + 1):
-        for j in range(1, len(s2) + 1):
-            cost = 0 if s1[i - 1] == s2[j - 1] else 2.0
-            dp[i, j] = min(
-                dp[i - 1, j] + 1,
-                dp[i, j - 1] + 1,
-                dp[i - 1, j - 1] + cost
-            )
-    distance = dp[len(s1), len(s2)]
-    total_length = len(s1) + len(s2)
-    return (total_length - distance) / total_length
-
-
-def W_BESTI_LINE(
-    src_line_no: int,
-    dest_line_no: int,
-    src_lines: list[str],
-    dest_lines: list[str],
-    ctx_length: int = 4,
-    line_sim_weight: float = 0.6,
-    sim_threshold: float = 0.5
+def w_besti_line(
+        src_line_no: int,
+        dest_line_no: int,
+        src_lines: list[str],
+        dest_lines: list[str],
+        ctx_length: int = 4,
+        line_sim_weight: float = 0.6,
+        sim_threshold: float = 0.5
 ) -> tuple[bool, float]:
     """Calculate line similarity considering both content and context [1].
     [1] Reiss and P. Steven. 2008. Tracking source locations. In ACM/IEEE International Conference on Software Engineering.
@@ -87,8 +55,7 @@ def W_BESTI_LINE(
     elif not src_lines[src_line_no - 1] or not dest_lines[dest_line_no - 1]:
         return False, 0
     else:
-        line_sim = levenshtein_ratio(src_lines[src_line_no - 1].strip(), dest_lines[dest_line_no - 1].strip())
-
+        line_sim = fuzz.ratio(src_lines[src_line_no - 1].strip(), dest_lines[dest_line_no - 1].strip())/100
     if src_line_no <= ctx_length:
         src_upper_ctx = src_lines[:src_line_no - 1]
     else:
@@ -113,16 +80,16 @@ def W_BESTI_LINE(
     under_group = [group[0].strip() == group[1].strip() for group in zip(src_under_ctx, dest_under_ctx)]
 
     if len(upper_group) + len(under_group) == 0:
-        return True if line_sim >= sim_threshold else False, round(line_sim, 3)
+        return line_sim >= sim_threshold, round(line_sim, 3)
 
     ctx_sim = (upper_group.count(True) + under_group.count(True)) / (len(upper_group) + len(under_group))
     synthetic_sim = line_sim * line_sim_weight + ctx_sim * (1 - line_sim_weight)
-    return True if synthetic_sim >= sim_threshold else False, round(synthetic_sim, 3)
+    return synthetic_sim >= sim_threshold, round(synthetic_sim, 3)
 
 
 def construct_line_data(
-    diffs: list[tuple[str, str]],
-    indent_tabs_size: int,
+        diffs: list[tuple[str, str]],
+        indent_tabs_size: int,
 ) -> tuple[OrderedDict, OrderedDict, list[str]]:
     """Construct structured data from diff results.
 
@@ -284,8 +251,7 @@ def compute_line_indent(diff_line: str, indent_tabs_size: int) -> tuple[int, int
         n_spaces = diff_line[:first_chara_index].count(" ")
         n_tabs = diff_line[:first_chara_index].count("\t")
         return n_spaces + n_tabs * indent_tabs_size, n_spaces, n_tabs
-    else:
-        return 0, 0, 0
+    return 0, 0, 0
 
 
 def is_pure_punctuation(s: str) -> bool:
@@ -304,14 +270,14 @@ def is_pure_punctuation(s: str) -> bool:
 
 
 def pure_block_len(
-    block_length: int,
-    src_start: int,
-    src_lines_list: list[str],
-    added_start: int,
-    added_lines_list: list[str],
-    pure_mv_block_contain_punc: bool,
-    pure_cp_block_contain_punc: bool,
-    mode: str
+        block_length: int,
+        src_start: int,
+        src_lines_list: list[str],
+        added_start: int,
+        added_lines_list: list[str],
+        pure_mv_block_contain_punc: bool,
+        pure_cp_block_contain_punc: bool,
+        mode: str
 ) -> int:
     """Calculate effective block length excluding pure punctuation lines.
 
@@ -334,8 +300,8 @@ def pure_block_len(
         if not src_lines_list[src_start - 1] and not added_lines_list[added_start - 1]:
             pure_block_length -= 1
         elif ((not pure_mv_block_contain_punc and mode == 'r') or (
-            not pure_cp_block_contain_punc and mode == 'k')) and is_pure_punctuation(
-                src_lines_list[src_start - 1]) and is_pure_punctuation(added_lines_list[added_start - 1]):
+                not pure_cp_block_contain_punc and mode == 'k')) and is_pure_punctuation(
+            src_lines_list[src_start - 1]) and is_pure_punctuation(added_lines_list[added_start - 1]):
             pure_block_length -= 1
         src_start += 1
         added_start += 1
@@ -344,14 +310,14 @@ def pure_block_len(
 
 
 def mapping_block_move(
-    src_lines: OrderedDict,
-    added_lines: OrderedDict,
-    src_all_lines: list[str],
-    dest_all_lines: list[str],
-    min_block_length: int,
-    diff_scripts: list[str],
-    pure_mv_block_contain_punc: bool,
-    count_mv_block_update: bool
+        src_lines: OrderedDict,
+        added_lines: OrderedDict,
+        src_all_lines: list[str],
+        dest_all_lines: list[str],
+        min_block_length: int,
+        diff_scripts: list[str],
+        pure_mv_block_contain_punc: bool,
+        count_mv_block_update: bool
 ) -> list[dict]:
     """Identify candidate moved blocks between source and destination.
 
@@ -395,7 +361,7 @@ def mapping_block_move(
                    (src_lines[cur_src_line_no][0] == added_lines[cur_added_line_no][0] or
                     (src_lines[cur_src_line_no][0] != added_lines[cur_added_line_no][0] and
                      count_mv_block_update and
-                     levenshtein_ratio(src_lines[cur_src_line_no][0], added_lines[cur_added_line_no][0]) >= 0.6)) and
+                     fuzz.ratio(src_lines[cur_src_line_no][0], added_lines[cur_added_line_no][0])/100 >= 0.6)) and
                    ((added_lines[cur_added_line_no][0] != "" and
                      added_lines[cur_added_line_no][1][0] - src_lines[cur_src_line_no][1][0] == indent_diff) or
                     added_lines[cur_added_line_no][0] == "")):
@@ -473,15 +439,15 @@ def mapping_block_move(
 
 
 def mapping_block_copy(
-    src_lines: OrderedDict,
-    added_lines: OrderedDict,
-    src_all_lines: list[str],
-    dest_all_lines: list[str],
-    min_copy_block_length: int,
-    hunks: list,
-    diff_scripts: list[str],
-    pure_cp_block_contain_punc: bool,
-    count_cp_block_update: bool
+        src_lines: OrderedDict,
+        added_lines: OrderedDict,
+        src_all_lines: list[str],
+        dest_all_lines: list[str],
+        min_copy_block_length: int,
+        hunks: list,
+        diff_scripts: list[str],
+        pure_cp_block_contain_punc: bool,
+        count_cp_block_update: bool
 ) -> list[dict]:
     """Identify candidate copied blocks between source and destination.
 
@@ -526,7 +492,7 @@ def mapping_block_copy(
                    (src_lines[cur_src_line_no][0] == added_lines[cur_added_line_no][0] or
                     (src_lines[cur_src_line_no][0] != added_lines[cur_added_line_no][0] and
                      count_cp_block_update and
-                     levenshtein_ratio(src_lines[cur_src_line_no][0], added_lines[cur_added_line_no][0]) >= 0.6)) and
+                     fuzz.ratio(src_lines[cur_src_line_no][0], added_lines[cur_added_line_no][0])/100 >= 0.6)) and
                    ((added_lines[cur_added_line_no][0] != "" and
                      added_lines[cur_added_line_no][1][0] - src_lines[cur_src_line_no][1][0] == indent_diff) or
                     added_lines[cur_added_line_no][0] == "")):
@@ -578,9 +544,9 @@ def mapping_block_copy(
                 rd = relative_distance(src_line, added_line, block_length, diff_scripts)
                 weight = edit_actions / block_length + (1 - ctx_similarity) / 10 + rd / 100
 
-                for s in candidates:
-                    if candidates[s]['block_length'] == block_length:
-                        if candidates[s]['weight'] > weight:
+                for s, c in candidates.items():
+                    if c['block_length'] == block_length:
+                        if c['weight'] > weight:
                             del candidates[s]
                             candidate = {
                                 "mode": src_mode,
@@ -595,9 +561,7 @@ def mapping_block_copy(
                                 "relative_distance": rd
                             }
                             candidates[src_line] = candidate
-                            break
-                        else:
-                            break
+                        break
                 else:
                     candidate = {
                         "mode": src_mode,
@@ -613,18 +577,16 @@ def mapping_block_copy(
                     }
                     candidates[src_line] = candidate
 
-        for s in candidates:
-            mappings.append(candidates[s])
-
+        mappings = mappings + list(candidates.values())
     return mappings
 
 
 def context_similarity(
-    src_start: int,
-    dest_start: int,
-    block: int,
-    src_lines: list[str],
-    dest_lines: list[str]
+        src_start: int,
+        dest_start: int,
+        block: int,
+        src_lines: list[str],
+        dest_lines: list[str]
 ) -> float:
     """Calculate similarity between contexts of source and destination blocks.
 
@@ -640,7 +602,7 @@ def context_similarity(
     """
     src_context = construct_context(src_start, block, src_lines)
     dest_context = construct_context(dest_start, block, dest_lines)
-    return levenshtein_ratio(src_context, dest_context)
+    return fuzz.ratio(src_context, dest_context)/100
 
 
 def construct_context(start: int, block_length: int, lines: list[str]) -> str:
@@ -661,7 +623,6 @@ def construct_context(start: int, block_length: int, lines: list[str]) -> str:
     while i < 5 and start_ptr >= 0:
         if lines[start_ptr].strip() == "":
             start_ptr -= 1
-            continue
         else:
             context = lines[start_ptr].strip() + " " + context
             start_ptr -= 1
@@ -671,7 +632,6 @@ def construct_context(start: int, block_length: int, lines: list[str]) -> str:
     while j < 5 and start_ptr < len(lines):
         if lines[start_ptr].strip() == "":
             start_ptr += 1
-            continue
         else:
             context = context + " " + lines[start_ptr].strip()
             start_ptr += 1
@@ -681,10 +641,10 @@ def construct_context(start: int, block_length: int, lines: list[str]) -> str:
 
 
 def judge_overlap_type(
-    assigned_start: int,
-    assigned_block_length: int,
-    overlapped_start: int,
-    overlapped_block_length: int
+        assigned_start: int,
+        assigned_block_length: int,
+        overlapped_start: int,
+        overlapped_block_length: int
 ) -> str | None:
     """Determine the type of overlap between two blocks.
 
@@ -716,13 +676,13 @@ def judge_overlap_type(
 
 
 def km_compute(
-    mappings: list[dict],
-    src_all_lines: list[str],
-    dest_all_lines: list[str],
-    min_move_block_length: int = 2,
-    min_copy_block_length: int = 2,
-    pure_mv_block_contain_punc: bool = True,
-    pure_cp_block_contain_punc: bool = True
+        mappings: list[dict],
+        src_all_lines: list[str],
+        dest_all_lines: list[str],
+        min_move_block_length: int = 2,
+        min_copy_block_length: int = 2,
+        pure_mv_block_contain_punc: bool = True,
+        pure_cp_block_contain_punc: bool = True
 ) -> tuple[list[dict], list[dict]]:
     """Compute optimal block mappings using Kuhn-Munkres algorithm.
 
@@ -745,7 +705,7 @@ def km_compute(
     km_start = 0
     km_end = 0
 
-    for index, mapping in enumerate(mappings):
+    for mapping in mappings:
         # state: a: assigned, d: deleted, None: waiting for assigned, s: sliced
         mapping['state'] = None
         found_src_mapping = False
@@ -769,7 +729,7 @@ def km_compute(
             km_start += 1
 
     mappings.sort(key=lambda x: x["added_start"])
-    for index, mapping in enumerate(mappings):
+    for mapping in mappings:
         found_added_mapping = False
 
         for group_added in grouped_mappings_added:
@@ -837,7 +797,7 @@ def km_compute(
                     mapping2['block_length']
                 )
 
-                if overlap_type == 'e' or overlap_type == 'i':
+                if overlap_type in ('e', 'i'):
                     mapping2['state'] = 'd'
                     continue
                 elif overlap_type is None:
@@ -879,7 +839,7 @@ def km_compute(
                             'block_length': up_offset,
                             'context_similarity': ctx_similarity,
                             'weight': edit_actions / up_offset + (1 - ctx_similarity) / 10 +
-                            mapping2['relative_distance'] / 100,
+                                      mapping2['relative_distance'] / 100,
                             'src_start': mapping2['src_start'],
                             'added_start': mapping2['added_start'],
                             'km_start': mapping2['km_start'],
@@ -943,7 +903,7 @@ def km_compute(
                             'block_length': down_offset,
                             'context_similarity': ctx_similarity,
                             'weight': edit_actions / down_offset + (1 - ctx_similarity) / 10 +
-                            mapping2['relative_distance'] / 100,
+                                      mapping2['relative_distance'] / 100,
                             'src_start': present_assignment['src_start'] + present_assignment['block_length'],
                             'added_start': mapping2['added_start'] + (present_assignment['src_start'] +
                                                                       present_assignment['block_length'] - mapping2[
@@ -998,7 +958,7 @@ def km_compute(
                             'block_length': up_offset,
                             'context_similarity': ctx_similarity,
                             'weight': edit_actions / up_offset + (1 - ctx_similarity) / 10 +
-                            mapping2['relative_distance'] / 100,
+                                      mapping2['relative_distance'] / 100,
                             'src_start': mapping2['src_start'],
                             'added_start': mapping2['added_start'],
                             'km_start': mapping2['km_start'],
@@ -1063,7 +1023,7 @@ def km_compute(
                             'block_length': down_offset,
                             'context_similarity': ctx_similarity,
                             'weight': edit_actions / down_offset + (1 - ctx_similarity) / 10 +
-                            mapping2['relative_distance'] / 100,
+                                      mapping2['relative_distance'] / 100,
                             'src_start': present_assignment['src_start'] + present_assignment['block_length'],
                             'added_start': mapping2['added_start'] + (present_assignment['src_start'] +
                                                                       present_assignment['block_length'] - mapping2[
@@ -1089,7 +1049,7 @@ def km_compute(
             if (not mapping2['state'] and
                     mapping2['km_end'] == assignment2[1] and
                     ((mapping2['mode'] == 'k' and mapping2['block_length'] >= min_copy_block_length) or
-                     mapping2['mode'] == 'u' or mapping2['mode'] == 'r')):
+                     mapping2['mode'] in ('u','r'))):
 
                 if mapping2 not in remain_mappings:
                     remain_mappings.append(mapping2)
@@ -1107,7 +1067,7 @@ def km_compute(
                     remain_mapping['added_start'], remain_mapping['block_length']
                 )
 
-                if end_overlap_type == 'e' or end_overlap_type == 'i':
+                if end_overlap_type in ('e', 'i'):
                     continue
                 elif end_overlap_type is None:
                     final_remain_mappings.append(remain_mapping)
@@ -1145,7 +1105,7 @@ def km_compute(
                             'block_length': up_offset,
                             'context_similarity': ctx_similarity,
                             'weight': edit_actions / up_offset + (1 - ctx_similarity) / 10 +
-                            remain_mapping['relative_distance'] / 100,
+                                      remain_mapping['relative_distance'] / 100,
                             'src_start': remain_mapping['src_start'],
                             'added_start': remain_mapping['added_start'],
                             'km_start': remain_mapping['km_start'],
@@ -1207,9 +1167,9 @@ def km_compute(
                             'block_length': down_offset,
                             'context_similarity': ctx_similarity,
                             'weight': edit_actions / down_offset + (1 - ctx_similarity) / 10 +
-                            remain_mapping['relative_distance'] / 100,
+                                      remain_mapping['relative_distance'] / 100,
                             'src_start': remain_mapping['src_start'] + km_match['added_start'] +
-                            km_match['block_length'] - remain_mapping['added_start'],
+                                         km_match['block_length'] - remain_mapping['added_start'],
                             'added_start': km_match['added_start'] + km_match['block_length'],
                             'km_start': remain_mapping['km_start'],
                             'km_end': remain_mapping['km_end'],
@@ -1258,7 +1218,7 @@ def km_compute(
                             'block_length': up_offset,
                             'context_similarity': ctx_similarity,
                             'weight': edit_actions / up_offset + (1 - ctx_similarity) / 10 +
-                            remain_mapping['relative_distance'] / 100,
+                                      remain_mapping['relative_distance'] / 100,
                             'src_start': remain_mapping['src_start'],
                             'added_start': remain_mapping['added_start'],
                             'km_start': remain_mapping['km_start'],
@@ -1320,7 +1280,7 @@ def km_compute(
                             'block_length': down_offset,
                             'context_similarity': ctx_similarity,
                             'weight': edit_actions / down_offset + (1 - ctx_similarity) / 10 +
-                            remain_mapping['relative_distance'] / 100,
+                                      remain_mapping['relative_distance'] / 100,
                             'src_start': remain_mapping['src_start'] + (km_match['added_start'] +
                                                                         km_match['block_length'] - remain_mapping[
                                                                             'added_start']),
@@ -1405,14 +1365,14 @@ def generate_edit_action(mode: str, *args) -> str:
 
 
 def generate_edit_scripts_from_match(
-    km_matches: list[dict],
-    diff_scripts: list[str],
-    src_lines: OrderedDict,
-    added_lines: OrderedDict,
-    splits_merges: list[list[list[int]]],
-    hunks: list[list[list[int]]],
-    src_len: int,
-    dest_len: int
+        km_matches: list[dict],
+        diff_scripts: list[str],
+        src_lines: OrderedDict,
+        added_lines: OrderedDict,
+        splits_merges: list[list[list[int]]],
+        hunks: list[list[list[int]]],
+        src_len: int,
+        dest_len: int
 ) -> list[dict]:
     """Generate structured edit scripts from the results computed from the Kuhn-Munkres process.
 
@@ -1524,7 +1484,7 @@ def generate_edit_scripts_from_match(
                                      construct_str_diff_data(src_lines[km_match['src_start']],
                                                              added_lines[km_match['added_start']]),
                                  "indent_offset": added_lines[km_match['added_start']][1][0] -
-                                 src_lines[km_match['src_start']][1][0],
+                                                  src_lines[km_match['src_start']][1][0],
                                  "edit_action": edit_action})
     for hunk in hunks:
         if not hunk[0]:
@@ -1575,7 +1535,7 @@ def generate_edit_scripts_from_match(
                             "split") or diff_scripts_dict[cur_i_ds].startswith("merge") or (
                             diff_scripts_dict[cur_i_ds].startswith("move") and (
                             int(diff_scripts_dict['r' + str(s_line_no)].split("-")[1]) - cur_right_line) == (
-                                s_line_no - cur_left_line)):
+                                    s_line_no - cur_left_line)):
                         cur_left_line = s_line_no
                         cur_right_line = int(diff_scripts_dict['r' + str(s_line_no)].split("-")[1])
                     else:
@@ -1601,7 +1561,7 @@ def generate_edit_scripts_from_match(
                             "split") or diff_scripts_dict[cur_r_ds].startswith("merge") or (
                             diff_scripts_dict[cur_r_ds].startswith("move") and (
                             int(diff_scripts_dict['i' + str(d_line_no)].split("-")[1]) - cur_left_line) == (
-                                d_line_no - cur_right_line)):
+                                    d_line_no - cur_right_line)):
                         cur_right_line = d_line_no
                         cur_left_line = int(diff_scripts_dict['i' + str(d_line_no)].split("-")[1])
     edit_scripts.sort(key=lambda x: (x["src_line"], x["dest_line"]))
@@ -1609,7 +1569,7 @@ def generate_edit_scripts_from_match(
         if esr['mode'] == 'delete':
             for esi in edit_scripts:
                 if esi['mode'] == "insert" and esr["dest_line"] > esi['dest_line'] and esr["src_line"] < esi[
-                        'src_line']:
+                    'src_line']:
                     esr['dest_line'] = esi['dest_line']
     return edit_scripts
 
@@ -1678,12 +1638,12 @@ def exists_hunk_inter(changes: OrderedDict) -> tuple[int, int, float] | None:
 
 
 def mapping_line_update(
-    src_lines_list: list[str],
-    dest_lines_list: list[str],
-    hunks: list[list[list[int]]],
-    ctx_length: int,
-    line_sim_weight: float,
-    sim_threshold: float
+        src_lines_list: list[str],
+        dest_lines_list: list[str],
+        hunks: list[list[list[int]]],
+        ctx_length: int,
+        line_sim_weight: float,
+        sim_threshold: float
 ) -> list[dict]:
     """Identify single-line update mappings between source and destination diff hunks.
 
@@ -1712,7 +1672,7 @@ def mapping_line_update(
             changes = OrderedDict()
             for r_line_no in hunk[0]:
                 for i_line_no in hunk[1]:
-                    syn_sim = W_BESTI_LINE(r_line_no, i_line_no, src_lines_list, dest_lines_list, ctx_length,
+                    syn_sim = w_besti_line(r_line_no, i_line_no, src_lines_list, dest_lines_list, ctx_length,
                                            line_sim_weight,
                                            sim_threshold)
                     if syn_sim[0]:
@@ -1741,10 +1701,10 @@ def mapping_line_update(
 
 
 def identify_splits_per_hunk(
-    hunk: list[list[int]],
-    src_lines: OrderedDict,
-    added_lines: OrderedDict,
-    max_split_lines: int = 8
+        hunk: list[list[int]],
+        src_lines: OrderedDict,
+        added_lines: OrderedDict,
+        max_split_lines: int = 8
 ) -> list[list[list[int]]]:
     """Detect line splits within a single diff hunk.
 
@@ -1834,10 +1794,10 @@ def identify_splits_per_hunk(
 
 
 def identify_merges_per_hunk(
-    hunk: list[list[int]],
-    src_lines: OrderedDict,
-    added_lines: OrderedDict,
-    max_merge_lines: int = 8
+        hunk: list[list[int]],
+        src_lines: OrderedDict,
+        added_lines: OrderedDict,
+        max_merge_lines: int = 8
 ) -> list[list[list[int]]]:
     """Identify line merges within a single diff hunk.
 
@@ -1935,10 +1895,10 @@ def identify_merges_per_hunk(
 
 
 def mapping_merges(
-    hunks: list[list[list[int]]],
-    src_lines: OrderedDict,
-    added_lines: OrderedDict,
-    max_merge_lines: int
+        hunks: list[list[list[int]]],
+        src_lines: OrderedDict,
+        added_lines: OrderedDict,
+        max_merge_lines: int
 ) -> list[list[list[int]]]:
     """Identify all line merges.
 
@@ -1965,10 +1925,10 @@ def mapping_merges(
 
 
 def mapping_splits(
-    hunks: list[list[list[int]]],
-    src_lines: OrderedDict,
-    added_lines: OrderedDict,
-    max_split_lines: int
+        hunks: list[list[list[int]]],
+        src_lines: OrderedDict,
+        added_lines: OrderedDict,
+        max_split_lines: int
 ) -> list[list[list[int]]]:
     """Identify all line splits.
 
@@ -1995,8 +1955,8 @@ def mapping_splits(
 
 
 def copy_block_in_hunk(
-    copy_block: dict,
-    hunks: list[list[list[int]]]
+        copy_block: dict,
+        hunks: list[list[list[int]]]
 ) -> bool:
     """Check if a copy block occurs within one hunk.
 
@@ -2024,10 +1984,10 @@ def copy_block_in_hunk(
 
 
 def relative_distance(
-    src_line: int,
-    dest_line: int,
-    block_length: int,
-    diff_scripts: list[str]
+        src_line: int,
+        dest_line: int,
+        block_length: int,
+        diff_scripts: list[str]
 ) -> float:
     """Calculate the relative distance between a source block and its corresponding destination block.
 
@@ -2071,37 +2031,33 @@ def relative_distance(
     return k_num + max(r_num, i_num)
 
 
-def BDiff(
-    src: str,
-    dest: str,
-    src_lines_list: list[str],
-    dest_lines_list: list[str],
-    diff_algorithm: str = "Histogram",
-    indent_tabs_size: int = 4,
-    min_move_block_length: int = 2,
-    min_copy_block_length: int = 2,
-    ctx_length: int = 4,
-    line_sim_weight: float = 0.6,
-    sim_threshold: float = 0.5,
-    max_merge_lines: int = 8,
-    max_split_lines: int = 8,
-    pure_mv_block_contain_punc: bool = False,
-    pure_cp_block_contain_punc: bool = False,
-    count_mv_block_update: bool = True,
-    count_cp_block_update: bool = True,
-    identify_move: bool = True,
-    identify_copy: bool = True,
-    identify_update: bool = True,
-    identify_split: bool = True,
-    identify_merge: bool = True
+def bdiff(
+        src: str,
+        dest: str,
+        diff_algorithm: str = "Histogram",
+        indent_tabs_size: int = 4,
+        min_move_block_length: int = 2,
+        min_copy_block_length: int = 2,
+        ctx_length: int = 4,
+        line_sim_weight: float = 0.6,
+        sim_threshold: float = 0.5,
+        max_merge_lines: int = 8,
+        max_split_lines: int = 8,
+        pure_mv_block_contain_punc: bool = False,
+        pure_cp_block_contain_punc: bool = False,
+        count_mv_block_update: bool = True,
+        count_cp_block_update: bool = True,
+        identify_move: bool = True,
+        identify_copy: bool = True,
+        identify_update: bool = True,
+        identify_split: bool = True,
+        identify_merge: bool = True
 ) -> list[dict]:
     """Main function to generate edit scripts between two files.
 
     Args:
         src: File path to the source file (original file for comparison)
         dest: File path to the destination file (modified file for comparison)
-        src_lines_list: Pre-read list of all lines from the source file (1-indexed content)
-        dest_lines_list: Pre-read list of all lines from the destination file (1-indexed content)
         diff_algorithm: Git diff algorithm to use for raw change detection ("Histogram" or "Myers", default: "Histogram")
         indent_tabs_size: Number of spaces a tab character represents (for indentation calculation, default: 4)
         min_move_block_length: Minimum number of lines required for a valid move block (default: 2)
@@ -2130,6 +2086,10 @@ def BDiff(
                     - "edit_action": Human-readable description of the operation (e.g., "Move 3-line block from line 5 to line 12")
                     - Additional mode-specific fields (e.g., "indent_offset" for indent changes, "updates" for line edits in blocks)
     """
+    with open(src, 'r', encoding="utf8") as left_infile:
+        src_lines_list = left_infile.readlines()
+    with open(dest, 'r', encoding="utf8") as right_infile:
+        dest_lines_list = right_infile.readlines()
     env = os.environ.copy()
     env["PATH"] = "/usr/bin:" + env["PATH"]
     result = subprocess.run(
@@ -2163,7 +2123,7 @@ def BDiff(
             else:
                 diffs.insert(abs(deletes[0]) + deletes[1] + ins_total - 1, ['i', dest_lines_list[add - 1]])
             ins_total += 1
-    src_lines, added_lines, diff_scripts = construct_line_data(diffs, indent_tabs_size)
+    src_lines, added_lines, diff_script = construct_line_data(diffs, indent_tabs_size)
     src_lines_copy = src_lines.copy()
     if added_lines:
         move_mappings, copy_mappings, splits, merges, update_mappings = [], [], [], [], []
@@ -2175,11 +2135,11 @@ def BDiff(
         splits_merges = splits + merges
         if identify_move:
             move_mappings = mapping_block_move(src_lines, added_lines, src_lines_list, dest_lines_list,
-                                               min_move_block_length, diff_scripts, pure_mv_block_contain_punc,
+                                               min_move_block_length, diff_script, pure_mv_block_contain_punc,
                                                count_mv_block_update)
         if identify_copy:
             copy_mappings = mapping_block_copy(src_lines_copy, added_lines, src_lines_list, dest_lines_list,
-                                               min_copy_block_length, hunks, diff_scripts, pure_cp_block_contain_punc,
+                                               min_copy_block_length, hunks, diff_script, pure_cp_block_contain_punc,
                                                count_cp_block_update)
         if identify_update:
             update_mappings = mapping_line_update(src_lines_list, dest_lines_list, hunks, ctx_length, line_sim_weight,
@@ -2190,15 +2150,7 @@ def BDiff(
                 if (split_merge[0][0] - update_change['src_start']) * (
                         split_merge[1][0] - update_change['added_start']) < 0 and update_change in update_mappings:
                     update_mappings.remove(update_change)
-        all_mappings = move_mappings[:]
-        for copy_mapping in copy_mappings:
-            for move_mapping in move_mappings:
-                if copy_mapping['src_start'] == move_mapping['src_start'] and copy_mapping['added_start'] == \
-                        move_mapping['added_start'] and copy_mapping['block_length'] == move_mapping['block_length']:
-                    break
-            else:
-                all_mappings.append(copy_mapping)
-        all_mappings = all_mappings + update_mappings
+        all_mappings = move_mappings + copy_mappings + update_mappings
         km_matches = []
         if all_mappings:
             km_matches, remaining_mappings = km_compute(all_mappings, src_lines_list, dest_lines_list,
@@ -2211,35 +2163,9 @@ def BDiff(
                                                                     pure_cp_block_contain_punc)
                 km_matches = km_matches + additional_matches
             km_matches.sort(key=lambda x: x['src_start'])
-        edit_scripts = generate_edit_scripts_from_match(km_matches, diff_scripts, src_lines_copy, added_lines,
+        edit_script = generate_edit_scripts_from_match(km_matches, diff_script, src_lines_copy, added_lines,
                                                         splits_merges, hunks_copy, len(src_lines_list),
                                                         len(dest_lines_list))
-        return edit_scripts
-    edit_scripts = generate_edit_scripts_from_diff(diff_scripts)
-    return edit_scripts
-
-
-def BDiffFile(src: str, dest: str, **kwargs) -> None:
-    """Command-line interface (CLI) wrapper to read source/destination files and generate semantic edit scripts.
-
-    Args:
-        src: File path to the source file (original file for comparison). Must be a valid, readable file path.
-        dest: File path to the destination file (modified file for comparison). Must be a valid, readable file path.
-
-    Returns:
-        None: Does not return a value; instead prints the generated edit scripts directly to the console via `pprint`.
-
-    Notes:
-        - Uses UTF-8 encoding to read files (ensure input files are encoded in UTF-8 to avoid decoding errors).
-        - Closes file handles explicitly after reading to prevent resource leaks.
-        - Relies on the `BDiff` function to generate edit scripts with default configuration (e.g., default diff algorithm,
-          minimum block lengths, similarity thresholds). For custom configurations, call the `BDiff` function directly.
-    """
-    src_infile = open(src, 'r', encoding='utf-8')
-    dest_infile = open(dest, 'r', encoding='utf-8')
-    src_lines_list = src_infile.read().splitlines()
-    dest_lines_list = dest_infile.read().splitlines()
-    src_infile.close()
-    dest_infile.close()
-
-    pprint.pprint(BDiff(src, dest, src_lines_list, dest_lines_list, **kwargs))
+        return edit_script
+    edit_script = generate_edit_scripts_from_diff(diff_script)
+    return edit_script
