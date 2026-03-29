@@ -1,4 +1,4 @@
-This repository hosts the experimental dataset, scripts, and results for the paper ”BDiff: Block-aware and Accurate Text-based Code Differencing" \(submitted to ASE 2026\), which proposes a practical code differencing tool supporting both accurate line\-level and block\-level edit detection\.
+This repository hosts the experimental dataset, scripts, and results for the paper ”BDiff: Block-aware and Accurate Text-based Code Differencing" \(submitted to ASE 2026\), which proposes a practical code differencing tool supporting accurate line\-level and block\-level edit detection\.
 
 All materials provided here are for academic research and reproduction of the paper's experimental results\.
 
@@ -9,7 +9,7 @@ The repository is organized into three core directories, with the following stru
 ```plain text
 ├── dataset/                             # Experimental dataset (real-world code change cases)
 │   ├── GhJava/                          # Real code change cases for Java language
-│   ├── GhPython/                        # Real code change cases for Python language (Produced by Falleri et al.)
+│   ├── GhPython/                        # Real code change cases for Python language
 │   └── GhXML/                           # Real code change cases for XML language
 ├── experiment_scripts/                  # Scripts to run BDiff and reproduce experiments
 │   ├── BDiff.py                         # Core implementation of BDiff in the experiment
