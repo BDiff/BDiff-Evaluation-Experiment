@@ -32,7 +32,7 @@ The repository is organized into three core directories, with the following stru
 │   |── projects.csv                     # The GitHub projects used in the experiment
 │   |── qweneditscripts.csv              # Results produced by Qwen3-32B
 │   |── updateactions.csv                # Results of line updates produced by BDiff
-├── bdiff.py                             # Implementation of the BDiff tool
+├── BDiff.py                             # Implementation of BDiff in the experiment.
 └── README.md                            # Repository documentation (this file)
 ```
 
@@ -67,6 +67,10 @@ This directory stores all experimental results reported in the paper, organized 
 - **manual\_evaluation\_results/**: Results of the manual evaluation experiment, including human\-judged scores of BDiff and baseline tools\.
 
 - **mutation\_experiment\_results/**: Results of the mutation\-based experiment, including the generated file in the "generated_files" folder and the experimental results.
+
+### 4\. BDiff.py
+
+Implementation of BDiff in the experiment.
 
 
 ## License
