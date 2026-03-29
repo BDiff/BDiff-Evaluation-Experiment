@@ -36,7 +36,7 @@ The repository is organized into three core directories, with the following stru
 └── README.md                            # Repository documentation (this file)
 ```
 
-## Directory \&amp; File Details
+## Directory File Details
 
 ### 1\. dataset/
 
